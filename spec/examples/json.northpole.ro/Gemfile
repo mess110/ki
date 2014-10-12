@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gem 'ki', :path => '../../..'
+gem 'passenger'
+gem 'capistrano'
+gem 'capistrano-rvm'

@@ -1,0 +1,12 @@
+%pre.code
+  = preserve do
+    :escaped
+      require 'uri'
+      require 'net/http'
+      require 'json'
+
+      uri = URI.parse("#{NP_URL}")
+      http = Net::HTTP.new(uri.host, uri.port)
+      request = Net::HTTP::Post.new("/storage.json")
+      request.body = {'#{NP_API_KEY}' => '#{NP_SECRET}', '#{NP_GUEST_API_KEY}' => '#{NP_GUEST_SECRET}'}.to_json
+      response = http.request(request)

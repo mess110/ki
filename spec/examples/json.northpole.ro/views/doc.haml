@@ -1,0 +1,16 @@
+%p Create
+%pre.code
+  = preserve do
+    curl -X <b>POST</b> -d <b>'{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","namespace":"shopping_list","storage":["milk","eggs","bacon"]}'</b> '#{NP_URL}/storage.json'
+%br
+%p Read
+%p.code{:style => 'text-align: left; background-color: #f5f5f5; color: #333; padding: 9.5px; font-family: Menlo,Monaco,Consolas,"Courier New",monospace;'}
+  curl -X <b>GET</b> -d <b>'{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_API_KEY}","id":"534569007047d56e11000002"}'</b> '#{NP_URL}/storage.json'
+%br
+%p Update
+%pre.code.shell
+  curl -X <b>PUT</b> -d <b>'{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","food":[],"id":"534569007047d56e11000002"}'</b> '#{NP_URL}/storage.json'
+%br
+%p Delete
+%pre.code.shell
+  curl -X <b>DELETE</b> -d <b>'{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","id":"534569007047d56e11000002"}'</b> '#{NP_URL}/storage.json'

@@ -1,0 +1,24 @@
+%p
+  Thank you Rares for contributing with the
+  %a{:href => 'https://github.com/northpole-api/NorthPoleNetWrapper/'} .net wrapper
+  \.
+%p
+  If you would like to dive in code imediatley, I suggest you take a look at the
+  %a{:href => 'https://github.com/northpole-api/NorthPoleNetWrapper/blob/master/NorthPoleNetWrapperTest/StorageTestSuite.cs'} tests
+  \.
+%pre.code.dotnet
+  = preserve do
+    :escaped
+      JObject jsonObject = new JObject();
+      jsonObject.Add("#{NP_API_KEY}", "#{NP_GUEST_API_KEY}");
+      jsonObject.Add("#{NP_SECRET}", "#{NP_GUEST_SECRET}");
+
+      JArray items = new JArray();
+      items.Add("milk");
+      items.Add("eggs");
+      items.Add("sugar");
+
+      jsonObject.Add("list", items);
+
+      Storage storage = new Storage(jsonObject);
+      JObject result = storage.Create();

@@ -1,0 +1,32 @@
+%a{'href' => '#what'} What is json.northpole.ro?
+%br
+%a{'href' => '#how'} How do I use the API?
+%br
+%a{'href' => '#storage'} What can I store?
+%br
+%a{'href' => '#where'} Where do I sign up for my free account?
+%br
+%a{'href' => '#question'} I have a question
+%br
+%h3#what What is json.northpole.ro
+%p
+  json.northpole.ro is a JSON cloud storage service. It is designed to be simple, fast and easy to use. It uses a documented oriented database in the backend to store your objects and provides you with a RESTful http layer to manage the data you store.
+%h3#how How do I use the API?
+%p
+  The API communicates through HTTP. #{NP_URL} has client libraries but you can write your own - if you want to. As long as your device is connected to the internet, you can use the API
+%p
+  To get an idea of how the API works, you can
+  %a{:href => '/try'}
+    try it in your browser
+%h3#storage What can I store?
+%p
+  Any valid json object. The object can contain keys, arrays and hashes. By default, each object will get an id and some extra attributes - like created_at
+%h3#where Where do I signup for my free account?
+%p
+  %a{:href => "/signup"} Signing up
+  is quick and easy. You will get an email containing your api_key and secet.
+%h3#question I have a question
+%p
+  If it concerns the API, I suggest you use
+  %a{'href' => 'http://github.com/northpole-api/northpole.ro/issues'}
+    github issues

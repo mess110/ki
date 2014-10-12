@@ -1,0 +1,222 @@
+$sky-dark: #a1caf6
+$sky-light: #bfe1fa
+$snow: #e4f2fd
+$ground: #6e8b8f
+$under-ground: #45645e
+
+@mixin square
+  border-radius: 0px
+  -mox-border-radius: 0px
+  -webkit-border-radius: 0px
+
+@mixin noshadow
+  box-shadow: none
+  text-shadow: none
+  -moz-box-shadow: none
+  -webkit-box-shadow: none
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false)
+  transition: none
+  -moz-transition: none
+  -webkit-box-transition: none
+
+@mixin handy
+  cursor: pointer
+  cursor: hand
+
+html, body
+  height: 100%
+  color: $under-ground
+
+.justify
+  text-align: justify
+
+.right
+  text-align: right
+
+a:hover
+  text-decoration: none
+
+.language:hover
+  text-decoration: none
+
+.wrapper
+  min-height: 100%
+  background: url('/images/bg.png') top center repeat-x
+  position: relative
+
+.container-fluid
+  padding-left: 150px
+  padding-right: 150px
+
+.bear
+  position: relative
+  top: -150px
+
+.flipit
+  -moz-transform: scaleX(-1)
+  -o-transform: scaleX(-1)
+  -webkit-transform: scaleX(-1)
+  transform: scaleX(-1)
+  filter: FlipH
+  -ms-filter: "FlipH"
+
+.italic
+  font-style: italic
+
+legend
+  color: $under-ground
+
+.all-content
+  padding-top: 60px
+
+.bear-content
+  text-align: center
+
+.ruby:hover
+  background-image: url('/images/ruby_small.png')
+
+.python:hover
+  background-image: url('/images/python_small.png')
+
+.php:hover
+  background-image: url('/images/php_small.png')
+
+.java:hover
+  background-image: url('/images/java_small.png')
+
+.shell:hover
+  background-image: url('/images/shell_small.png')
+
+.json:hover
+  background-image: url('/images/json_small.png')
+
+.dotnet:hover
+  background-image: url('/images/dotnet_small.png')
+
+.label-info
+  background-color: $ground
+
+.hero-unit
+  @include square
+  margin-bottom: 80px
+  background-color: white
+
+#storageEndpoint
+  display: none
+
+.index-page-wrapper
+  .row-fluid
+    .span4
+      h3
+        text-align: center
+      p
+        text-align: center
+
+pre.code, .badge, .label
+  @include square
+
+input[type=text], textarea
+  @include square
+  &:focus
+    @include noshadow
+    border-color: #cccccc
+
+i
+  font-size: 28px
+  color: $under-ground
+
+.btn
+  @include square
+  @include noshadow
+  background-image: none
+  border: 0
+  background-color: $ground
+  color: $snow
+  &:hover
+    background-color: $ground
+    color: $snow
+
+pre.code
+  background-repeat: no-repeat
+  background-position: right top
+
+h3
+  a
+    color: $under-ground
+    &:hover
+      color: $under-ground
+
+#tryNowTable
+  margin-bottom: 0px
+  input
+    width: 100%
+    padding: 2px
+  i
+    font-size: 18px
+    @include handy
+  .clearButton
+    display: none
+    height: 10px
+
+#addTableRow
+  @include handy
+
+pre
+  padding: 5px
+  @include square
+  @include noshadow
+
+.string
+  color: green
+
+.number
+  color: darkorange
+
+.boolean
+  color: blue
+
+.null
+  color: magenta
+
+.key
+  color: red
+
+#header
+  padding-top: 130px
+  height: 200px
+  div
+    text-align: center
+    width: 100%
+    background-color: $ground
+    padding-top: 5px
+    padding-bottom: 5px
+  a
+    color: $snow
+  p
+    color: $snow
+    font-weight: bold
+  a:hover
+    text-decoration: none
+
+#footer
+  position: absolute
+  bottom: 0px
+  left: 0px
+  background-color: $under-ground
+  background-image: url(/images/footer.png)
+  background-repeat: repeat-x
+  div
+    div
+      text-align: center
+  dl
+    position: relative
+  dd
+    padding-top: 3px
+  dd, p, h3, a, div
+    color: $snow
+  .span8
+    padding-left: 90px
+
+@media (max-width: 767px)
+  .bear-content
+    visibility: hidden

@@ -1,0 +1,37 @@
+%pre.code.php
+  = preserve do
+    :escaped
+      <?php
+
+      $apiKey = '#{NP_GUEST_API_KEY}';
+      $secret = '#{NP_GUEST_SECRET}';
+      $url = '#{NP_URL}/storage.json';
+
+      $curlPost = curl_init();
+      curl_setopt($curlPost, CURLOPT_URL, $url);
+      curl_setopt($curlPost, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($curlPost, CURLOPT_POSTFIELDS, '{"#{NP_API_KEY}":"' . $apiKey . '","#{NP_SECRET}":"' . $secret . '","food":"pizza"}');
+      $response = curl_exec($curlPost);
+
+      $resource = json_decode($response);
+      $resourceId = $resource->{'id'};
+
+      $curlGet = curl_init();
+      curl_setopt($curlGet, CURLOPT_URL, $url . '?#{NP_API_KEY}=' . $apiKey . '&#{NP_SECRET}='. $secret .'&id=' . $resourceId);
+      curl_setopt($curlGet, CURLOPT_RETURNTRANSFER, 1);
+      $response = curl_exec($curlGet);
+
+      $curlPut = curl_init();
+      curl_setopt($curlPut, CURLOPT_URL, $url . '?#{NP_API_KEY}=' . $apiKey . '&#{NP_SECRET}='. $secret .'&id=' . $resourceId . '&food=salad');
+      curl_setopt($curlPut, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($curlPut, CURLOPT_CUSTOMREQUEST, "PUT");
+      $response = curl_exec($curlPut);
+      var_dump($response);
+
+      $curlDelete = curl_init();
+      curl_setopt($curlDelete, CURLOPT_URL, $url . '?#{NP_API_KEY}=' . $apiKey . '&#{NP_SECRET}=' . $secret . '&id=' . $resourceId);
+      curl_setopt($curlDelete, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($curlDelete, CURLOPT_CUSTOMREQUEST, "DELETE");
+      $response = curl_exec($curlDelete);
+
+      ?>

@@ -1,0 +1,10 @@
+*.gem
+*.rbc
+/pkg/
+/spec/reports/
+/tmp/
+
+/.bundle/
+
+spec/examples/*/tmp
+spec/examples/*/log

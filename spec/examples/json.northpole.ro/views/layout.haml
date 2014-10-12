@@ -1,0 +1,42 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %meta{content: "", name: "description"}/
+    %meta{content: "", name: "author"}/
+
+    %link{href: "/favicon.ico", rel: "shortcut icon"}/
+
+    %title json cloud storage
+
+    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel: "stylesheet"}/
+    = css "/stylesheets/app.css"
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  %body
+    .container
+      .navbar.navbar-default{role: "navigation"}
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand{href: "/"} {"json": ["cloud", "storage"]}
+          .navbar-collapse.collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li.playground
+                %a{href: "/playground"} playground
+              %li.examples
+                %a{href: "/examples"} examples
+      = yield
+
+    = js "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    = js "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+    = js "/javascripts/jnorthpole.js"
+    = js "/javascripts/app.js"

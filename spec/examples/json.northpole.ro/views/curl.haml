@@ -1,0 +1,19 @@
+%pre.code
+  = preserve do
+    :escaped
+      curl -X POST -d '{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","storage":["milk","eggs","bacon"]}' '#{NP_URL}/storage.json'
+
+%pre.code
+  = preserve do
+    :escaped
+      curl -X GET -d '{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","storage":["milk","eggs","bacon"]}' '#{NP_URL}/storage.json'
+
+%pre.code
+  = preserve do
+    :escaped
+      curl -X PUT -d '{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","storage":["milk","eggs"],"id": "OBJECT_ID"}' '#{NP_URL}/storage.json'
+
+%pre.code
+  = preserve do
+    :escaped
+      curl -X DELETE -d '{"api_key":"#{NP_GUEST_API_KEY}","secret":"#{NP_GUEST_SECRET}","storage":["milk","eggs"]}' '#{NP_URL}/storage.json'

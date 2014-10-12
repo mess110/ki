@@ -1,0 +1,17 @@
+%pre.code.python
+  = preserve do
+    :escaped
+      import requests
+      import json
+
+      API_KEY = '#{NP_GUEST_API_KEY}'
+      SECRET = '#{NP_GUEST_SECRET}'
+      URL = '#{NP_URL}/storage.json'
+
+      result = requests.post(URL, params = {'#{NP_API_KEY}': API_KEY, '#{NP_SECRET}': SECRET, 'foo': 'bar'})
+      resource = json.loads(result.text)
+      resource_id = resource['id']
+
+      requests.get(URL, params = {'#{NP_API_KEY}': API_KEY, '#{NP_SECRET}': SECRET, 'id': resource_id})
+      requests.put(URL, params = {'#{NP_API_KEY}': API_KEY, '#{NP_SECRET}': SECRET, 'id': resource_id, 'foo': 'not bar'})
+      requests.delete(URL, params = {'#{NP_API_KEY}': API_KEY, '#{NP_SECRET}': SECRET, 'id': resource_id})

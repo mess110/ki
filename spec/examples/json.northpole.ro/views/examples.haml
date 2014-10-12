@@ -1,0 +1,28 @@
+= partial "doc_table"
+
+%ul#myTab.nav.nav-tabs
+  %li.active
+    %a{"data-toggle" => "tab", href: "#curl"} curl
+  %li
+    %a{"data-toggle" => "tab", href: "#ruby"} ruby
+  %li
+    %a{"data-toggle" => "tab", href: "#python"} python
+  %li
+    %a{"data-toggle" => "tab", href: "#php"} php
+  %li
+    %a{"data-toggle" => "tab", href: "#java"} java
+  %li
+    %a{"data-toggle" => "tab", href: "#dotnet"} .net
+.tab-content
+  #curl.tab-pane.fade.in.active
+    = partial 'curl'
+  #ruby.tab-pane.fade
+    = partial 'ruby'
+  #python.tab-pane.fade
+    = partial 'python'
+  #php.tab-pane.fade
+    = partial 'php'
+  #java.tab-pane.fade
+    = partial 'java'
+  #dotnet.tab-pane.fade
+    = partial 'dotnet'

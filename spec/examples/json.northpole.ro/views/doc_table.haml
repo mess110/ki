@@ -1,0 +1,45 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th Resource
+      %th HTTP Verb
+      %th Content-Type
+      %th Required Params
+      %th{'style' => 'width: 50%'} Description
+  %tbody
+    %tr
+      %td /user
+      %td GET, SEARCH
+      %td application/json
+      %td api_key, secret
+      %td Finds a user and any info related to the user json object
+    %tr
+      %td /user
+      %td POST
+      %td application/json
+      %td api_key, secret
+      %td Creates a new user
+    %tr
+      %td /storage
+      %td GET, SEARCH
+      %td application/json
+      %td api_key, secret
+      %td Finds stored json objects. Results are always returned in an array
+    %tr
+      %td /storage
+      %td POST
+      %td application/json
+      %td api_key, secret
+      %td Creates a new json object
+    %tr
+      %td /storage
+      %td PUT
+      %td application/json
+      %td api_key, secret, id
+      %td Updates a json object. All attributes of the json object are replaced with the json found in the body of the request
+    %tr
+      %td /storage
+      %td DELETE
+      %td application/json
+      %td api_key, secret
+      %td Deletes json objects
