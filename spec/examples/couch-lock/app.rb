@@ -44,3 +44,18 @@ class Sound < Ki::Model
     end
   end
 end
+
+class Jrobot < Ki::Model
+  forbid :create, :update, :delete
+
+  def after_find
+    return if params["q"].nil?
+    return unless ['listen', 'kill'].include? params["q"]
+
+    if params["q"] == "listen"
+      run `cd ../../../../CouchLockServer/; ./start.sh`
+    else
+      run `kill \`ps ax | grep lockserver.UDPServer | grep -v grep | awk '{ print $1 }'\``
+    end
+  end
+end
