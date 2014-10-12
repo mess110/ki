@@ -19,6 +19,7 @@ require 'ki/modules/view_helper'
 require 'ki/modules/format_of'
 require 'ki/modules/public_file_helper'
 
+require 'ki/indifferent_hash'
 require 'ki/ki_config'
 require 'ki/helpers'
 require 'ki/orm'
