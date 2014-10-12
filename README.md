@@ -1,6 +1,9 @@
 # Ki Framework
 
-Tiny REST JSON ORM framework
+Tiny REST JSON ORM framework.
+
+Ki's goal is to help you protoype your ideas blazing fast. It has a db backend
+and provides a fullblown REST api on top.
 
 * rvm
 * mongodb
@@ -16,19 +19,28 @@ gem install ki
 
 ## Getting started
 
+Learn by example. We will create the traditional 'hello world' app for web
+development: the dreaded TODO app.
+
+View the [code](https://github.com/mess110/ki/tree/master/spec/examples/todo) for
+the final webapp.
+
 ### Creating a new app
 
 ```shell
-ki new my-app
-cd my-app
-bundle
+ki new todo
 ```
 
-This will create the folder *my-app* containing a bare bones ki application.
+This will create the folder *todo* containing a bare bones ki application. Your
+app will look [like this](https://github.com/mess110/ki/tree/master/spec/examples/base).
 
 ```shell
+cd todo
+bundle
 rackup
 ```
+
+*rackup* is the command which starts the webserver. The port will be displayed.
 
 ### Adding a view
 
