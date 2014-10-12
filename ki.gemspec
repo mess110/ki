@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["mess110@gmail.com"]
   spec.summary       = %q{it said optional}
   spec.description   = %q{it said optional}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/mess110/ki"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "coffee-script"
   spec.add_runtime_dependency "mongo"
   spec.add_runtime_dependency "bson_ext"
-
 
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rack-test"
