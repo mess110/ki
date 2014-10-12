@@ -16,8 +16,13 @@ module Ki
   class RequiredAttributeMissing < ApiError; end
   class AttributeNotUnique < ApiError; end
   class ForbiddenAction < ApiError
-    def initialize
-      super 'action forbidden', 400
+    def initialize s='forbidden', code=403
+      super s, code
+    end
+  end
+  class UnauthorizedError < ApiError
+    def initialize s='unauthroized', code=401
+      super s, code
     end
   end
   class PartialNotFoundError < ApiError

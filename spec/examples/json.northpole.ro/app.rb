@@ -28,17 +28,17 @@ module Ki
 
     def ensure_authorization
       if params[NP_API_KEY].nil?
-        raise ApiError.new("not authorized. #{NP_API_KEY} is missing", 400)
+        raise UnauthorizedError.new("not authorized. #{NP_API_KEY} is missing")
       end
       if params[NP_SECRET].nil?
-        raise ApiError.new("not authorized. #{NP_SECRET} is missing", 400)
+        raise UnauthorizedError.new("not authorized. #{NP_SECRET} is missing")
       end
 
       h = { NP_API_KEY => params[NP_API_KEY], NP_SECRET => params[NP_SECRET]}
       u = User.find(h)
       unless action == :create && self.class == User
         if u.empty?
-          raise ApiError.new('not authorized', 400)
+          raise UnauthorizedError.new
         end
       end
       params.delete(NP_SECRET) if !required_attributes.include? NP_SECRET.to_sym
