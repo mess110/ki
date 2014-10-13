@@ -155,7 +155,7 @@ without a title attribute.
 Let's say you want to forbid access to deleting items. You can do that with
 the *forbid* method.
 
-```
+```ruby
 class Todo < Ki::Model
   forbid :delete
 end
