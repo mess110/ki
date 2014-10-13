@@ -98,39 +98,43 @@ end
 This will create the Todo resource and its corresponding routes. Each route is
 mapped to a model method.
 
-Method name | Verb | HTTP request
-------------|------|-------------
-find        |GET   | /todo.json
-create      |POST  | /todo.json
-update      |PATCH | /todo.json
-delete      |DELETE| /todo.json
+Method name | Verb | HTTP request|Required params|
+------------|------|-------------|---------------|
+find        |GET   | /todo.json  |               |
+create      |POST  | /todo.json  |               |
+update      |PATCH | /todo.json  |id             |
+delete      |DELETE| /todo.json  |id             |
 
 Below is a curl example for creating a todo item. Notice the data sent in the
-body request is a JSON string.
+body request is a JSON string. It can take the shape of any valid JSON object.
+All json objects will be stored in the database under the resource name. In our
+case *todo*.
+
+#### Create
 
 ```shell
 curl -X POST -d '{"title": "make a todo tutorial"}' http://localhost:9292/todo.json
 ```
 
-To get all the todo items
+#### Get all
 
 ```shell
 curl -X GET http://localhost:9292/todo.json
 ```
 
-To get an item by id
+#### Get by id
 
 ```shell
 curl -X GET http://localhost:9292/todo.json?id=ITEM_ID
 ```
 
-To update an item
+#### Update
 
 ```shell
 curl -X PATCH -d '{"id": "ITEM_ID", "title": "finish the todo tutorial"}' http://localhost:9292/todo.json
 ```
 
-To delete an item
+#### Delete
 
 ```shell
 curl -X DELETE -d http://localhost:9292/todo.json?id=ITEM_ID
@@ -162,5 +166,13 @@ end
 ```
 
 ### Before/after filters
+
+TODO
+
+#### Accessing the json object within the filter
+
+TODO
+
+### Exceptions
 
 TODO
