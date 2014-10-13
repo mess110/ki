@@ -9,7 +9,11 @@ module Ki
 
       def establish_connection
         @config = KiConfig.instance.database
-        @connection = Mongo::Connection.new(@config['host'], @config['port'])
+        if ENV["MONGODB_URI"]
+          @connection = Mongo::Connection.new
+        else
+          @connection = Mongo::Connection.new(@config['host'], @config['port'])
+        end
         @db = @connection.db(@config['name'])
         self
       end
