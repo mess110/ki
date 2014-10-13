@@ -5,6 +5,36 @@ Tiny REST JSON ORM framework.
 Ki's goal is to help you protoype your ideas blazing fast. It has a db backend
 and provides a fullblown REST api on top.
 
+## TLDR
+
+To create an api endpoint '/todo.json' with GET/POST/PATCH and restricting
+DELETE, with title and description as required attributes, with db backend,
+with a unique title, and before/after filters you would need to write:
+
+```ruby
+class Todo < Ki::Model
+  requires :title, :description
+  unique :title
+  forbid :delete
+
+  def before_all
+    puts 'hello'
+  end
+
+  def before_create
+    params['created_at'] = Time.now.to_i
+  end
+
+  def after_find
+    if @result['keywords'].include? 'food'
+      puts 'yummy'
+    end
+  end
+end
+```
+
+List of used stuff:
+
 * rvm
 * mongodb
 * haml
