@@ -26,7 +26,7 @@ class Todo < Ki::Model
   end
 
   def after_find
-    if @result['keywords'].include? 'food'
+    if result['keywords'].include? 'food'
       puts 'yummy'
     end
   end
@@ -225,14 +225,48 @@ class Todo < Ki::Model
 end
 ```
 
-### Before/after filters
+### Before/after callbacks
 
-TODO
+The framework has (these callbacks)[https://github.com/mess110/ki/blob/master/lib/ki/modules/callbacks.rb].
+Here is an example on how to use them:
 
-#### Accessing the json object within the filter
+```ruby
+class Todo < Ki::Model
+  def before_create
+    # do your stuff
+  end
+end
+```
 
-TODO
+#### Accessing the json object within a callback
+
+Before the request is sent to the client, you can look at the result through
+the *result* method. Modifying it will change what the client receives.
+
+```ruby
+class Todo < Ki::Model
+  def after_find
+    puts result
+  end
+end
+```
 
 ### Exceptions
 
-TODO
+A list of exceptions can be found (here)[https://github.com/mess110/ki/blob/master/lib/ki/api_error.rb]
+
+```ruby
+class Todo < Ki::Model
+  def before_all
+    ensure_authroization
+  end
+
+  private
+
+  def ensure_authorization
+    if params[:key] = 'secret-key'
+      raise UnauthorizedError.new
+    end
+  end
+end
+```
