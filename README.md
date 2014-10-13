@@ -73,7 +73,25 @@ similar to haml.
 
 ### View layout
 
-TODO
+If the file *views/layout.haml* exists, it will be used as a layout for all the
+other haml files. The content of the route will be placed in the layout *yield*
+
+*views/layout.haml*
+
+```haml
+!!!
+%html
+  %head
+    %title Ki Framework
+  %body
+    = yield
+```
+
+*views/index.haml*
+
+```haml
+%p Hello World!
+```
 
 ### Helpers
 
@@ -93,8 +111,7 @@ end
 *views/index.haml*
 
 ```haml
-%body
-  %p= say_hello
+%p= say_hello
 ```
 
 ### Adding a resource
