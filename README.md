@@ -227,7 +227,7 @@ end
 
 ### Before/after callbacks
 
-The framework has (these callbacks)[https://github.com/mess110/ki/blob/master/lib/ki/modules/callbacks.rb].
+The framework has [these callbacks](https://github.com/mess110/ki/blob/master/lib/ki/modules/callbacks.rb).
 Here is an example on how to use them:
 
 ```ruby
@@ -253,7 +253,7 @@ end
 
 ### Exceptions
 
-A list of exceptions can be found (here)[https://github.com/mess110/ki/blob/master/lib/ki/api_error.rb]
+A list of exceptions can be found [here](https://github.com/mess110/ki/blob/master/lib/ki/api_error.rb)
 
 ```ruby
 class Todo < Ki::Model
