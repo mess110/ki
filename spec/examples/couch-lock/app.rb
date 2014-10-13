@@ -1,7 +1,33 @@
 require 'ki'
 
 def run cmd
-  puts `DISPLAY=:0.0 #{cmd}`
+  res = `DISPLAY=:0.0 #{cmd}`
+  puts res
+  res
+end
+
+module Ki
+  module Helpers
+    def display_status
+      res = run "xrandr | head -n 1 | awk '{ print $8 }'"
+      res.strip.to_i == 1920 ? 'cloned' : 'extended'
+    end
+
+    def vlc_running?
+      res = run "ps -ef | grep vlc | grep -v grep | head -n 1"
+      res.strip != ""
+    end
+
+    def couch_lock_running?
+      res = run "ps -ef | grep lockserver.UDPServer | grep -v grep | head -n 1"
+      res.strip != ""
+    end
+
+    def sound_output
+      res = run "pactl info | grep 'Default Sink' | grep hdmi"
+      res.strip == "" ? 'analog' : 'hdmi'
+    end
+  end
 end
 
 class Monitors < Ki::Model

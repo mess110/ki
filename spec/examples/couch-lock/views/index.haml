@@ -1,25 +1,57 @@
 !!!
 %html
   %head
-    %title Ki Framework
+    %title Ki Framework - Couch Lock Remote Control
+
     %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
+
+    %link{href: "stylesheets/font-awesome.min.css", rel: "stylesheet"}/
+    %link{href: "stylesheets/pure-min.css", rel: "stylesheet"}/
+    %link{href: "stylesheets/main.css", rel: "stylesheet"}/
   %body
-    %ul
-      %li
-        %a{ href: 'couchlock://client' } client
-      %li
-        %a{ href: '/monitors.json?q=c&redirect_to=/' } clone
-      %li
-        %a{ href: '/monitors.json?q=e&redirect_to=/' } extend
-      %li
-        %a{ href: '/fireplace.json?q=start&redirect_to=/' } fireplace
-      %li
-        %a{ href: '/fireplace.json?q=kill&redirect_to=/' } fireplace kill
-      %li
-        %a{ href: '/sound.json?q=speakers&redirect_to=/' } speakers
-      %li
-        %a{ href: '/sound.json?q=hdmi&redirect_to=/' } hdmi
-      %li
-        %a{ href: '/jrobot.json?q=listen&redirect_to=/' } jrobot
-      %li
-        %a{ href: '/jrobot.json?q=kill&redirect_to=/' } jrobot kill
+    .pure-g
+      .pure-u-1.row
+        %a.pure-button.pure-button-primary{ href: 'couchlock://client' }
+          %i.fa.fa-android
+          client
+    .pure-g
+      .pure-u-1.row
+        - if display_status == 'cloned'
+          %a.pure-button.pure-button-primary{ href: '/monitors.json?q=e&redirect_to=/' }
+            %i.fa.fa-desktop
+            %i.fa.fa-desktop
+            extend
+        - else
+          %a.pure-button.pure-button-primary{ href: '/monitors.json?q=c&redirect_to=/' }
+            %i.fa.fa-desktop
+            clone
+    .pure-g
+      .pure-u-1.row
+        - unless vlc_running?
+          %a.pure-button.pure-button-primary{ href: '/fireplace.json?q=start&redirect_to=/' }
+            %i.fa.fa-fire
+            fireplace
+        - else
+          %a.pure-button.pure-button-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
+            %i.fa.fa-fire-extinguisher
+            kill fireplace
+    .pure-g
+      .pure-u-1.row
+        - if sound_output == 'hdmi'
+          %a.pure-button.pure-button-primary{ href: '/sound.json?q=speakers&redirect_to=/' }
+            %i.fa.fa-file-audio-o
+            speakers
+        - else
+          %a.pure-button.pure-button-primary{ href: '/sound.json?q=hdmi&redirect_to=/' }
+            %i.fa.fa-file-audio-o
+            hdmi
+    .pure-g
+      .pure-u-1.row
+        - unless couch_lock_running?
+          %a.pure-button.pure-button-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
+            %i.fa.fa-coffee
+            couch-lock
+        - else
+          %a.pure-button.pure-button-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
+            %i.fa.fa-times
+              kill couch-lock
