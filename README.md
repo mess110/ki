@@ -34,6 +34,19 @@ ki new todo
 This will create the folder *todo* containing a bare bones ki application. Your
 app will look [like this](https://github.com/mess110/ki/tree/master/spec/examples/base).
 
+App directory structure:
+
+* public/
+  * javascripts/
+  * stylesheets/
+* views/
+* app.rb
+* config.yml
+
+The entry point for the app is *app.rb*. You will add most of your code there.
+Views are in the *views* folder and you can find some database info in
+*config.yml*.
+
 ```shell
 cd todo
 bundle
