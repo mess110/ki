@@ -33,14 +33,6 @@ class Todo < Ki::Model
 end
 ```
 
-List of used stuff:
-
-* rvm
-* mongodb
-* haml
-* sass
-* coffee
-
 ## Install
 
 ```shell
@@ -270,3 +262,11 @@ class Todo < Ki::Model
   end
 end
 ```
+
+## Deploy
+
+It has a *config.ru* file. Ki is based on *rack*. You can deploy anywhere (ex:
+nginx, thin, apache, webrick).
+
+In the webserver config, just remember to point the virtual host to the
+*public* directory.
