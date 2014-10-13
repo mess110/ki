@@ -270,3 +270,18 @@ nginx, thin, apache, webrick).
 
 In the webserver config, just remember to point the virtual host to the
 *public* directory.
+
+### Heroku deployment
+
+```shell
+ki new heroku-ki
+cd heroku-ki
+bundle
+git init
+git add .
+git commit -m 'initial commit'
+heroku create
+heroku config:set MONGODB_URI="mongodb://user:pass@mongo_url:mongo_port/db_name"
+git push heroku master
+heroku open
+```
