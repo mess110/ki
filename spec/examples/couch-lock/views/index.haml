@@ -1,57 +1,45 @@
-!!!
-%html
-  %head
-    %title Ki Framework - Couch Lock Remote Control
-
-    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
-
-    %link{href: "stylesheets/font-awesome.min.css", rel: "stylesheet"}/
-    %link{href: "stylesheets/pure-min.css", rel: "stylesheet"}/
-    %link{href: "stylesheets/main.css", rel: "stylesheet"}/
-  %body
-    .pure-g
-      .pure-u-1.row
-        %a.pure-button.pure-button-primary{ href: 'couchlock://192.168.0.12:9876' }
-          %i.fa.fa-android
-          client
-    .pure-g
-      .pure-u-1.row
-        - if display_status == 'cloned'
-          %a.pure-button.pure-button-primary{ href: '/monitors.json?q=e&redirect_to=/' }
-            %i.fa.fa-desktop
-            %i.fa.fa-desktop
-            extend
-        - else
-          %a.pure-button.pure-button-primary{ href: '/monitors.json?q=c&redirect_to=/' }
-            %i.fa.fa-desktop
-            clone
-    .pure-g
-      .pure-u-1.row
-        - unless vlc_running?
-          %a.pure-button.pure-button-primary{ href: '/fireplace.json?q=start&redirect_to=/' }
-            %i.fa.fa-fire
-            fireplace
-        - else
-          %a.pure-button.pure-button-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
-            %i.fa.fa-fire-extinguisher
-            kill fireplace
-    .pure-g
-      .pure-u-1.row
-        - if sound_output == 'hdmi'
-          %a.pure-button.pure-button-primary{ href: '/sound.json?q=speakers&redirect_to=/' }
-            %i.fa.fa-file-audio-o
-            speakers
-        - else
-          %a.pure-button.pure-button-primary{ href: '/sound.json?q=hdmi&redirect_to=/' }
-            %i.fa.fa-file-audio-o
-            hdmi
-    .pure-g
-      .pure-u-1.row
-        - unless couch_lock_running?
-          %a.pure-button.pure-button-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
-            %i.fa.fa-coffee
-            couch-lock
-        - else
-          %a.pure-button.pure-button-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
-            %i.fa.fa-times
-              kill couch-lock
+.row.text-center.menu
+  %a.btn.btn-primary{ href: 'couchlock://192.168.0.12:9876' }
+    %i.fa.fa-android
+      client
+.row.text-center.menu
+  - if display_status == 'cloned'
+    %a.btn.btn-primary{ href: '/monitors.json?q=e&redirect_to=/' }
+      %i.fa.fa-desktop
+      %i.fa.fa-desktop
+      extend
+  - else
+    %a.btn.btn-primary{ href: '/monitors.json?q=c&redirect_to=/' }
+      %i.fa.fa-desktop
+      clone
+.row.text-center.menu
+  - unless vlc_running?
+    %a.btn.btn-primary{ href: '/fireplace.json?q=start&redirect_to=/' }
+      %i.fa.fa-fire
+      fireplace
+  - else
+    %a.btn.btn-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
+      %i.fa.fa-fire-extinguisher
+      kill fireplace
+.row.text-center.menu
+  - if sound_output == 'hdmi'
+    %a.btn.btn-primary{ href: '/sound.json?q=speakers&redirect_to=/' }
+      %i.fa.fa-file-audio-o
+      speakers
+  - else
+    %a.btn.btn-primary{ href: '/sound.json?q=hdmi&redirect_to=/' }
+      %i.fa.fa-file-audio-o
+      hdmi
+.row.text-center.menu
+  - unless couch_lock_running?
+    %a.btn.btn-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
+      %i.fa.fa-coffee
+      couch-lock
+  - else
+    %a.btn.btn-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
+      %i.fa.fa-times
+        kill couch-lock
+.row.text-center.menu
+  %a.btn.btn-primary{ href: '/shop' }
+    %i.fa.fa-shopping-cart
+    shopping list

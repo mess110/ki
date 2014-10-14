@@ -1,0 +1,21 @@
+!!!
+%html{ "ng-app" => "clApp" }
+  %head
+    %title Ki Framework - Couch Lock Remote Control
+
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
+
+    %link{href: "stylesheets/font-awesome.min.css", rel: "stylesheet"}/
+    %link{href: "stylesheets/bootstrap.min.css", rel: "stylesheet"}/
+    %link{href: "stylesheets/bootstrap-theme.min.css", rel: "stylesheet"}/
+    %link{href: "stylesheets/main.css", rel: "stylesheet"}/
+  %body
+    .container
+      = yield
+      .row
+        .col-xs-12.text-center
+          %a.btn.btn-primary{ href: 'javascript: location.reload()' }
+            %i.fa.fa-refresh
+
+    %script{src: "javascripts/angular.min.js"}
+    %script{src: "javascripts/clApp.js"}

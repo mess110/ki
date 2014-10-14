@@ -30,6 +30,10 @@ module Ki
   end
 end
 
+class Items < Ki::Model
+  requires :name, :qty
+end
+
 class Monitors < Ki::Model
   forbid :create, :update, :delete
 
