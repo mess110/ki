@@ -45,6 +45,14 @@ class Monitors < Ki::Model
   end
 end
 
+class Ring < Ki::Model
+  forbid :create, :update, :delete
+
+  def after_find
+    run "aplay public/doorbell-1.wav &"
+  end
+end
+
 class Fireplace < Ki::Model
   forbid :create, :update, :delete
 
