@@ -14,7 +14,7 @@
         %i.fa.fa-fire-extinguisher
         kill fireplace
 .row.text-center.menu
-  .col-md-3.col-md-offset-4.col-xs-9
+  .col-md-4.col-md-offset-4.col-xs-12
     - unless couch_lock_running?
       %a.btn.btn-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
         %i.fa.fa-coffee
@@ -23,6 +23,8 @@
       %a.btn.btn-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
         %i.fa.fa-times
           kill couch-lock
-  .col-md-1.col-xs-3
+.row.text-center.menu
+  .col-md-4.col-md-offset-4.col-xs-12
     %a.btn.btn-primary{ href: 'couchlock://192.168.0.12:9876' }
       %i.fa.fa-android
+      android

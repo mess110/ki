@@ -1,25 +1,23 @@
 .row{ "ng-controller" => "ShopController" }
   .col-md-4.col-md-offset-4.col-xs-12
-    %form{role: "form"}
-      .row.no-padding
-        .col-xs-7
-          %input.form-control{ type: "text", placeholder: "name", "ng-model" => "item.name" }
-        .col-xs-3
-          %input.form-control{ type: "number", placeholder: "Qty", min: 0, "ng-model" => "item.qty" }
-        .col-xs-2
-          %a.btn.btn-primary{ "ng-click" => "create()"}
-            %i.fa.fa-plus
+    .row.no-padding
+      .col-xs-7
+        %input.form-control{ type: "text", placeholder: "name", "ng-model" => "item.name" }
+      .col-xs-3
+        %input.form-control{ type: "number", placeholder: "Qty", min: 0, "ng-model" => "item.qty" }
+      .col-xs-2
+        %a.btn.btn-primary{ "ng-click" => "create()"}
+          %i.fa.fa-plus
 
   .col-xs-12
     %hr
 
   .col-md-4.col-md-offset-4.col-xs-12{ "ng-repeat" => "si in shopping_items" }
-    %form{role: "form" }
-      .row.no-padding
-        .col-xs-7
-          %input.form-control{ type: "text", "ng-model" => "si.name", "ng-blur" => "update(si)"}
-        .col-xs-3
-          %input.form-control{ type: "number", placeholder: "Qty", min: 0, "ng-model" => "si.qty", "ng-blur" => "update(si)" }
-        .col-xs-2
-          %a.btn.btn-primary{ "ng-click" => "delete(si.id)" }
-            %i.fa.fa-trash
+    .row.no-padding
+      .col-xs-7
+        %input.form-control{ type: "text", "ng-model" => "si.name", "ng-blur" => "update(si)"}
+      .col-xs-3
+        %input.form-control{ type: "number", placeholder: "Qty", min: 0, "ng-model" => "si.qty", "ng-blur" => "update(si)" }
+      .col-xs-2
+        %a.btn.btn-primary{ "ng-click" => "delete(si.id)" }
+          %i.fa.fa-trash
