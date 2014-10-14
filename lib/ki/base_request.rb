@@ -1,6 +1,6 @@
 module Ki
   class BaseRequest < Rack::Request
-    include FormatOf
+    include Middleware::Helpers::FormatOf
 
     def root?
       path == '/'

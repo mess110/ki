@@ -38,7 +38,7 @@ end
 
 module Ki
   module Helpers
-    include ViewHelper
+    include Middleware::Helpers::View
 
     def css url
       render_haml "%link{:href => '#{url}', :rel => 'stylesheet'}"

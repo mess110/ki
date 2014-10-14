@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Ki::FormatOf do
-  let(:obj) { @obj = Object.new; @obj.extend(Ki::FormatOf) }
+describe Ki::Middleware::Helpers::FormatOf do
+  let(:obj) { @obj = Object.new; @obj.extend(Ki::Middleware::Helpers::FormatOf) }
 
   it 'should parse url format' do
     [nil, {}, '', '.json'].each do |s|

@@ -1,9 +1,9 @@
 module Ki
   module Middleware #:nodoc:
     module BaseMiddleware
-      include FormatOf
-      include ViewHelper
-      include PublicFileHelper
+      include Helpers::FormatOf
+      include Helpers::View
+      include Helpers::PublicFile
 
       def initialize app
         @app = app
