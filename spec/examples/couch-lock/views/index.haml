@@ -33,3 +33,20 @@
     %a.btn.btn-primary{ href: 'couchlock://192.168.0.12:9876' }
       %i.fa.fa-android
       android
+.row.text-center.menu
+  .col-md-4.col-md-offset-4.col-xs-12
+    - unless vlc_running?
+      %a.btn.btn-primary{ href: '/radio.json?q=rockfm&redirect_to=/' }
+        %i.fa.fa-headphones
+        radio now
+    - else
+      %a.btn.btn-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
+        %i.fa.fa-headphones
+        kill radio
+.row.text-center.menu
+  .col-md-2.col-md-offset-4.col-xs-6
+    %a.btn.btn-primary{ href: '/volume.json?q=down&redirect_to=/' }
+      %i.fa.fa-volume-down
+  .col-md-2.col-xs-6
+    %a.btn.btn-primary{ href: '/volume.json?q=up&redirect_to=/' }
+      %i.fa.fa-volume-up

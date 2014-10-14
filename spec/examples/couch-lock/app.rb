@@ -34,6 +34,35 @@ class Items < Ki::Model
   requires :name, :qty
 end
 
+class Radio < Ki::Model
+  forbid :create, :update, :delete
+
+  def after_find
+    return if params["q"].nil?
+    return unless ['rockfm'].include? params["q"]
+
+    run "vlc http://80.86.106.35:800/"
+  end
+end
+
+class Volume < Ki::Model
+  forbid :create, :update, :delete
+
+  def after_find
+    return if params["q"].nil?
+    return unless ['up', 'down', 'manager'].include? params["q"]
+
+    case params["q"]
+    when 'up'
+      run "amixer -D pulse sset Master 5%+"
+    when 'down'
+      run "amixer -D pulse sset Master 5%-"
+    when 'manager'
+      run "gnome-control-center sound &"
+    end
+  end
+end
+
 class Monitors < Ki::Model
   forbid :create, :update, :delete
 
