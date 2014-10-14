@@ -1,45 +1,28 @@
 .row.text-center.menu
-  %a.btn.btn-primary{ href: 'couchlock://192.168.0.12:9876' }
-    %i.fa.fa-android
-      client
+  .col-md-4.col-md-offset-4.col-xs-12
+    %a.btn.btn-primary{ href: '/shop' }
+      %i.fa.fa-shopping-cart
+      shopping list
 .row.text-center.menu
-  - if display_status == 'cloned'
-    %a.btn.btn-primary{ href: '/monitors.json?q=e&redirect_to=/' }
-      %i.fa.fa-desktop
-      %i.fa.fa-desktop
-      extend
-  - else
-    %a.btn.btn-primary{ href: '/monitors.json?q=c&redirect_to=/' }
-      %i.fa.fa-desktop
-      clone
+  .col-md-4.col-md-offset-4.col-xs-12
+    - unless vlc_running?
+      %a.btn.btn-primary{ href: '/fireplace.json?q=start&redirect_to=/' }
+        %i.fa.fa-fire
+        fireplace
+    - else
+      %a.btn.btn-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
+        %i.fa.fa-fire-extinguisher
+        kill fireplace
 .row.text-center.menu
-  - unless vlc_running?
-    %a.btn.btn-primary{ href: '/fireplace.json?q=start&redirect_to=/' }
-      %i.fa.fa-fire
-      fireplace
-  - else
-    %a.btn.btn-primary{ href: '/fireplace.json?q=kill&redirect_to=/' }
-      %i.fa.fa-fire-extinguisher
-      kill fireplace
-.row.text-center.menu
-  - if sound_output == 'hdmi'
-    %a.btn.btn-primary{ href: '/sound.json?q=speakers&redirect_to=/' }
-      %i.fa.fa-file-audio-o
-      speakers
-  - else
-    %a.btn.btn-primary{ href: '/sound.json?q=hdmi&redirect_to=/' }
-      %i.fa.fa-file-audio-o
-      hdmi
-.row.text-center.menu
-  - unless couch_lock_running?
-    %a.btn.btn-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
-      %i.fa.fa-coffee
-      couch-lock
-  - else
-    %a.btn.btn-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
-      %i.fa.fa-times
-        kill couch-lock
-.row.text-center.menu
-  %a.btn.btn-primary{ href: '/shop' }
-    %i.fa.fa-shopping-cart
-    shopping list
+  .col-md-3.col-md-offset-4.col-xs-9
+    - unless couch_lock_running?
+      %a.btn.btn-primary{ href: '/jrobot.json?q=listen&redirect_to=/' }
+        %i.fa.fa-coffee
+        couch-lock
+    - else
+      %a.btn.btn-primary{ href: '/jrobot.json?q=kill&redirect_to=/' }
+        %i.fa.fa-times
+          kill couch-lock
+  .col-md-1.col-xs-3
+    %a.btn.btn-primary{ href: 'couchlock://192.168.0.12:9876' }
+      %i.fa.fa-android

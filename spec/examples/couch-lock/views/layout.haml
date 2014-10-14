@@ -11,11 +11,15 @@
     %link{href: "stylesheets/main.css", rel: "stylesheet"}/
   %body
     .container
-      = yield
       .row
-        .col-xs-12.text-center
+        .col-md-4.col-md-offset-4.col-xs-12
+          %a.btn.btn-primary{ href: '/' }
+            %i.fa.fa-home
           %a.btn.btn-primary{ href: 'javascript: location.reload()' }
             %i.fa.fa-refresh
+          %a.pull-right.btn.btn-primary{ href: '/settings' }
+            %i.fa.fa-cog
+      = yield
 
     %script{src: "javascripts/angular.min.js"}
     %script{src: "javascripts/clApp.js"}
