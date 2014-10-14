@@ -72,10 +72,11 @@ Views are in the *views* folder and you can find some database info in
 ```shell
 cd todo
 bundle
-rackup
+ki server
 ```
 
-*rackup* is the command which starts the webserver. The port will be displayed.
+*ki server* is the command which starts the webserver. By default it starts on
+port 1337.
 
 ### Adding a view
 

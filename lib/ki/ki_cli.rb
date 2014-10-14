@@ -41,6 +41,28 @@ class AppGenerator < KiGenerator
   end
 end
 
+class DevServer < KiGenerator
+  DEFAULT_PORT = 1337
+
+  argument :port
+
+  def prepare_port
+    unless port && port.to_i != 0
+      @port = DEFAULT_PORT
+    end
+  end
+
+  def start_server
+    unless File.exists? 'config.ru'
+      say "Working directory should be a ki app."
+      exit 3
+    end
+
+    `bundle exec rackup -o 0.0.0.0 -p #{@port}`
+  end
+end
+
 class KiCli < Thor
   register AppGenerator, :new, 'new [APP_NAME]', 'generate a new app'
+  register DevServer, :server, 'server [PORT]', "start the ki server. Default port is #{DevServer::DEFAULT_PORT}"
 end
