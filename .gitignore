@@ -8,3 +8,5 @@
 
 spec/examples/*/tmp
 spec/examples/*/log
+
+/doc/*

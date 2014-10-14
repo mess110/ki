@@ -1,5 +1,5 @@
 module Ki
-  class ApiError < StandardError
+  class ApiError < StandardError #:nodoc:
     attr_reader :status
 
     def initialize body, status=400
@@ -12,20 +12,28 @@ module Ki
     end
   end
 
-  class InvalidUrlError < ApiError; end
-  class RequiredAttributeMissing < ApiError; end
-  class AttributeNotUnique < ApiError; end
-  class ForbiddenAction < ApiError
+  class InvalidUrlError < ApiError #:nodoc:
+  end
+
+  class RequiredAttributeMissing < ApiError #:nodoc:
+  end
+
+  class AttributeNotUnique < ApiError #:nodoc:
+  end
+
+  class ForbiddenAction < ApiError #:nodoc:
     def initialize s='forbidden', code=403
       super s, code
     end
   end
-  class UnauthorizedError < ApiError
+
+  class UnauthorizedError < ApiError #:nodoc:
     def initialize s='unauthroized', code=401
       super s, code
     end
   end
-  class PartialNotFoundError < ApiError
+
+  class PartialNotFoundError < ApiError #:nodoc:
     def initialize s
       super "partial #{s} not found", 404
     end

@@ -1,5 +1,5 @@
 module Ki
-  module Middleware
+  module Middleware #:nodoc:
     module BaseMiddleware
       include FormatOf
       include ViewHelper

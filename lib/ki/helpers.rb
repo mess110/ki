@@ -1,4 +1,13 @@
 class String
+  # Converts a string to a class
+  #
+  # ==== Examples
+  #
+  #   class User
+  #   end
+  #
+  #   "user".to_class == User
+  #
   def to_class
     chain = self.split "::"
     klass = Kernel
