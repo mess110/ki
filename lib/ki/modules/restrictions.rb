@@ -1,47 +1,49 @@
 module Ki
-  module Restrictions
-    def forbidden_actions
-      []
-    end
-
-    def forbid *actions
-      send :define_method, :forbidden_actions do
-        actions
+  class Model
+    module Restrictions
+      def forbidden_actions
+        []
       end
 
-      eigen_class = class << self; self; end
-      eigen_class.send(:define_method, :forbidden_actions) do
-        actions
-      end
-    end
+      def forbid *actions
+        send :define_method, :forbidden_actions do
+          actions
+        end
 
-    def required_attributes
-      []
-    end
-
-    def requires *attributes
-      send :define_method, :required_attributes do
-        attributes
+        eigen_class = class << self; self; end
+        eigen_class.send(:define_method, :forbidden_actions) do
+          actions
+        end
       end
 
-      eigen_class = class << self; self; end
-      eigen_class.send(:define_method, :required_attributes) do
-        attributes
-      end
-    end
-
-    def unique_attributes
-      []
-    end
-
-    def unique *attributes
-      send :define_method, :unique_attributes do
-        attributes
+      def required_attributes
+        []
       end
 
-      eigen_class = class << self; self; end
-      eigen_class.send(:define_method, :unique_attributes) do
-        attributes
+      def requires *attributes
+        send :define_method, :required_attributes do
+          attributes
+        end
+
+        eigen_class = class << self; self; end
+        eigen_class.send(:define_method, :required_attributes) do
+          attributes
+        end
+      end
+
+      def unique_attributes
+        []
+      end
+
+      def unique *attributes
+        send :define_method, :unique_attributes do
+          attributes
+        end
+
+        eigen_class = class << self; self; end
+        eigen_class.send(:define_method, :unique_attributes) do
+          attributes
+        end
       end
     end
   end

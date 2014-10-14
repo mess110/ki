@@ -4,4 +4,4 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'ki/ki_cli'
 
-KiCli.start(ARGV)
+Ki::Cli::Main.start(ARGV)

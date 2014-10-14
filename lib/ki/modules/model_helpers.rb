@@ -1,35 +1,37 @@
 module Ki
-  module ModelHelpers
-    def get?
-      @req.get?
-    end
+  class Model
+    module ModelHelpers
+      def get?
+        @req.get?
+      end
 
-    def post?
-      @req.post?
-    end
+      def post?
+        @req.post?
+      end
 
-    def put?
-      @req.put?
-    end
+      def put?
+        @req.put?
+      end
 
-    def delete?
-      @req.delete?
-    end
+      def delete?
+        @req.delete?
+      end
 
-    def forbidden_actions
-      []
-    end
+      def forbidden_actions
+        []
+      end
 
-    def required_attributes
-      []
-    end
+      def required_attributes
+        []
+      end
 
-    def skipped_params
-      []
-    end
+      def skipped_params
+        []
+      end
 
-    def unique_attributes
-      []
+      def unique_attributes
+        []
+      end
     end
   end
 end

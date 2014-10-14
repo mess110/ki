@@ -12,7 +12,7 @@ describe Ki::Model do
     desc.include?(Bar).should be_true
   end
 
-  context Ki::QueryInterface do
+  context Ki::Model::QueryInterface do
     it 'should have the query interface' do
       Foo.class_name.should == 'Foo'
       expect {
