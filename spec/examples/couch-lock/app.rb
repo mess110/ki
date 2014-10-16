@@ -8,6 +8,13 @@ end
 
 module Ki
   module Helpers
+    def wiki_defaults
+      base = Wiki.count base: "1"
+      if base == 0
+        Wiki.create({ title: "wiki", body: "", base: "1" })
+      end
+    end
+
     def display_status
       res = run "xrandr | head -n 1 | awk '{ print $8 }'"
       res.strip.to_i == 1920 ? 'cloned' : 'extended'
@@ -28,6 +35,10 @@ module Ki
       res.strip == "" ? 'analog' : 'hdmi'
     end
   end
+end
+
+class Wiki < Ki::Model
+  requires :title, :body
 end
 
 class Items < Ki::Model

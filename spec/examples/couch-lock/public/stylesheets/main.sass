@@ -19,3 +19,18 @@
   input[type=number]
     max-width: 70px
     text-align: center
+
+.zero_border
+  width: 100%
+  border-style: none
+  border-color: Transparent
+  overflow: auto
+  outline: none
+  text-align: justify
+
+input
+  @extend .zero_border
+
+textarea
+  height: 420px
+  @extend .zero_border

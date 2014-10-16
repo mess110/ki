@@ -1,5 +1,30 @@
 clApp = angular.module("clApp", [])
 
+clApp.directive "autoFocus", ($timeout) ->
+  restrict: "AC"
+  link: (_scope, _element) ->
+    $timeout (->
+      _element[0].focus()
+      return
+    ), 0
+    return
+
+clApp.controller "WikiController", ($scope, $http) ->
+  $scope.refresh = ->
+    $http.get("/wiki.json?base=1").success((data, status, headers, config) ->
+      $scope.wiki = data[0]
+    ).error (data, status, headers, config) ->
+      console.log data
+  $scope.refresh()
+
+  $scope.$watch 'wiki.body', (newValue, oldValue) ->
+    return unless oldValue?
+    $http.put("/wiki.json", $scope.wiki);
+
+  $scope.$watch 'wiki.title', (newValue, oldValue) ->
+    return unless oldValue?
+    $http.put("/wiki.json", $scope.wiki);
+
 clApp.controller "ShopController", ($scope, $http) ->
   $scope.shopping_items = []
   $scope.item = {
