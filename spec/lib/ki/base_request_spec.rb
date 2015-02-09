@@ -11,6 +11,8 @@ describe Ki::BaseRequest do
   it 'coverts path to class' do
     class Foo < Ki::Model; end
     class Bar < Ki::Model; end
+    class FooBar < Ki::Model; end
+
     req.new({'PATH_INFO' => ''}).to_ki_model_class.should == nil
     req.new({'PATH_INFO' => '/'}).to_ki_model_class.should == nil
     req.new({'PATH_INFO' => 'foo'}).to_ki_model_class.should == Foo
@@ -19,7 +21,9 @@ describe Ki::BaseRequest do
     req.new({'PATH_INFO' => '/bar.json'}).to_ki_model_class.should == Bar
     req.new({'PATH_INFO' => '/Foo/bar.json'}).to_ki_model_class.should == nil
     req.new({'PATH_INFO' => '/Foo/bar'}).to_ki_model_class.should == nil
-    req.new({'PATH_INFO' => '/Foo_bar'}).to_ki_model_class.should == nil
+    req.new({'PATH_INFO' => '/Foo_bar'}).to_ki_model_class.should == FooBar
+    req.new({'PATH_INFO' => '/foo_bar'}).to_ki_model_class.should == FooBar
+    req.new({'PATH_INFO' => '/foo_bar.json'}).to_ki_model_class.should == FooBar
   end
 
   it 'converts verb to action' do
