@@ -128,21 +128,20 @@ module Ki
       end
 
       def resourcerize req
-        begin
-          klass = req.to_ki_model_class
-          if Model.descendants.include? klass
-            model = klass.new(req.to_action, req.params)
-            if req.params['redirect_to'].nil? # TODO document this
-              render model
-            else
-              redirect_to req.params['redirect_to'] # TODO check for injection
-            end
-          else
-            raise InvalidUrlError.new("invalid url '#{req.path}'", 404)
-          end
-        rescue ApiError => e
-          render e
+        klass = req.to_ki_model_class
+
+        unless Model.descendants.include?(klass)
+          raise InvalidUrlError.new("invalid url '#{req.path}'", 404)
         end
+
+        model = klass.new(req.to_action, req.params)
+        if req.params['redirect_to'].nil? # TODO document this
+          render model
+        else
+          redirect_to req.params['redirect_to'] # TODO check for injection
+        end
+      rescue ApiError => e
+        render e
       end
 
       def redirect_to s
