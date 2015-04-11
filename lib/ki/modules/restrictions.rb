@@ -6,14 +6,7 @@ module Ki
       end
 
       def forbid *actions
-        send :define_method, :forbidden_actions do
-          actions
-        end
-
-        eigen_class = class << self; self; end
-        eigen_class.send(:define_method, :forbidden_actions) do
-          actions
-        end
+        generic_restriction :forbidden_actions, actions
       end
 
       def required_attributes
@@ -21,14 +14,7 @@ module Ki
       end
 
       def requires *attributes
-        send :define_method, :required_attributes do
-          attributes
-        end
-
-        eigen_class = class << self; self; end
-        eigen_class.send(:define_method, :required_attributes) do
-          attributes
-        end
+        generic_restriction :required_attributes, attributes
       end
 
       def unique_attributes
@@ -36,15 +22,22 @@ module Ki
       end
 
       def unique *attributes
-        send :define_method, :unique_attributes do
+        generic_restriction :unique_attributes, attributes
+      end
+
+      private
+
+      def generic_restriction method_name, attributes
+        send :define_method, method_name do
           attributes
         end
 
         eigen_class = class << self; self; end
-        eigen_class.send(:define_method, :unique_attributes) do
+        eigen_class.send(:define_method, method_name) do
           attributes
         end
       end
+
     end
   end
 end

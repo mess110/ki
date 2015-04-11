@@ -6,7 +6,9 @@ include Rack::Test::Methods
 
 require 'ki'
 
-Ki::KiConfig::CONFIG_FILE_PATH = 'spec/examples/base/config.yml'
+fail 'Test config file does not exist. See spec/config.yml.example' if !File.exists?('spec/config.yml')
+
+Ki::KiConfig::CONFIG_FILE_PATH = 'spec/config.yml'
 Ki::KiConfig.instance.read 'test'
 Ki::Orm::Db.instance.establish_connection
 

@@ -2,6 +2,7 @@
 *.rbc
 /pkg/
 /spec/reports/
+/spec/config.yml
 /tmp/
 
 /.bundle/
