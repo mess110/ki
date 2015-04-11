@@ -1,5 +1,7 @@
 # Ki Framework
 
+[![Code Climate](https://codeclimate.com/github/mess110/ki/badges/gpa.svg)](https://codeclimate.com/github/mess110/ki)
+
 Tiny REST JSON ORM framework.
 
 Ki's goal is to help you protoype your ideas blazing fast. It has a db backend
