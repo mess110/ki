@@ -1,5 +1,6 @@
 # Ki Framework
 
+[![Build Status](https://travis-ci.org/mess110/ki.svg?branch=master)](https://travis-ci.org/mess110/ki)
 [![Code Climate](https://codeclimate.com/github/mess110/ki/badges/gpa.svg)](https://codeclimate.com/github/mess110/ki)
 
 Tiny REST JSON ORM framework.
