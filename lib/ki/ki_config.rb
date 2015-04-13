@@ -4,13 +4,15 @@ module Ki
   class KiConfig
     include Singleton
 
-    CONFIG_FILE_PATH = 'config.yml'
-
     attr_reader :config, :environment
 
     def read environment
       @environment = environment
-      @config = YAML.load_file(CONFIG_FILE_PATH)[environment]
+      @config = YAML.load_file(config_file_path)[environment]
+    end
+
+    def config_file_path
+      'config.yml'
     end
 
     def middleware

@@ -9,12 +9,18 @@ include Rack::Test::Methods
 
 require 'ki'
 
-config_yml_path = File.exists?('spec/config.yml') ? 'spec/config.yml' : 'spec/config.yml.example'
-if config_yml_path.end_with?('example')
-  puts 'WARNING: spec/config.yml.example used'
+module Ki
+  class KiConfig
+    def config_file_path
+      config_yml_path = File.exists?('spec/config.yml') ? 'spec/config.yml' : 'spec/config.yml.example'
+      if config_yml_path.end_with?('example')
+        puts 'WARNING: spec/config.yml.example used'
+      end
+      config_yml_path
+    end
+  end
 end
 
-Ki::KiConfig::CONFIG_FILE_PATH = config_yml_path
 Ki::KiConfig.instance.read 'test'
 Ki::Orm::Db.instance.establish_connection
 
