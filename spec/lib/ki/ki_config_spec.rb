@@ -6,6 +6,7 @@ describe Ki::KiConfig do
   end
 
   it 'is overwritten for testing. see spec_helper' do
-    Ki::KiConfig.instance.config_file_path.should == 'spec/config.yml'
+    path = Ki::KiConfig.instance.config_file_path
+    path.start_with?('spec/config.yml').should be true
   end
 end
