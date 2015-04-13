@@ -34,6 +34,16 @@ class Array
       e
     end
   end
+
+  def present?
+    !nil? && !empty?
+  end
+end
+
+class NilClass
+  def present?
+    false
+  end
 end
 
 module Ki

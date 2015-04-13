@@ -120,6 +120,12 @@ other haml files. The content of the route will be placed in the layout *yield*
 %p Hello World!
 ```
 
+### Middleware
+
+Views, assets, haml, less, sass are all handled through Rack middleware.
+
+You can learn more about ki middleware [here](MIDDLEWARE.md).
+
 ### Helpers
 
 To reduce complexity in your views, you can use helpers. Here we create a

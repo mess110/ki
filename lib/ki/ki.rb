@@ -20,11 +20,9 @@ module Ki
         use Middleware::InitMiddleware
         # TODO what happens with invalid json?
         use Rack::Parser, :content_types => { 'application/json'  => Proc.new { |body| ::MultiJson.decode body } }
-        use Middleware::ApiHandler
-        use Middleware::CoffeeCompiler
-        use Middleware::SassCompiler
-        use Middleware::HamlCompiler
-        use Middleware::PublicFileServer
+        KiConfig.instance.middleware.each do |middleware|
+          use middleware
+        end
         run KiApp.new
       end
     end
