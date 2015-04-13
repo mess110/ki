@@ -11,4 +11,11 @@ describe Ki do
     'cez'.to_class.should == Cez
     'cez_bar'.to_class.should == CezBar
   end
+
+  describe Array do
+    it 'responds to present?' do
+      expect([]).to_not be_present
+      expect([1]).to be_present
+    end
+  end
 end
