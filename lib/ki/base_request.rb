@@ -10,6 +10,10 @@ module Ki
       path == '/instadoc'
     end
 
+    def admin?
+      path == '/instadmin'
+    end
+
     def json?
       content_type == 'application/json' || format_of(path) == 'json'
     end

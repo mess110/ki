@@ -40,6 +40,15 @@ module Ki
         self
       end
 
+      def connection_string
+        db = KiConfig.instance.database
+        if ENV["MONGODB_URI"]
+          ENV["MONGODB_URI"]
+        else
+          "#{db['host']}:#{db['port']}/#{db['name']}"
+        end
+      end
+
       # ==== Returns
       #
       # An array of all the collection names in the database.

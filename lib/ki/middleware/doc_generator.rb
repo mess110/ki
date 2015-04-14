@@ -5,18 +5,22 @@ module Ki
 
       def call env
         req = BaseRequest.new env
-        if req.doc?
+        if custom_check(req)
           if view_exists?(req)
             render_haml view_path(req)
           else
-            render_haml doc_view_path(req)
+            render_haml custom_view_path
           end
         else
           @app.call env
         end
       end
 
-      def doc_view_path path
+      def custom_check req
+        req.doc?
+      end
+
+      def custom_view_path
         File.join(File.dirname(__FILE__), '..', 'views', 'instadoc.haml')
       end
     end

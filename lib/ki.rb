@@ -31,6 +31,7 @@ require 'ki/middleware/sass_compiler'
 require 'ki/middleware/haml_compiler'
 require 'ki/middleware/coffee_compiler'
 require 'ki/middleware/doc_generator'
+require 'ki/middleware/admin_interface_generator'
 
 require 'ki/ki_config'
 require 'ki/helpers'

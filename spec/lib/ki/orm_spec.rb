@@ -9,6 +9,10 @@ describe Ki::Orm do
     @db.config['name'].should == 'np_test'
   end
 
+  it 'has a connection string' do
+    expect(@db.connection_string.class).to be String
+  end
+
   it 'should create a db object' do
     expect {
       oid = @db.insert 'foo', {hello: 'world'}
