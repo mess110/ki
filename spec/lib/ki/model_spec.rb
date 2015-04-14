@@ -21,14 +21,14 @@ describe Ki::Model do
         Foo.update('id' => id, 'hello' => 'universe')
         Foo.find(id).first['hello'].should == 'universe'
         Foo.delete(id)
-      }.to change{Foo.count}.by 0
+      }.to change { Foo.count }.by 0
     end
 
     it 'should find or create' do
       expect {
-        h = { 'time' => Time.now.to_i.to_s }
-        r = Foo.find_or_create(h)
-        r = Foo.find_or_create(h)
+        h = { time: Time.now.to_i.to_s, random: SecureRandom.uuid }
+        Foo.find_or_create(h)
+        Foo.find_or_create(h)
       }.to change { Foo.count }.by 1
     end
   end

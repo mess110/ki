@@ -1,5 +1,7 @@
 require 'thor'
 
+require 'ki/utils/extra_irb'
+
 module Ki
   module Cli #:nodoc:
     class KiGenerator < Thor::Group #:nodoc:
@@ -7,6 +9,13 @@ module Ki
 
       def self.source_root
         File.join(File.dirname(__FILE__), '..', '..')
+      end
+
+      def self.requies_ki_directory
+        unless File.exists? 'config.ru'
+          say "Working directory should be a ki app."
+          exit 3
+        end
       end
     end
 
@@ -50,18 +59,24 @@ module Ki
       desc "Starts the ki server"
 
       def start_server
-        unless File.exists? 'config.ru'
-          say "Working directory should be a ki app."
-          exit 3
-        end
-
+        KiGenerator.requies_ki_directory
         `bundle exec rackup -o 0.0.0.0 -p #{port}`
+      end
+    end
+
+    class DevConsole < KiGenerator
+      def start_console
+        KiGenerator.requies_ki_directory
+        require './app'
+        Ki.connect
+        IRB.start_session(nil)
       end
     end
 
     class Main < Thor
       register AppGenerator, :new, 'new [APP_NAME]', 'generate a new app'
       register DevServer, :server, 'server [PORT]', "start the ki server. Default port is #{DevServer::DEFAULT_PORT}"
+      register DevConsole, :console, 'console', 'start the console'
     end
   end
 end

@@ -82,6 +82,13 @@ ki server
 *ki server* is the command which starts the webserver. By default it starts on
 port 1337.
 
+For an interactive environment, you can run the *console* command. It starts a
+irb session with your application context already loaded.
+
+```shell
+ki console
+```
+
 ### Adding a view
 
 A view is a html page. By default, a view called 'index.haml' is created for

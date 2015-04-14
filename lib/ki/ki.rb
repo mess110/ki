@@ -13,8 +13,7 @@ module Ki
     VIEWS_PATH = 'views'
 
     def initialize
-      KiConfig.instance.read environment
-      Orm::Db.instance.establish_connection
+      Ki.connect
 
       @app = Rack::Builder.new do
         use Middleware::InitMiddleware
@@ -27,8 +26,13 @@ module Ki
       end
     end
 
-    def environment
-      ENV['RACK_ENV']
+    def self.connect
+      KiConfig.instance.read Ki.environment
+      Orm::Db.instance.establish_connection
+    end
+
+    def self.environment
+      ENV['RACK_ENV'] || 'development'
     end
 
     def call env

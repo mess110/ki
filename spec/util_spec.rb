@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Ki do
   it 'should run in test env' do
-    Ki::Ki.new.environment.should == 'test'
+    Ki::Ki.environment.should == 'test'
   end
 
   it 'should convert string to class corectly' do
