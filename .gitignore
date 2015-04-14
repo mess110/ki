@@ -9,5 +9,6 @@
 
 spec/examples/*/tmp
 spec/examples/*/log
+spec/examples/*/Gemfile.lock
 
 /doc/*
