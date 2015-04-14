@@ -7,3 +7,5 @@ require 'ki/middleware/public_file_server'
 require 'ki/middleware/sass_compiler'
 require 'ki/middleware/haml_compiler'
 require 'ki/middleware/coffee_compiler'
+
+require 'ki/middleware/doc_generator'

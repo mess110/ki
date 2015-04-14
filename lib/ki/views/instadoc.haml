@@ -1,0 +1,16 @@
+%h1 Ki InstaDoc
+
+%ul
+  - Ki::Model.descendants.each do |model|
+    %li
+      %div
+        %h2= model.to_s
+        %p
+          Required attributes:
+          = model.required_attributes
+        %p
+          Forbidden actions:
+          = model.forbidden_actions
+        %p
+          Unique attributes:
+          = model.unique_attributes

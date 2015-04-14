@@ -5,6 +5,14 @@ development:
     port: 27017
 
 test:
+  middleware: [
+    'ApiHandler',
+    'DocGenerator',
+    'CoffeeCompiler',
+    'SassCompiler',
+    'HamlCompiler',
+    'PublicFileServer'
+  ]
   database:
     name: np_test
     host: 127.0.0.1

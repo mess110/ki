@@ -6,6 +6,10 @@ module Ki
       path == '/'
     end
 
+    def doc?
+      path == '/instadoc'
+    end
+
     def json?
       content_type == 'application/json' || format_of(path) == 'json'
     end

@@ -296,3 +296,8 @@ heroku config:set MONGODB_URI="mongodb://user:pass@mongo_url:mongo_port/db_name"
 git push heroku master
 heroku open
 ```
+
+## Documentation
+
+Ki offers instant documentation. Add the middleware 'DocGenerator' and access
+*/instadoc*.
