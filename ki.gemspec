@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "coffee-script"
   spec.add_runtime_dependency "mongo"
   spec.add_runtime_dependency "bson_ext"
+  spec.add_runtime_dependency "rack-cors"
 
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rack-test"

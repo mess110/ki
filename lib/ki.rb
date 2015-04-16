@@ -5,6 +5,7 @@ require 'uri'
 # gems
 require 'rack'
 require 'rack/parser'
+require 'rack/cors'
 require 'haml'
 require 'sass'
 require 'coffee-script'

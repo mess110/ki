@@ -22,6 +22,12 @@ module Ki
         KiConfig.instance.middleware.each do |middleware|
           use middleware
         end
+        use Rack::Cors do
+          allow do
+            origins '*'
+            resource '*', headers: :any, methods: :any
+          end
+        end
         run KiApp.new
       end
     end
