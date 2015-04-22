@@ -4,7 +4,7 @@ describe Ki::Helpers do
   include Ki::Helpers
 
   it 'should render_haml' do
-    render_haml('%div.foo').should == "<div class='foo'></div>\n"
+    haml('%div.foo').should == "<div class='foo'></div>\n"
   end
 
   it 'renders css tag' do

@@ -1,6 +1,6 @@
 module Ki
   class Model
-    module ModelHelpers
+    module ModelHelper
       def get?
         @req.get?
       end

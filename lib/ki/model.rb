@@ -3,7 +3,7 @@ module Ki
     extend QueryInterface
     extend Restrictions
     include Callbacks
-    include ModelHelpers
+    include ModelHelper
 
     attr_accessor :action, :result, :params, :status
 

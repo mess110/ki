@@ -3,14 +3,14 @@ module Ki
     include Middleware::Helpers::View
 
     def css(url)
-      render_haml "%link{:href => '#{url}', :rel => 'stylesheet'}"
+      haml "%link{:href => '#{url}', :rel => 'stylesheet'}"
     end
 
     def js(url)
-      render_haml "%script{:src => '#{url}'}"
+      haml "%script{:src => '#{url}'}"
     end
 
-    def render_haml(s)
+    def haml(s)
       Haml::Engine.new(s).render
     end
 
