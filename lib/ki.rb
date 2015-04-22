@@ -39,5 +39,6 @@ require 'ki/helpers'
 require 'ki/orm'
 require 'ki/model'
 require 'ki/base_request'
+require 'ki/ki_app'
 
 require 'ki/ki'

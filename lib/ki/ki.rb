@@ -1,11 +1,4 @@
 module Ki
-  class KiApp
-    def call(env)
-      s = 'misplaced in space'
-      Rack::Response.new(s).finish
-    end
-  end
-
   class Ki
     PUBLIC_PATH = 'public'
     VIEWS_PATH = 'views'
