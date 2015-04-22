@@ -9,10 +9,15 @@ module Ki
     def read environment
       @environment = environment
       @config = YAML.load_file(config_file_path)[environment]
+      @config['cors'] ||= true
     end
 
     def config_file_path
       'config.yml'
+    end
+
+    def cors?
+      @config['cors']
     end
 
     def middleware
@@ -22,6 +27,7 @@ module Ki
         used_middleware = @config['middleware']
       end
 
+      # convert middleware to ruby object
       used_middleware.map { |middleware|
         Object.const_get('Ki').const_get('Middleware').const_get(middleware)
       }

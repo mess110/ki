@@ -1,7 +1,5 @@
 module Ki
   class KiApp
-    # should never reach this
-    # middleware should catch all the requests
     def call env
       s = 'misplaced in space'
       Rack::Response.new(s).finish
@@ -20,10 +18,12 @@ module Ki
         use Rack::Parser, :content_types => {
           'application/json' => Proc.new { |body| ::MultiJson.decode body }
         }
-        use Rack::Cors do
-          allow do
-            origins '*'
-            resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
+        if KiConfig.instance.cors?
+          use Rack::Cors do
+            allow do
+              origins '*'
+              resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
+            end
           end
         end
         KiConfig.instance.middleware.each do |middleware|
