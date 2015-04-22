@@ -19,14 +19,14 @@ module Ki
         use Middleware::InitMiddleware
         # TODO what happens with invalid json?
         use Rack::Parser, :content_types => { 'application/json'  => Proc.new { |body| ::MultiJson.decode body } }
-        KiConfig.instance.middleware.each do |middleware|
-          use middleware
-        end
         use Rack::Cors do
           allow do
             origins '*'
             resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
           end
+        end
+        KiConfig.instance.middleware.each do |middleware|
+          use middleware
         end
         run KiApp.new
       end
