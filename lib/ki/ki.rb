@@ -17,8 +17,9 @@ module Ki
 
       @app = Rack::Builder.new do
         use Middleware::InitMiddleware
-        # TODO what happens with invalid json?
-        use Rack::Parser, :content_types => { 'application/json'  => Proc.new { |body| ::MultiJson.decode body } }
+        use Rack::Parser, :content_types => {
+          'application/json' => Proc.new { |body| ::MultiJson.decode body }
+        }
         use Rack::Cors do
           allow do
             origins '*'
