@@ -24,6 +24,7 @@ and provides a fullblown REST api on top.
     - [Create](#create)
     - [Get all](#get-all)
     - [Get by id](#get-by-id)
+    - [Get advanced queries](#advanced-queries)
     - [Update](#update)
     - [Delete](#delete)
   - [Required attributes](#required-attributes)
@@ -224,6 +225,30 @@ curl -X GET http://localhost:9292/todo.json
 
 ```shell
 curl -X GET http://localhost:9292/todo.json?id=ITEM_ID
+```
+
+#### Advanced queries
+
+Mongo syntax is supported. See [here](http://docs.mongodb.org/manual/tutorial/query-documents/) for more details.
+
+Some examples:
+
+Search in array
+
+```
+curl -k -X GET -d '{"category": {"$in": ["music"]}}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
+Greater than number
+
+```
+curl -k -X GET -d '{"i": {"$gt": 0}}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
+OR Query
+
+```
+curl -k -X GET -d '{"$or": [{"category": "music"}, {"category": "band"}]}' "https://json.northpole.ro/storage.json?api_key=secret&secret=secret"
 ```
 
 #### Update
