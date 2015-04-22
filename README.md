@@ -9,6 +9,14 @@ Tiny REST JSON ORM framework with MongoDB.
 Ki's goal is to help you protoype your ideas blazing fast. It has a db backend
 and provides a fullblown REST api on top.
 
+**Table of Contents**
+
+- [TLDR](#tldr)
+- [Install](#install)
+- [Getting started](#getting-started)
+  - [Create a new app](#create-a-new-app)
+  - [Adding a view](#adding-a-view)
+
 ## TLDR
 
 To create an api endpoint '/todo.json' with GET/POST/PATCH and restricting
@@ -304,7 +312,16 @@ git push heroku master
 heroku open
 ```
 
+## CORS enabled
+
+Yes.
+
 ## Documentation
 
 Ki offers instant documentation. Add the middleware 'DocGenerator' and access
 */instadoc*.
+
+## Administration Interface
+
+Ki offers an instant administration interface. Add the middleware 'AdminIntefaceGenerator'
+and access */instadmin*.
