@@ -6,7 +6,7 @@ module Ki
 
     attr_reader :config, :environment
 
-    def read environment
+    def read(environment)
       @environment = environment
       @config = YAML.load_file(config_file_path)[environment]
       @config['cors'] ||= true
@@ -21,16 +21,14 @@ module Ki
     end
 
     def middleware
-      used_middleware = %w(ApiHandler CoffeeCompiler SassCompiler HamlCompiler PublicFileServer)
-
-      if @config['middleware'].present?
-        used_middleware = @config['middleware']
-      end
+      used_middleware = %w(ApiHandler CoffeeCompiler SassCompiler HamlCompiler
+                           PublicFileServer)
+      used_middleware = @config['middleware'] if @config['middleware'].present?
 
       # convert middleware to ruby object
-      used_middleware.map { |middleware|
+      used_middleware.map do |middleware|
         Object.const_get('Ki').const_get('Middleware').const_get(middleware)
-      }
+      end
     end
 
     def database

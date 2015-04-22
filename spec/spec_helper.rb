@@ -1,4 +1,4 @@
-require "codeclimate-test-reporter"
+require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
@@ -12,7 +12,9 @@ require 'ki'
 module Ki
   class KiConfig
     def config_file_path
-      config_yml_path = File.exists?('spec/config.yml') ? 'spec/config.yml' : 'spec/config.yml.example'
+      config_yml_path = 'spec/config.yml'
+      config_yml_path += '.example' unless File.exist?('spec/config.yml')
+
       if config_yml_path.end_with?('example')
         puts 'WARNING: spec/config.yml.example used'
       end
@@ -29,9 +31,9 @@ module Requests
   module JsonHelpers
     def json
       @json = JSON.parse(last_response.body)
-      # TODO find out if it is needed to convert to a hash with indifferent
+      # TODO: find out if it is needed to convert to a hash with indifferent
       # access
-      #@json = @json.with_indifferent_access if @json.class == Hash
+      # @json = @json.with_indifferent_access if @json.class == Hash
       @json
     end
   end

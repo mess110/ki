@@ -3,7 +3,7 @@ module Ki
     class DocGenerator < HamlCompiler
       include BaseMiddleware
 
-      def call env
+      def call(env)
         req = BaseRequest.new env
         if custom_check(req)
           if view_exists?(req)
@@ -16,7 +16,7 @@ module Ki
         end
       end
 
-      def custom_check req
+      def custom_check(req)
         req.doc?
       end
 

@@ -1,5 +1,5 @@
 class IndifferentHash < Hash
-  def []=(key,val)
+  def []=(key, val)
     key = key.to_sym
     super(key, val)
   end

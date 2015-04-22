@@ -19,7 +19,7 @@ module Ki
     end
 
     def to_ki_model_class
-      self.path.to_s.gsub('/','').gsub(format_of(path), '').gsub('.', '').to_class
+      path.to_s.gsub('/', '').gsub(format_of(path), '').gsub('.', '').to_class
     end
 
     def to_action

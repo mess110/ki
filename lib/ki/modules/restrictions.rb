@@ -5,7 +5,7 @@ module Ki
         []
       end
 
-      def forbid *actions
+      def forbid(*actions)
         generic_restriction :forbidden_actions, actions
       end
 
@@ -13,7 +13,7 @@ module Ki
         []
       end
 
-      def requires *attributes
+      def requires(*attributes)
         generic_restriction :required_attributes, attributes
       end
 
@@ -21,13 +21,13 @@ module Ki
         []
       end
 
-      def unique *attributes
+      def unique(*attributes)
         generic_restriction :unique_attributes, attributes
       end
 
       private
 
-      def generic_restriction method_name, attributes
+      def generic_restriction(method_name, attributes)
         send :define_method, method_name do
           attributes
         end
@@ -37,7 +37,6 @@ module Ki
           attributes
         end
       end
-
     end
   end
 end

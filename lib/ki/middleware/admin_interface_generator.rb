@@ -5,7 +5,7 @@ module Ki
         File.join(File.dirname(__FILE__), '..', 'views', 'instadmin.haml')
       end
 
-      def custom_check req
+      def custom_check(req)
         req.admin?
       end
     end

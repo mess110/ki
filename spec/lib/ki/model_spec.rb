@@ -6,7 +6,7 @@ describe Ki::Model do
     class Bar < Ki::Model; end
   end
 
-  it "should know about all descendants" do
+  it 'should know about all descendants' do
     desc = Ki::Model.descendants
     desc.include?(Foo).should be_true
     desc.include?(Bar).should be_true
@@ -14,14 +14,14 @@ describe Ki::Model do
 
   context Ki::Model::QueryInterface do
     it 'should have the query interface' do
-      Foo.class_name.should == 'Foo'
-      expect {
-        id = Foo.create({hello: 'world'})['id']
-        Foo.find(id).first['hello'].should == 'world'
+      Foo.class_name.should eq 'Foo'
+      expect do
+        id = Foo.create({ hello: 'world' })['id']
+        Foo.find(id).first['hello'].should eq 'world'
         Foo.update('id' => id, 'hello' => 'universe')
-        Foo.find(id).first['hello'].should == 'universe'
+        Foo.find(id).first['hello'].should eq 'universe'
         Foo.delete(id)
-      }.to change { Foo.count }.by 0
+      end.to change { Foo.count }.by 0
     end
 
     it 'should find or create' do
@@ -34,9 +34,9 @@ describe Ki::Model do
   end
 
   it 'should have restrictions configured' do
-    Bar.unique_attributes.should == []
-    Bar.required_attributes.should == []
-    Bar.forbidden_actions.should == []
+    Bar.unique_attributes.should eq []
+    Bar.required_attributes.should eq []
+    Bar.forbidden_actions.should eq []
 
     class Bar < Ki::Model
       unique :foo
@@ -44,9 +44,9 @@ describe Ki::Model do
       forbid :delete
     end
 
-    Bar.unique_attributes.should == [:foo]
-    Bar.required_attributes.should == [:foo]
-    Bar.forbidden_actions.should == [:delete]
+    Bar.unique_attributes.should eq [:foo]
+    Bar.required_attributes.should eq [:foo]
+    Bar.forbidden_actions.should eq [:delete]
   end
 
   context 'default properties' do
@@ -71,7 +71,7 @@ describe Ki::Model do
       t = Time.now.to_i
       # keep in mind that delete does not call unique/requires/forbid filters
       # make sure there are no duplicates
-      SpecialProperties.delete({'foo' => t})
+      SpecialProperties.delete({ 'foo' => t })
       expect {
         SpecialProperties.new(:create, { 'name' => 'zim', 'foo' => t })
       }.to change { SpecialProperties.count }.by 1

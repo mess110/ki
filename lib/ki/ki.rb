@@ -1,6 +1,6 @@
 module Ki
   class KiApp
-    def call env
+    def call(env)
       s = 'misplaced in space'
       Rack::Response.new(s).finish
     end
@@ -15,8 +15,8 @@ module Ki
 
       @app = Rack::Builder.new do
         use Middleware::InitMiddleware
-        use Rack::Parser, :content_types => {
-          'application/json' => Proc.new { |body| ::MultiJson.decode body }
+        use Rack::Parser, content_types: {
+          'application/json' => proc { |body| ::MultiJson.decode body }
         }
         if KiConfig.instance.cors?
           use Rack::Cors do
@@ -42,7 +42,7 @@ module Ki
       ENV['RACK_ENV'] || 'development'
     end
 
-    def call env
+    def call(env)
       @app.call env
     end
   end

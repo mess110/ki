@@ -7,12 +7,13 @@ module Ki
 
     attr_accessor :action, :result, :params, :status
 
-    def initialize action, params
+    def initialize(action, params)
       @action = action
       @params = params
       @status = 200
 
       raise ForbiddenAction.new if forbidden_actions.include? @action
+
       ccall
     end
 
@@ -40,26 +41,24 @@ module Ki
 
     def check_for_required_attributes
       required_attributes.each do |ra|
-        if !@params.keys.include?(ra.to_s)
-          raise RequiredAttributeMissing.new("#{ra.to_s} missing")
+        unless @params.keys.include?(ra.to_s)
+          raise RequiredAttributeMissing.new("#{ra} missing")
         end
       end
     end
 
     def check_for_unique_attributes
       unique_attributes.each do |ua|
-        u = self.class.find({ua.to_s => @params[ua.to_s]})
-        unless u.empty?
-          raise AttributeNotUnique.new("#{ua.to_s} not unique")
-        end
+        u = self.class.find({ ua.to_s => @params[ua.to_s] })
+        raise AttributeNotUnique.new("#{ua} not unique") unless u.empty?
       end
     end
 
     def ccall
       before_all
-      send "before_#{@action.to_s}".to_sym
+      send "before_#{@action}".to_sym
       send @action.to_sym
-      send "after_#{@action.to_s}".to_sym
+      send "after_#{@action}".to_sym
       after_all
     end
 

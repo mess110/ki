@@ -30,7 +30,7 @@ module Ki
       #
       def establish_connection
         @config = KiConfig.instance.database
-        if ENV["MONGODB_URI"]
+        if ENV['MONGODB_URI']
           @connection = Mongo::Connection.new
           @db = @connection.db
         else
@@ -42,8 +42,8 @@ module Ki
 
       def connection_string
         db = KiConfig.instance.database
-        if ENV["MONGODB_URI"]
-          ENV["MONGODB_URI"]
+        if ENV['MONGODB_URI']
+          ENV['MONGODB_URI']
         else
           "#{db['host']}:#{db['port']}/#{db['name']}"
         end
@@ -54,7 +54,7 @@ module Ki
       # An array of all the collection names in the database.
       #
       def collection_names
-        @db.collection_names.delete_if{|name| name =~ /^system/}
+        @db.collection_names.delete_if { |name| name =~ /^system/ }
       end
 
       # Insert a hash in the database.
@@ -75,7 +75,7 @@ module Ki
       #   db = Db.instance
       #   db.insert 'users', { name: 'Homer' }
       #
-      def insert name, hash
+      def insert(name, hash)
         @db[name].insert(hash)
         [hash].stringify_ids.first
       end
@@ -101,7 +101,7 @@ module Ki
       #   db.find 'users', { id: 'id' }
       #   db.find 'users', { name: 'Homer' }
       #
-      def find name, hash={}
+      def find(name, hash = {})
         hash = nourish_hash_id hash
         @db[name].find(hash).to_a.stringify_ids
       end
@@ -126,11 +126,11 @@ module Ki
       #  db = Db.instance
       #  db.update('users', { id: 'id', name: 'Sir Homer' })
       #
-      def update name, hash
+      def update(name, hash)
         hash = nourish_hash_id hash
         id = hash['_id'].to_s
         hash.delete('_id')
-        @db[name].update({'_id' => BSON::ObjectId(id)}, hash)
+        @db[name].update({ '_id' => BSON::ObjectId(id) }, hash)
         hash['id'] = id
         hash
       end
@@ -152,7 +152,7 @@ module Ki
       #   db.delete 'users', { id: 'id' }
       #   db.delete 'users', {}
       #
-      def delete name, hash
+      def delete(name, hash)
         hash = nourish_hash_id hash
         @db[name].remove hash
         {}
@@ -179,13 +179,13 @@ module Ki
       #   db.count 'users'
       #   db.count 'users', { name: 'Homer' }
       #
-      def count name, hash={}
+      def count(name, hash = {})
         @db[name].count hash
       end
 
       private
 
-      def nourish_hash_id hash
+      def nourish_hash_id(hash)
         hash = { '_id' => BSON::ObjectId(hash) } if hash.class == String
         if hash['id']
           hash['_id'] = hash['id']

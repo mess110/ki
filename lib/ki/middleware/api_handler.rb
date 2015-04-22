@@ -1,6 +1,5 @@
 module Ki
   module Middleware #:nodoc:
-
     # Handles all API calls
     #
     # Any json request is considered an api call. A request is considered as json
@@ -11,7 +10,7 @@ module Ki
     class ApiHandler
       include BaseMiddleware
 
-      def call env
+      def call(env)
         req = BaseRequest.new env
         if req.json?
           resourcerize(req)
@@ -20,7 +19,7 @@ module Ki
         end
       end
 
-      def resourcerize req
+      def resourcerize(req)
         klass = req.to_ki_model_class
 
         unless Model.descendants.include?(klass)
@@ -28,22 +27,22 @@ module Ki
         end
 
         model = klass.new(req.to_action, req.params)
-        if req.params['redirect_to'].nil? # TODO document this
+        if req.params['redirect_to'].nil? # TODO: document this
           render model
         else
-          redirect_to req.params['redirect_to'] # TODO check for injection
+          redirect_to req.params['redirect_to'] # TODO: check for injection
         end
       rescue ApiError => e
         render e
       end
 
-      def redirect_to s
+      def redirect_to(s)
         resp = Rack::Response.new
         resp.redirect(s)
         resp.finish
       end
 
-      def render r
+      def render(r)
         resp = Rack::Response.new(r.result.to_json, r.status)
         resp['Content-Type'] = 'application/json'
         resp.finish

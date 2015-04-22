@@ -5,7 +5,7 @@ module Ki
       include Helpers::View
       include Helpers::PublicFile
 
-      def initialize app
+      def initialize(app)
         @app = app
       end
     end

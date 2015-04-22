@@ -2,7 +2,7 @@ module Ki
   class ApiError < StandardError #:nodoc:
     attr_reader :status
 
-    def initialize body, status=400
+    def initialize(body, status = 400)
       super body
       @status = status
     end
@@ -22,19 +22,19 @@ module Ki
   end
 
   class ForbiddenAction < ApiError #:nodoc:
-    def initialize s='forbidden', code=403
+    def initialize(s = 'forbidden', code = 403)
       super s, code
     end
   end
 
   class UnauthorizedError < ApiError #:nodoc:
-    def initialize s='unauthroized', code=401
+    def initialize(s = 'unauthroized', code = 401)
       super s, code
     end
   end
 
   class PartialNotFoundError < ApiError #:nodoc:
-    def initialize s
+    def initialize(s)
       super "partial #{s} not found", 404
     end
   end

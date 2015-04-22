@@ -3,7 +3,7 @@ module Ki
     class InitMiddleware
       include BaseMiddleware
 
-      def call env
+      def call(env)
         req = BaseRequest.new env
         if req.root?
           if public_file_exists? 'index.html'

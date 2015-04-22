@@ -3,7 +3,7 @@ module Ki
     class PublicFileServer
       include BaseMiddleware
 
-      def call env
+      def call(env)
         req = BaseRequest.new env
         if public_file_exists? req
           Rack::File.new(Ki::PUBLIC_PATH).call env

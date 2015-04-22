@@ -6,6 +6,6 @@ describe Ki::Ki do
 
   it 'has CORS enabled' do
     get '/cors_resource.json'
-    expect(last_response.headers.key?("Vary")).to be true
+    expect(last_response.headers.key?('Vary')).to be true
   end
 end
