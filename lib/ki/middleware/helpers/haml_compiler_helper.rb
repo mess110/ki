@@ -2,10 +2,10 @@ module Ki
   module Middleware
     module Helpers
       module HamlCompiler
-        def render_haml_file(file_path)
+        def render_haml_file(file_path, layout = true)
           file_contents = File.read(file_path)
 
-          if view_exists? 'layout'
+          if layout && view_exists?('layout')
             layout_contents = File.read(view_path('layout'))
           else
             layout_contents = '= yield'

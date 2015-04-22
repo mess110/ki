@@ -13,6 +13,6 @@ describe Ki::Middleware::HamlCompiler do
   it 'passes to next middleware' do
     compiler.any_instance.stub(:view_exists?).and_return(false)
     get '/inexisting_haml'
-    expect(last_response.body).to eq 'misplaced in space'
+    expect(last_response.body).to eq '<h1>404</h1>'
   end
 end
