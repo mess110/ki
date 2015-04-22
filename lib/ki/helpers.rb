@@ -19,7 +19,7 @@ module Ki
       if File.file?(path)
         render_haml(File.read(path))
       else
-        raise PartialNotFoundError.new path
+        fail PartialNotFoundError, path
       end
     end
   end

@@ -35,7 +35,7 @@ module Ki
       when 'SEARCH'
         :find
       else
-        raise 'unkown action'
+        fail 'unkown action'
       end
     end
   end

@@ -23,7 +23,7 @@ module Ki
         klass = req.to_ki_model_class
 
         unless Model.descendants.include?(klass)
-          raise InvalidUrlError.new("invalid url '#{req.path}'", 404)
+          fail InvalidUrlError.new("invalid url '#{req.path}'", 404)
         end
 
         model = klass.new(req.to_action, req.params)

@@ -12,7 +12,7 @@ module Ki
       @params = params
       @status = 200
 
-      raise ForbiddenAction.new if forbidden_actions.include? @action
+      fail ForbiddenAction if forbidden_actions.include? @action
 
       ccall
     end
@@ -42,7 +42,7 @@ module Ki
     def check_for_required_attributes
       required_attributes.each do |ra|
         unless @params.keys.include?(ra.to_s)
-          raise RequiredAttributeMissing.new("#{ra} missing")
+          fail RequiredAttributeMissing, "#{ra} missing"
         end
       end
     end
@@ -50,7 +50,7 @@ module Ki
     def check_for_unique_attributes
       unique_attributes.each do |ua|
         u = self.class.find({ ua.to_s => @params[ua.to_s] })
-        raise AttributeNotUnique.new("#{ua} not unique") unless u.empty?
+        fail AttributeNotUnique, "#{ua} not unique" unless u.empty?
       end
     end
 
