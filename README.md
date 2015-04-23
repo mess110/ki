@@ -28,6 +28,7 @@ and provides a fullblown REST api on top.
     - [Update](#update)
     - [Delete](#delete)
   - [Required attributes](#required-attributes)
+  - [Unique attributes](#unique-attributes)
   - [Restricting resource requests](#restricting-resource-requests)
   - [Before/after callbacks](#beforeafter-callbacks)
     - [Accessing the json object within the callback](#accessing-the-json-object-within-the-callback)
@@ -276,6 +277,21 @@ end
 
 This will make sure a Todo item can not be saved or updated in the database
 without a title attribute.
+
+### Unique attributes
+
+You can add unique attributes on resources with the *unique* method. It
+takes one parameter or an array of parameters as an argument.
+
+```ruby
+class Todo < Ki::Model
+  unique :title
+end
+```
+
+This will make sure a Todo item can not be saved or updated in the database
+if it is not unique.
+
 
 ### Restricting resource requests
 

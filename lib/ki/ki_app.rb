@@ -4,17 +4,9 @@ module Ki
     include Middleware::Helpers::View
 
     def call(env)
-      if view_exists?(not_found_view_path)
-        path = not_found_view_path
-      else
-        path = custom_view_path
-      end
+      path = view_exists?('404') ? view_path('404') : custom_view_path
       html = render_haml_file(path).strip!
-      Rack::Response.new(html).finish
-    end
-
-    def not_found_view_path
-      view_path('404')
+      Rack::Response.new(html, 404).finish
     end
 
     def custom_view_path
