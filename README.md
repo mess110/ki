@@ -386,3 +386,7 @@ Ki offers instant documentation. Add the middleware 'DocGenerator' and access
 
 Ki offers an instant administration interface. Add the middleware 'AdminIntefaceGenerator'
 and access */instadmin*.
+
+## Tasks
+
+Ki offers a simple task framework. [More info here](https://github.com/mess110/ki/tree/master/spec/examples/tasks-examples/).

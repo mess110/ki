@@ -11,7 +11,7 @@ module Ki
         File.join(File.dirname(__FILE__), '..', '..')
       end
 
-      def self.requies_ki_directory
+      def self.requires_ki_directory
         unless File.exist? 'config.ru'
           say 'Working directory should be a ki app.'
           exit 3
@@ -58,17 +58,42 @@ module Ki
       desc 'Starts the ki server'
 
       def start_server
-        KiGenerator.requies_ki_directory
+        KiGenerator.requires_ki_directory
         `bundle exec rackup -o 0.0.0.0 -p #{port}`
       end
     end
 
     class DevConsole < KiGenerator
       def start_console
-        KiGenerator.requies_ki_directory
+        KiGenerator.requires_ki_directory
         require './app'
         Ki.connect
         IRB.start_session(nil)
+      end
+    end
+
+    class KiTaskRunner < KiGenerator
+      argument :name, type: :string, desc: 'name of the task', default: 'ki_show_task_list_1337'
+      desc 'run ki tasks'
+
+      def run_ki_task
+        KiGenerator.requires_ki_directory
+
+        if name == 'ki_show_task_list_1337'
+          say Dir['tasks/**/*.rb']
+        else
+          task_path = File.join('tasks', "#{name}.rb")
+          unless File.exists?(task_path)
+            say "Task #{name} not found in ./tasks/"
+            exit 3
+          end
+          require './app'
+          Ki.connect
+          say "Running #{name} task."
+          say '-' * 80
+          require "./#{task_path}"
+          say '-' * 80
+        end
       end
     end
 
@@ -76,6 +101,7 @@ module Ki
       register AppGenerator, :new, 'new [APP_NAME]', 'generate a new app'
       register DevServer, :server, 'server [PORT]', "start the ki server. Default port is #{DevServer::DEFAULT_PORT}"
       register DevConsole, :console, 'console', 'start the console'
+      register KiTaskRunner, :tasks, 'tasks', 'list tasks'
     end
   end
 end
