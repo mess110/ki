@@ -17,7 +17,7 @@ module Ki
     def partial(s)
       path = view_path(s)
       if File.file?(path)
-        render_haml(File.read(path))
+        haml(File.read(path))
       else
         fail PartialNotFoundError, path
       end
