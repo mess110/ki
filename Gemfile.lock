@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ki (0.4.8)
+    ki (0.4.9)
       bson_ext
       bundler (~> 1.5)
       coffee-script
