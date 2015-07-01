@@ -2,7 +2,7 @@
 lock '3.1.0'
 
 set :application, 'json.northpole.ro'
-set :repo_url, 'git@bitbucket.org:mess110/ki.git'
+set :repo_url, 'git@github.com:mess110/ki.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
