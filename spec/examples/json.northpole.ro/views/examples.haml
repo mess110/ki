@@ -4,6 +4,8 @@
   %li.active
     %a{"data-toggle" => "tab", href: "#curl"} curl
   %li
+    %a{"data-toggle" => "tab", href: "#javascript"} javascript
+  %li
     %a{"data-toggle" => "tab", href: "#ruby"} ruby
   %li
     %a{"data-toggle" => "tab", href: "#python"} python
@@ -16,6 +18,8 @@
 .tab-content
   #curl.tab-pane.fade.in.active
     = partial 'curl'
+  #javascript.tab-pane.fade
+    = partial 'javascript'
   #ruby.tab-pane.fade
     = partial 'ruby'
   #python.tab-pane.fade

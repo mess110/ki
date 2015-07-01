@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    ki (0.4.6)
+    ki (0.4.9)
       bson_ext
       bundler (~> 1.5)
       coffee-script
@@ -49,7 +49,7 @@ GEM
     rack-parser (0.6.1)
       rack
     rake (10.1.1)
-    sass (3.4.13)
+    sass (3.4.15)
     sshkit (1.3.0)
       net-scp (>= 1.1.2)
       net-ssh
