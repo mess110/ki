@@ -1,0 +1,54 @@
+%div{ 'ng-app' => 'app' }
+  %div{ 'ng-controller' => 'MainCtrl' }
+    %div{ 'ng-show' => 'true' }
+      %input{ 'ng-model' => 'json.api_key', 'type' => 'text', 'placeholder' => 'api key' }
+      %input{ 'ng-model' => 'json.secret', 'type' => 'password', 'placeholder' => 'secret' }
+      %p{ 'ng-click' => 'refresh()' } refresh
+    %ul
+      %li{ 'ng-repeat' => 'result in results', 'ng-click' => 'play(result)'}
+        {{ result.name || result }}
+    %youtube-video{ 'video-url' => 'ytVideoUrl', 'player' => 'bestPlayer', 'player-vars' => 'playerVars' }
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
+= js "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"
+= js "/javascripts/music/angular-youtube-embed.js"
+
+:javascript
+  var app = angular.module('app', ['youtube-embed']);
+
+  app.controller('MainCtrl', function ($scope, youtubeEmbedUtils) {
+    $scope.refresh = function () {
+      jNorthPole.getStorage($scope.json, function (data) {
+        if ($scope.json.apiKey != 'guest' && data.error === undefined) {
+          localStorage.json = angular.toJson($scope.json)
+        }
+
+        $scope.results = data
+        $scope.$apply();
+      });
+    };
+    $scope.playerVars = {
+      controls: 1,
+      autoplay: 1
+    };
+
+    if (localStorage.json === undefined) {
+      $scope.json = { 'api_key': 'guest', 'secret': 'quest', 'category': 'music' };
+    } else {
+      $scope.json = angular.fromJson(localStorage.json)
+      $scope.refresh()
+    }
+    $scope.results = []
+
+    $scope.play = function (video) {
+      $scope.ytVideoUrl = video.url;
+      console.log(youtubeEmbedUtils.getIdFromURL($scope.ytVideoUrl));
+    }
+
+    $scope.$on('youtube.player.ended', function ($event, player) {
+      var item = $scope.results[Math.floor(Math.random()*$scope.results.length)];
+      $scope.play(item);
+      player.seekTo(0);
+    })
+  });
