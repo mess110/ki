@@ -154,8 +154,10 @@ module Ki
       #
       def delete(name, hash)
         hash = nourish_hash_id hash
-        @db[name].remove hash
-        {}
+        r = @db[name].remove hash
+        {
+          deleted_item_count: r["n"] || 0
+        }
       end
 
       # Count the number of hashes found in a specified collection, filtered

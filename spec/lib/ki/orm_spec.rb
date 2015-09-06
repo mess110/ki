@@ -81,7 +81,7 @@ describe Ki::Orm do
   it 'should delete by id' do
     obj_id = @db.insert 'foo', { 'hello' => 'world' }
     expect {
-      @db.delete('foo', obj_id).should == {}
+      @db.delete('foo', obj_id).should == { deleted_item_count: 1 }
     }.to change { @db.count 'foo' }.by(-1)
   end
 end

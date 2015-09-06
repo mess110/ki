@@ -14,10 +14,6 @@ module Ki
     def config_file_path
       config_yml_path = 'spec/config.yml'
       config_yml_path += '.example' unless File.exist?('spec/config.yml')
-
-      if config_yml_path.end_with?('example')
-        puts 'WARNING: spec/config.yml.example used'
-      end
       config_yml_path
     end
   end
