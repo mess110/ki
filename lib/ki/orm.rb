@@ -156,7 +156,7 @@ module Ki
         hash = nourish_hash_id hash
         r = @db[name].remove hash
         {
-          deleted_item_count: r["n"] || 0
+          deleted_item_count: r['n'] || 0
         }
       end
 

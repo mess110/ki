@@ -83,7 +83,7 @@ module Ki
           say Dir['tasks/**/*.rb']
         else
           task_path = File.join('tasks', "#{name}.rb")
-          unless File.exists?(task_path)
+          unless File.exist?(task_path)
             say "Task #{name} not found in ./tasks/"
             exit 3
           end
