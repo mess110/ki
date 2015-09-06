@@ -24,15 +24,15 @@ randomlyFlipBear = () ->
 window.syntaxHighlight = (json) ->
   json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
   json.replace /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) ->
-    cls = "number"
+    cls = "number value"
     if /^"/.test(match)
       if /:$/.test(match)
         cls = "key"
       else
-        cls = "string"
+        cls = "string value"
     else if /true|false/.test(match)
-      cls = "boolean"
-    else cls = "null"  if /null/.test(match)
+      cls = "boolean value"
+    else cls = "null value"  if /null/.test(match)
     "<span class=\"" + cls + "\">" + match + "</span>"
 
 $(document).ready ->
@@ -48,6 +48,10 @@ $(document).ready ->
   $('#myTab a').click (e) ->
     e.preventDefault()
     $(this).tab('show')
+    window.location.hash = $(this)[0].hash
+
+  if window.location.hash?
+    $("#myTab a[href='#{window.location.hash}']").tab('show')
 
   $('#npAction').click () ->
     verb = $('#verb').text();

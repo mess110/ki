@@ -2,19 +2,33 @@
 
 %ul#myTab.nav.nav-tabs
   %li.active
-    %a{"data-toggle" => "tab", href: "#curl"} curl
+    %a{"data-toggle" => "tab", href: "#curl"}
+      %img{"src" => "/images/shell.png"}
+      curl
   %li
-    %a{"data-toggle" => "tab", href: "#javascript"} javascript
+    %a{"data-toggle" => "tab", href: "#javascript"}
+      %img{"src" => "/images/js.png"}
+      javascript
   %li
-    %a{"data-toggle" => "tab", href: "#ruby"} ruby
+    %a{"data-toggle" => "tab", href: "#ruby"}
+      %img{"src" => "/images/ruby.png"}
+      ruby
   %li
-    %a{"data-toggle" => "tab", href: "#python"} python
+    %a{"data-toggle" => "tab", href: "#python"}
+      %img{"src" => "/images/python.png"}
+      python
   %li
-    %a{"data-toggle" => "tab", href: "#php"} php
+    %a{"data-toggle" => "tab", href: "#php"}
+      %img{"src" => "/images/php.png"}
+      php
   %li
-    %a{"data-toggle" => "tab", href: "#java"} java
+    %a{"data-toggle" => "tab", href: "#java"}
+      %img{"src" => "/images/java.png"}
+      java
   %li
-    %a{"data-toggle" => "tab", href: "#dotnet"} .net
+    %a{"data-toggle" => "tab", href: "#dotnet"}
+      %img{"src" => "/images/dotnet.png"}
+      \.net
 .tab-content
   #curl.tab-pane.fade.in.active
     = partial 'curl'

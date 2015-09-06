@@ -1,8 +1,12 @@
-%a{'href' => '#what'} What is json.northpole.ro?
+%a{href: '#what'} What is json.northpole.ro?
 %br
-%a{'href' => '#how'} How do I use the API?
+%a{href: '#how'} How do I use the API?
 %br
-%a{'href' => '#storage'} What can I store?
+%a{href: '#storage'} What can I store?
+%br
+%a{href: '#why'} Why should I register?
+%br
+%a{href: '#register'} How do I register?
 %br
 %h3#what What is json.northpole.ro?
 %p
@@ -17,10 +21,18 @@
   for more info.
 %p
   To get an idea of how the API works, head to the
-  %a{:href => '/playground'} playground
+  %a{href: '/playground'} playground
   \.
 %h3#storage What can I store?
 %p
   Any valid json object. The object can contain keys, arrays and hashes.
 %p
   Once the object gets created it will receive a unique id.
+%h3#why Why should I register?
+%p You get your own private storage space under your api_key and secret.
+%h3#register How do I register?
+%p
+  Create a user in the
+  %a{href: '/playground'} playground
+  \. If you can't do that, there is a good chance you don't understand
+  how the API works. Think of it as a tutorial.
