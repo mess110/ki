@@ -1,7 +1,17 @@
 .row{ 'ng-app' => 'app', 'ng-controller' => 'MainCtrl' }
   .col-xs-6
-    .embed-responsive.embed-responsive-16by9
-      %youtube-video.embed-responsive-item{ 'video-url' => 'ytVideoUrl', 'player' => 'bestPlayer', 'player-vars' => 'playerVars' }
+    .row
+      .embed-responsive.embed-responsive-16by9
+        %youtube-video.embed-responsive-item{ 'video-url' => 'ytVideoUrl', 'player' => 'bestPlayer', 'player-vars' => 'playerVars' }
+    .row{ 'ng-show' => 'selected' }
+      .col-xs-12
+        %br
+        %input.form-control{ 'ng-model' => 'selected.name', 'placeholder' => 'title' }
+        %br
+        %input.form-control{ 'ng-model' => 'selected.url', 'placeholder' => 'url' }
+        %br
+        %p.text-center
+          %i.fa.fa-save{ 'ng-click' => 'update(selected)' }
   .col-xs-6
     %div{ 'ng-show' => 'results.length == 0' }
       %input{ 'ng-model' => 'json.api_key', 'type' => 'text', 'placeholder' => 'api key' }
@@ -11,13 +21,13 @@
       %ul
         %li.text-center{ 'ng-click' => 'playRandom()' }
           %i.fa.fa-random{ 'alt' => 'yes, I know' }
-        %li{ 'ng-repeat' => 'result in results', 'ng-click' => 'play(result)', 'ng-class' => '{ selected: isSelected(result) }'}
-          %span.pull-right
+        %li{ 'ng-repeat' => 'result in results', 'ng-class' => '{ selected: isSelected(result) }' }
+          %span.pull-right{ 'ng-click' => 'edit(result)' }
             %i.fa.fa-edit
-          %p
+          %p{ 'ng-click' => 'play(result)', }
             {{ result.name || result }}
         %li.text-center
-          %i.fa.fa-plus
+          %i.fa.fa-plus{ 'ng-click' => 'newSong()' }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -60,6 +70,7 @@
   var app = angular.module('app', ['youtube-embed']);
 
   app.controller('MainCtrl', function ($scope, youtubeEmbedUtils) {
+    jNorthPole.BASE_URL = 'https://json.northpole.ro/'
     $scope.results = []
     $scope.refresh = function () {
       jNorthPole.getStorage($scope.json, function (data) {
@@ -88,6 +99,31 @@
     $scope.play = function (video) {
       $scope.ytVideoUrl = video.url;
       console.log(youtubeEmbedUtils.getIdFromURL($scope.ytVideoUrl));
+    }
+
+    $scope.edit = function (video) {
+      $scope.selected = video
+    }
+
+    $scope.update = function (video) {
+      $scope.selected.secret = $scope.json.secret;
+      json = angular.copy($scope.selected);
+      log = function (data) {
+        console.log(data);
+      }
+
+      if (video.id == null || video.id == undefined) {
+        json.api_key = $scope.json.api_key;
+        json.category = 'music';
+        jNorthPole.createStorage(json, log);
+      } else {
+        jNorthPole.putStorage(json, log);
+      }
+      $scope.selected = undefined
+    }
+
+    $scope.newSong = function () {
+      $scope.selected = {}
     }
 
     $scope.isSelected = function (video) {
