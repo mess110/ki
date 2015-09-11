@@ -27,8 +27,12 @@ app.controller 'MainCtrl', ($scope, youtubeEmbedUtils) ->
     $scope.refresh()
 
   $scope.play = (video) ->
-    $scope.ytVideoUrl = video.url
-    console.log youtubeEmbedUtils.getIdFromURL($scope.ytVideoUrl)
+    if $scope.ytVideoUrl == video.url and $scope.bestPlayer.getPlayerState() == 1
+      $scope.bestPlayer.pauseVideo()
+    else
+      $scope.ytVideoUrl = video.url
+      $scope.bestPlayer.playVideo() if $scope.bestPlayer?
+      # console.log youtubeEmbedUtils.getIdFromURL($scope.ytVideoUrl)
     return
 
   $scope.edit = (video) ->
