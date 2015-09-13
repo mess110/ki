@@ -5,79 +5,122 @@
     <meta name="viewport" content="width=device-width">
     <title>music</title>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link href="bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
+    <link href="bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/music/music-player.css">
   </head>
   <body ng-controller="MainCtrl">
-    <div class="container-fluid">
-      <div class="row" >
-        <div ng-show="results.length == 0">
-          <input ng-model="json.api_key" type="text" placeholder="api key"/>
-          <input ng-model="json.secret" type="password" placeholder="secret" />
-          <i class="fa fa-refresh" ng-click="refresh()"></i>
+    <div class="container">
+      <div class="row" ng-hide="!loggedIn">
+        <div class="col-md-12 well" style="display: flex; align-items: center;">
+          <div class="col-xs-4 col-md-2 col-md-offset-6">
+            <div class="form-group has-warning">
+              <input type="text" class="form-control" ng-model="search" placeholder="search"/>
+            </div>
+          </div>
+          <div class="col-xs-2 col-sm-1 col-sm-offset-6 col-md-offset-2 col-xs-offset-4">
+            <a ng-click="playRandom()" class="btn btn-danger btn-fab btn-raised fa fa-random"></a>
+          </div>
+          <div class="col-xs-2 col-sm-1">
+            <a ng-click="refresh()" class="btn btn-danger btn-fab btn-raised fa" ng-class="{ 'fa-sign-in': !loggedIn, 'fa-sign-out': loggedIn}"></a>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 hidden-sm hidden-xs">
-          <div class="embed-responsive embed-responsive-16by9">
+      <div class="row" ng-show="!loggedIn">
+        <div class="well col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+          <form class="form-horizontal">
+            <fieldset>
+              <!-- <legend>Sign in</legend> -->
+              <div class="form-group has-warning">
+                <!-- <label for="inputApiKey" class="col-lg-2 control-label">api_key</label> -->
+                <div class="col-lg-12">
+                  <input type="text" class="form-control input-lg" ng-model="json.api_key" id="inputApiKey" placeholder="api_key">
+                </div>
+                <!-- <label for="inputSecret" class="col-lg-2 control-label">secret</label> -->
+                <div class="col-lg-12">
+                  <input type="password" class="form-control inpu-lg" ng-model="json.secret" id="inputSecret" placeholder="secret">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2 text-center">
+                  <button type="submit" class="btn btn-danger" ng-click="refresh()">login</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" ng-show="loggedIn">
+        <div class="col-md-6">
+          <div class="embed-responsive embed-responsive-16by9 well">
             <youtube-video class="embed-responsive-item" video-url="ytVideoUrl" player="bestPlayer" player-vars="playerVars"></youtube-video>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
-          <div ng-show="results.length > 0">
-            <div class="row text-center">
-              <div class="col-xs-1 text-center">
-              </div>
-              <div class="col-xs-10">
-                <input class="form-control" ng-model="search" placeholder="search"/>
-              </div>
-              <div class="col-xs-1 text-center">
-                <i class="fa fa-random" alt="yes, I know" ng-click="playRandom()"></i>
-              </div>
-            </div>
-            <div class="row" ng-repeat="result in results | filter: search" ng-class="{ selected: isSelected(result) }">
-              <div class="col-xs-1 text-center">
-                <i class="fa fa-youtube" ng-show="result.url.indexOf('youtube') != -1"></i>
-              </div>
-              <div class="col-xs-10">
-                <div ng-show="result.id == selected.id">
-                <input class="form-control" ng-model="selected.name" placeholder="title"/>
-                <input class="form-control" ng-model="selected.url" placeholder="url"/>
-                <input class="form-control" ng-model="selected.moods" placeholder="moods" ng-list required>
+        <div class="col-md-6">
+          <div class="list-group well">
+            <div ng-repeat="result in results | filter: search">
+              <div class="list-group-item vertical-center" ng-class="{ selected: isSelected(result) }">
+                <div class="row-action-primary">
+                  <i class="fa fa-edit" ng-click="select(result)" data-toggle="modal" data-target="#complete-dialog"></i>
                 </div>
-                <p ng-hide="result.id == selected.id" ng-click="play(result)" style="white-space:nowrap; overflow: hidden; text-overflow:ellipsis">{{ result.name || result }}</p>
+                <div class="row-content" style="display: flex; align-items: center;">
+                  <div class="least-content row-action-primary">
+                  </div>
+                  <div ng-click="play(result)">
+                    <h4 class="list-group-item-heading no-wrap">{{ result.name || result}}</h4>
+                    <p class="disabled list-group-item-text no-wrap disabled">{{ result.url }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col-xs-1 text-center">
-                <i class="fa fa-save" ng-click="update(selected)" ng-show="result.id == selected.id"></i>
-                <i class="fa fa-edit" ng-click="edit(result)" ng-hide="result.id == selected.id"></i>
+              <div class="list-group-separator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-show="loggedIn">
+        <a ng-click="newSong()" data-toggle="modal" data-target="#complete-dialog" class="btn btn-danger btn-fab btn-raised fa fa-plus add-button"></a>
+      </div>
+
+      <div id="complete-dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+              <div class="form-group has-warning">
               </div>
             </div>
-            <div class="row text-center">
-              <i class="fa fa-plus" ng-click = "newSong()"></i>
-            </div>
-            <div class="row" ng-show="selected && selected.id == undefined">
-              <div class="col-xs-1 text-center">
-              </div>
-              <div class="col-xs-10">
+            <div class="modal-body">
+              <div class="form-group has-warning">
                 <input class="form-control" ng-model="selected.name" placeholder="title" />
                 <input class="form-control" ng-model="selected.url" placeholder="url" />
                 <input class="form-control" ng-model="selected.moods" placeholder="moods" ng-list required>
               </div>
-              <div class="col-xs-1 text-center">
-                <i class="fa fa-save" ng-click = "update(selected)"></i>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" ng-click="save(selected)">Save changes</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <script src="/javascripts/music/angular-youtube-embed.js"></script>
-    <script src="/javascripts/jnorthpole.js"></script>
-    <script src="/javascripts/music/music-player.js"></script>
-  </body>
-</html>
+      <script src="bootstrap-material-design/dist/js/ripples.min.js"></script>
+      <script src="bootstrap-material-design/dist/js/material.min.js"></script>
+
+      <script src="//www.youtube.com/iframe_api"></script>
+      <script src="/javascripts/music/angular-youtube-embed.js"></script>
+
+      <script src="/javascripts/jnorthpole.js"></script>
+      <script src="/javascripts/music/music-player.js"></script>
+    </body>
+  </html>

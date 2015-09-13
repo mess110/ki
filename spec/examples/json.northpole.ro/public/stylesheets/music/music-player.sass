@@ -1,5 +1,10 @@
+$size: 56px
+
 html, body
   height: 100%
+
+.bear
+  background: url(/images/bear.png) no-repeat center center
 
 .embed-responsive
   position: relative
@@ -12,6 +17,7 @@ html, body
   padding-bottom: 56.25%
 
 .embed-responsive-item
+  @extend .bear
   position: absolute
   top: 0
   bottom: 0
@@ -20,11 +26,38 @@ html, body
   height: 100%
   border: 0
 
+.container
+  z-index: 10
+
+.content-container
+  padding-top: $size + 10px
+  padding-bottom: $size - 10px
+
+.add-button
+  margin-bottom: 10px !important
+  margin-right: 10px !important
+  position: fixed
+  right: 0
+  bottom: 0
+
+.no-wrap
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.vertical-center
+  display: flex
+  align-items: center
+
+p.disabled
+  color: #bdbdbd
+
 .selected
-  background-color: yellow
+  background-color: red !important
+  p
+    color: #f5f5f5
+  h4
+    color: #f5f5f5 !important
 
-li
-  list-style-type: none
-
-ul
-  padding: 0px
+  .list-group-separator
+    background-color: white

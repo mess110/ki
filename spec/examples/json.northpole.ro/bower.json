@@ -1,0 +1,17 @@
+{
+  "name": "json.northpole.ro",
+  "version": "0.4.10",
+  "homepage": "https://github.com/mess110/ki",
+  "authors": [
+    "Cristian Mircea Messel <mess110@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ]
+}
