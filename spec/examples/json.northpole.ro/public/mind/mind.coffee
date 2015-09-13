@@ -4,6 +4,17 @@ $(() ->
 
 app = angular.module('app', [])
 
+app.directive 'specialInput', ->
+  (scope, element, attrs) ->
+    element.bind 'keypress', (event) ->
+      # if event.which == 13
+        # i = scope.result.caret.get
+        # scope.result.text = scope.result.text.insert(i, "\n# ")
+        # if scope.result.text.lineStartsWith(i)
+          # scope.result.caret.set = i + 3
+      return
+    return
+
 app.directive 'elastic', [
   '$timeout'
   ($timeout) ->
@@ -66,7 +77,7 @@ app.controller 'MainCtrl', ($scope) ->
     if json.text == '/delete'
       delete json.priority
       delete json.text
-      jNorthPole.deleteStorage json, ->
+      jNorthPole.deleteStorage json, -> {}
 
       for r in $scope.results
         if r.id == json.id
@@ -81,6 +92,7 @@ app.controller 'MainCtrl', ($scope) ->
       json.category = CATEGORY
       jNorthPole.createStorage json, (data) ->
         $scope.results.push data
+        $scope.$apply()
     return
 
   $scope.vote = (json, up=true)->
