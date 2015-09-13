@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>music</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link href="/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
+    <link href="/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/mind/mind.css">
+  </head>
+  <body ng-controller="MainCtrl">
+
+    <div class="container">
+
+      <div class="row" ng-hide="loggedIn">
+        <div class="well col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+          <form class="form-horizontal">
+            <fieldset>
+              <!-- <legend>Sign in</legend> -->
+              <div class="form-group has-warning">
+                <!-- <label for="inputApiKey" class="col-lg-2 control-label">api_key</label> -->
+                <div class="col-lg-12">
+                  <input type="text" class="form-control input-lg" ng-model="json.api_key" id="inputApiKey" placeholder="api_key">
+                </div>
+                <!-- <label for="inputSecret" class="col-lg-2 control-label">secret</label> -->
+                <div class="col-lg-12">
+                  <input type="password" class="form-control input-lg" ng-model="json.secret" id="inputSecret" placeholder="secret">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2 text-center">
+                  <button type="submit" class="btn btn-danger" ng-click="toggleAuth()">login</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="row" ng-show="loggedIn">
+        <div class="col-md-12 well" style="display: flex; align-items: center;">
+          <div class="col-xs-10 col-sm-11">
+            <div class="form-group has-warning">
+              <input type="text" class="form-control" ng-model="search" placeholder="search"/>
+            </div>
+          </div>
+          <div class="col-xs-2 col-sm-1">
+            <a ng-click="toggleAuth()" class="btn btn-danger btn-fab btn-raised fa" ng-class="{ 'fa-sign-in': !loggedIn, 'fa-sign-out': loggedIn}"></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row well item" ng-show="loggedIn" ng-repeat="result in results | filter: search | orderBy:'-priority'">
+        <div class="col-xs-11">
+          <textarea elastic class="form-control" ng-model='result.text' ng-change="save(result)" ng-model-options="{ debounce: 1000 }">{{result.text}}</textarea>
+        </div>
+        <div class="col-xs-1">
+          <input type="number" class="form-control" ng-model="result.priority" ng-change="save(result)" ng-model-options="{ debounce: 1000 }"/>
+        </div>
+      </div>
+
+      <div ng-show="loggedIn">
+        <a ng-click="newPanel()" class="btn btn-danger btn-fab btn-raised fa fa-plus add-button"></a>
+      </div>
+
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+      <script src="/bootstrap-material-design/dist/js/ripples.min.js"></script>
+      <script src="/bootstrap-material-design/dist/js/material.min.js"></script>
+
+      <script src="/javascripts/jnorthpole.js"></script>
+      <script src="/mind/mind.js"></script>
+    </body>
+  </html>
