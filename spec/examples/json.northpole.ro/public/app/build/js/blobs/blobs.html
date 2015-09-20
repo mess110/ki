@@ -1,0 +1,18 @@
+<md-content flex layout="row" layout-align="center">
+  <md-content flex>
+  <md-card ng-repeat="item in items" md-swipe-right="showContactOptions($event, item)">
+    <md-card-content>
+      <div layout="row" layout-wrap>
+        <md-input-container flex>
+          <label>Text</label>
+          <textarea ng-model="item.text" columns="1" md-maxlength="1024" ng-change="save(item)" ng-model-options="{ debounce: 1000 }"></textarea>
+          </md-input-container>
+        </div>
+      </md-card-content>
+    </md-card>
+  </md-content>
+</md-content>
+
+<md-button ng-show="user.api_key" class="md-fab md-primary md-fab-bottom-right" aria-label="Use Android" ng-click="newPanel()">
+  <md-icon md-svg-icon="plus"></md-icon>
+</md-button>

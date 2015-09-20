@@ -1,0 +1,28 @@
+<md-dialog aria-label="mango (fruit)">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>mango (fruit)</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-icon="clear" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-input-container>
+        <label>Api Key</label>
+        <input ng-model="user.api_key" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Secret</label>
+        <input ng-model="user.secret" type="password" reguired>
+      </md-input-container>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="answer()" style="margin-right:20px;" >
+        Connect
+      </md-button>
+    </div>
+  </form>
+</md-dialog>
