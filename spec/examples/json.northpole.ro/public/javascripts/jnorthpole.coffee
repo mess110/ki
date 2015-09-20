@@ -21,7 +21,7 @@ window.jNorthPole =
 
     r.onreadystatechange = ->
       return if r.readyState != 4
-      if status == 200
+      if r.status == 200
         responseHandler(JSON.parse(r.responseText), r.status)
       else
         errorHandler(JSON.parse(r.responseText), r.status)
@@ -34,16 +34,20 @@ window.jNorthPole =
     @genericRequest(jsonObj, 'POST', 'user', success, failure)
     return
 
+  getUser: (jsonObj, responseHandler, errorHandler) ->
+    @genericRequest(jsonObj, 'SEARCH', 'user', responseHandler, errorHandler)
+    return
+
   createStorage: (jsonObj, responseHandler, errorHandler) ->
     @genericRequest(jsonObj, 'POST', 'storage', responseHandler, errorHandler)
     return
 
-  putStorage: (jsonObj, responseHandler, errorHandler) ->
-    @genericRequest(jsonObj, 'PUT', 'storage', responseHandler, errorHandler)
-    return
-
   getStorage: (jsonObj, responseHandler, errorHandler) ->
     @genericRequest(jsonObj, 'SEARCH', 'storage', responseHandler, errorHandler)
+    return
+
+  putStorage: (jsonObj, responseHandler, errorHandler) ->
+    @genericRequest(jsonObj, 'PUT', 'storage', responseHandler, errorHandler)
     return
 
   deleteStorage: (jsonObj, responseHandler, errorHandler) ->
