@@ -15,9 +15,6 @@ html, body {
   margin: 16px;
   width: 36px; }
 
-md-toolbar h1 {
-  margin: auto; }
-
 md-list .md-button {
   color: inherit;
   font-weight: 500;
@@ -72,6 +69,9 @@ md-button.menuBtn > md-icon {
 md-toolbar h1 {
   font-size: 1.250em;
   font-weight: 400; }
+
+md-toolbar h1.center-it {
+  margin: auto; }
 
 .avatar {
   position: relative;

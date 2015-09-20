@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
   <head>
-    <title>mango (fruit)</title>
+    <title>{{myConfig.title}}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="./css/app.css"/>
   </head>
 
-  <body ng-app="app" layout="row" layout-fill ng-controller="MainController as ul">
+  <body layout="row" layout-fill ng-controller="MainController as ul">
 
     <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="false">
 
       <md-toolbar class="md-whiteframe-z1">
-        <h1>accounts</h1>
+        <h1 class="center-it">accounts</h1>
       </md-toolbar>
 
       <md-list>
@@ -38,11 +38,11 @@
 
     <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
 
-      <md-toolbar layout="row" class="md-whiteframe-z1">
+      <md-toolbar layout="row" class="md-whiteframe-z1"  layout-align="start center">
         <md-button class="menu" ng-click="ul.toggleList()" aria-label="Show User List">
           <md-icon md-svg-icon="menu"></md-icon>
         </md-button>
-        <h1>mango (fruit)</h1>
+        <h1>{{myConfig.title}}</h1>
       </md-toolbar>
 
       <md-content id="content" ng-view flex layout="column" layout-fill></md-content>
