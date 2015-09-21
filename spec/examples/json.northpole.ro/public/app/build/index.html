@@ -23,8 +23,9 @@
 
       <md-list>
         <md-list-item ng-repeat="it in ul.users">
-          <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+          <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it.api_key === user.api_key }">
             <md-icon md-svg-icon="svg-1" class="avatar"></md-icon>
+            {{ul.user.api_key}}
             {{it.api_key}}
           </md-button>
         </md-list-item>

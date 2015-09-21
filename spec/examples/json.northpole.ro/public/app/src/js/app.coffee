@@ -20,6 +20,8 @@ app.config ['$mdThemingProvider', '$mdIconProvider', ($mdThemingProvider, $mdIco
     .icon('delete', './assets/svg/ic_delete_48px.svg', 48)
     .icon('lock', './assets/svg/ic_lock_48px.svg', 48)
     .icon('share', './assets/svg/ic_share_48px.svg', 48)
+    .icon('music', './assets/svg/ic_music_note_48px.svg', 48)
+    .icon('note_add', './assets/svg/ic_note_add_48px.svg', 48)
 
   $mdThemingProvider
     .theme('default')

@@ -67,6 +67,7 @@ MainController = function($scope, userService, $mdSidenav, $mdBottomSheet, $log,
     $localStorage.selected = angular.copy(user);
     $location.path("/blobs/" + user.api_key);
     self.toggleList();
+    refresh();
   };
   $scope.showToast = function(s) {
     var toast;
@@ -94,6 +95,9 @@ MainController = function($scope, userService, $mdSidenav, $mdBottomSheet, $log,
   refresh = function() {
     return userService.loadAllUsers().then(function(users) {
       self.users = [].concat(users);
+      if ($localStorage.selected != null) {
+        $scope.user = $localStorage.selected;
+      }
     });
   };
   refresh();
