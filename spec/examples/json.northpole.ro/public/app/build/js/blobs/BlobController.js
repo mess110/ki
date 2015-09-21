@@ -6,6 +6,10 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
     return;
   }
   if ($routeParams.id != null) {
+    if ($localStorage.selected == null) {
+      $location.path('/blobs');
+      return;
+    }
     $scope.user = $localStorage.selected;
     jNorthPole.getStorage($scope.user, function(data) {
       $scope.items = data;
@@ -14,7 +18,8 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
       return console.log(error);
     });
   } else {
-    console.log('nothing to see here');
+    $location.path('/tutorial');
+    return;
   }
   $scope["delete"] = function(item) {
     item = angular.copy(item);
@@ -63,7 +68,7 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
       this.json = json;
       this.actions = [
         {
-          name: 'Delete',
+          name: 'Yes, delete already',
           icon: 'delete'
         }
       ];
@@ -73,13 +78,13 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
     };
     return $mdBottomSheet.show({
       parent: angular.element(document.getElementById('content')),
-      templateUrl: './js/users/contactSheet.html',
+      templateUrl: './js/templates/contactSheet.html',
       controller: ['$mdBottomSheet', '$scope', ContactPanelController],
       controllerAs: 'cp',
       bindToController: true,
       targetEvent: $event
     }).then(function(clickedItem) {
-      if (clickedItem.name === 'Delete') {
+      if (clickedItem.icon === 'delete') {
         $scope["delete"](json);
       }
     });

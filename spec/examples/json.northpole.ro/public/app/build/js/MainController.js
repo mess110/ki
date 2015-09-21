@@ -1,6 +1,7 @@
 var DialogController, MainController;
 
 DialogController = function($scope, $mdDialog, $localStorage, $mdToast) {
+  var apiError, userFound;
   $scope.hide = function() {
     $mdDialog.hide();
   };
@@ -12,7 +13,21 @@ DialogController = function($scope, $mdDialog, $localStorage, $mdToast) {
     toast = $mdToast.simple().content(s).position('bottom right').hideDelay(3000);
     return $mdToast.show(toast);
   };
-  $scope.answer = function() {
+  apiError = function(error) {
+    console.log(error);
+    return $scope.showToast(error.error);
+  };
+  userFound = function(json) {
+    $localStorage.accounts.push({
+      api_key: json.api_key,
+      secret: json.secret
+    });
+    return $mdDialog.hide('refresh');
+  };
+  $scope.register = function() {
+    jNorthPole.createUser($scope.user.api_key, $scope.user.secret, userFound, apiError);
+  };
+  $scope.connect = function() {
     jNorthPole.getUser($scope.user, function(data) {
       var exists, item, json;
       json = data[0];
@@ -29,19 +44,12 @@ DialogController = function($scope, $mdDialog, $localStorage, $mdToast) {
         return results;
       })();
       if (exists.length === 0) {
-        $localStorage.accounts.push({
-          api_key: json.api_key,
-          secret: json.secret
-        });
-        return $mdDialog.hide('refresh');
+        return userFound(json);
       } else {
         $scope.showToast("account already connected");
         return console.log("account already connected");
       }
-    }, function(error) {
-      console.log(error);
-      return $scope.showToast(error.error);
-    });
+    }, apiError);
   };
 };
 

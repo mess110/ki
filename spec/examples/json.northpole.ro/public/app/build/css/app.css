@@ -8,6 +8,9 @@ html, body {
 ::-webkit-scrollbar {
   display: none; }
 
+.asd {
+  background: url("//media.giphy.com/media/EFIwNN4wo9Tig/giphy.gif") no-repeat center center; }
+
 .menu {
   background-color: transparent;
   border: none;
@@ -58,11 +61,6 @@ md-button.menuBtn > md-icon {
   padding: 4px;
   transition: all 100ms ease-out 30ms; }
 
-#content img {
-  display: block;
-  height: auto;
-  max-width: 500px; }
-
 .content-wrapper {
   position: relative; }
 
@@ -70,7 +68,7 @@ md-toolbar h1 {
   font-size: 1.250em;
   font-weight: 400; }
 
-md-toolbar h1.center-it {
+h1.center-it {
   margin: auto; }
 
 .avatar {

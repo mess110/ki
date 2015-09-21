@@ -8,14 +8,16 @@ app.constant("myConfig", {
 
 app.config([
   '$mdThemingProvider', '$mdIconProvider', function($mdThemingProvider, $mdIconProvider) {
-    $mdIconProvider.defaultIconSet('./assets/svg/avatars.svg', 128).icon('menu', './assets/svg/menu.svg', 24).icon('share', './assets/svg/share.svg', 24).icon('google_plus', './assets/svg/google_plus.svg', 512).icon('hangouts', './assets/svg/hangouts.svg', 512).icon('twitter', './assets/svg/twitter.svg', 512).icon('phone', './assets/svg/phone.svg', 512).icon('person_add', './assets/svg/ic_person_add_48px.svg', 48).icon('clear', './assets/svg/ic_clear_48px.svg', 48).icon('plus', './assets/svg/ic_add_48px.svg', 48).icon('cog', './assets/svg/ic_settings_48px.svg', 48).icon('delete', './assets/svg/ic_delete_48px.svg', 48);
+    $mdIconProvider.defaultIconSet('./assets/svg/avatars.svg', 128).icon('menu', './assets/svg/menu.svg', 24).icon('share', './assets/svg/share.svg', 24).icon('google_plus', './assets/svg/google_plus.svg', 512).icon('hangouts', './assets/svg/hangouts.svg', 512).icon('twitter', './assets/svg/twitter.svg', 512).icon('phone', './assets/svg/phone.svg', 512).icon('person_add', './assets/svg/ic_person_add_48px.svg', 48).icon('clear', './assets/svg/ic_clear_48px.svg', 48).icon('plus', './assets/svg/ic_add_48px.svg', 48).icon('cog', './assets/svg/ic_settings_48px.svg', 48).icon('delete', './assets/svg/ic_delete_48px.svg', 48).icon('lock', './assets/svg/ic_lock_48px.svg', 48).icon('share', './assets/svg/ic_share_48px.svg', 48);
     $mdThemingProvider.theme('default').primaryPalette('deep-orange').accentPalette('blue').warnPalette('red').backgroundPalette('grey');
   }
 ]);
 
 app.config([
   '$routeProvider', function($routeProvider) {
-    $routeProvider.when('/blobs', {
+    $routeProvider.when('/tutorial', {
+      templateUrl: 'js/tutorial/tutorial.html'
+    }).when('/blobs', {
       templateUrl: 'js/blobs/blobs.html',
       controller: 'BlobController'
     }).when('/blobs/:id', {
