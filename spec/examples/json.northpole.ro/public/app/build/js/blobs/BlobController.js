@@ -77,7 +77,7 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
       };
     };
     return $mdBottomSheet.show({
-      parent: angular.element(document.getElementById('content')),
+      parent: angular.element(document.body),
       templateUrl: './js/templates/contactSheet.html',
       controller: ['$mdBottomSheet', '$scope', ContactPanelController],
       controllerAs: 'cp',

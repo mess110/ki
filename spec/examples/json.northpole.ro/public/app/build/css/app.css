@@ -3,7 +3,8 @@ html, body {
   font-size: 14px;
   height: 100%;
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  overflow: hidden; }
 
 ::-webkit-scrollbar {
   display: none; }
@@ -37,8 +38,7 @@ md-sidenav md-list {
   padding: 0px 0px 8px 0px; }
 
 #content {
-  overflow: hidden;
-  padding-top: 5px; }
+  overflow: hidden; }
   #content .md-button.contact {
     background-color: transparent;
     border: none;
