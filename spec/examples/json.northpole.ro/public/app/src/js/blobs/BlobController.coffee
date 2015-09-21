@@ -55,7 +55,7 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
       @json = json
       @actions = [
         {
-          name: 'Delete'
+          name: 'Yes, delete already'
           icon: 'delete'
         }
       ]
@@ -75,7 +75,7 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
         bindToController: true
         targetEvent: $event)
       .then (clickedItem) ->
-        if clickedItem.name == 'Delete'
+        if clickedItem.icon == 'delete'
           $scope.delete(json)
         return
 

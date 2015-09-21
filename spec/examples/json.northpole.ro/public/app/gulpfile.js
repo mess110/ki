@@ -20,7 +20,8 @@ var paths = {
       { group: 'content', icon: 'ic_clear_48px.svg' },
       { group: 'content', icon: 'ic_add_48px.svg' },
       { group: 'action', icon: 'ic_settings_48px.svg' },
-      { group: 'action', icon: 'ic_delete_48px.svg' }
+      { group: 'action', icon: 'ic_delete_48px.svg' },
+      { group: 'action', icon: 'ic_lock_48px.svg' }
     ],
     js: [
       './bower_components/angular/angular.js',
