@@ -12,18 +12,18 @@
     <md-dialog-content style="max-width:800px;max-height:810px; ">
       <md-input-container>
         <label>api key</label>
-        <input ng-model="user.api_key" required>
+        <input ng-model="user.api_key" ng-required>
       </md-input-container>
       <md-input-container>
         <label>secret</label>
-        <input ng-model="user.secret" required>
+        <input ng-model="user.secret" ng-required>
       </md-input-container>
     </md-dialog-content>
     <div class="md-actions" layout="row">
-      <md-button ng-click="register()" style="margin-right:20px;" ng-disabled="!user.api_key">
+      <md-button ng-click="register()" style="margin-right:20px;">
         Register
       </md-button>
-      <md-button ng-click="connect()" style="margin-right:20px;" ng-disabled="!user.secret">
+      <md-button ng-click="connect()" style="margin-right:20px;">
         Connect
       </md-button>
     </div>

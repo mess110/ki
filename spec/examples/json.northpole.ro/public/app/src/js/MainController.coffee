@@ -34,7 +34,7 @@ DialogController = ($scope, $mdDialog, $localStorage, $mdToast) ->
       json = data[0]
       exists = (item for item in $localStorage.accounts when item.api_key == json.api_key)
       if exists.length == 0
-        foo(json)
+        userFound(json)
       else
         $scope.showToast "account already connected"
         console.log "account already connected"

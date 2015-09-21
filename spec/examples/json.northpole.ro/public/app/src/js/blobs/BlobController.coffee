@@ -4,6 +4,10 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
     return
 
   if $routeParams.id?
+    unless $localStorage.selected?
+      $location.path '/blobs'
+      return
+
     $scope.user = $localStorage.selected
     jNorthPole.getStorage($scope.user, (data) ->
       $scope.items = data
@@ -12,7 +16,8 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
       console.log error
     )
   else
-    console.log 'nothing to see here'
+    $location.path '/tutorial'
+    return
 
   $scope.delete = (item) ->
     item = angular.copy(item)
