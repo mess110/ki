@@ -8,7 +8,10 @@ html, body {
 ::-webkit-scrollbar {
   display: none; }
 
-.asd {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+.boobs {
   background: url("//media.giphy.com/media/EFIwNN4wo9Tig/giphy.gif") no-repeat center center; }
 
 .menu {
