@@ -18,14 +18,14 @@
         <label>secret</label>
         <input ng-model="user.secret" ng-required>
       </md-input-container>
+      <div class="md-actions" layout="row">
+        <md-button ng-click="register()" style="margin-right:20px;">
+          Register
+        </md-button>
+        <md-button ng-click="connect()" style="margin-right:20px;">
+          Connect
+        </md-button>
+      </div>
     </form>
-    <div class="md-actions" layout="row">
-      <md-button ng-click="register()" style="margin-right:20px;">
-        Register
-      </md-button>
-      <md-button ng-click="connect()" style="margin-right:20px;">
-        Connect
-      </md-button>
-    </div>
   </md-dialog-content>
 </md-dialog>
