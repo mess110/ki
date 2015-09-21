@@ -57,6 +57,7 @@ MainController = ($scope, userService, $mdSidenav, $mdBottomSheet, $log, $q, $md
     $localStorage.selected = angular.copy(user)
     $location.path "/blobs/#{user.api_key}"
     self.toggleList()
+    refresh()
     return
 
   $scope.showToast = (s) ->
@@ -71,8 +72,7 @@ MainController = ($scope, userService, $mdSidenav, $mdBottomSheet, $log, $q, $md
       targetEvent: ev
       clickOutsideToClose: true)
     .then ((answer) ->
-      if answer == 'refresh'
-        refresh()
+      refresh() if answer == 'refresh'
       return
     ), ->
       # $scope.status = 'You cancelled the dialog.'
@@ -89,10 +89,10 @@ MainController = ($scope, userService, $mdSidenav, $mdBottomSheet, $log, $q, $md
   refresh = ->
     userService.loadAllUsers().then (users) ->
       self.users = [].concat(users)
+      $scope.user = $localStorage.selected if $localStorage.selected?
       return
 
   refresh()
-
   return
 
 angular.module('app').controller 'MainController', ['$scope', 'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$mdDialog', '$localStorage', '$location', '$mdToast', MainController]
