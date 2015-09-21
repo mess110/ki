@@ -13,10 +13,20 @@
               <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
             </md-button>
             <md-menu-content width="3" >
+
               <md-menu-item>
                 <md-button ng-click="showToast('not implemented')">
                   <div layout="row">
-                    <p flex>Encrypt</p>
+                    <p flex>share</p>
+                    <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button ng-click="showToast('not implemented')">
+                  <div layout="row">
+                    <p flex>encrypt</p>
                     <md-icon md-menu-align-target md-svg-icon="lock" style="margin: auto 3px auto 0;"></md-icon>
                   </div>
                 </md-button>
@@ -25,11 +35,12 @@
               <md-menu-item>
                 <md-button ng-click="showContactOptions($event, item)">
                   <div layout="row">
-                    <p flex>Delete</p>
+                    <p flex>delete</p>
                     <md-icon md-menu-align-target md-svg-icon="delete" style="margin: auto 3px auto 0;"></md-icon>
                   </div>
                 </md-button>
               </md-menu-item>
+
             </md-menu-content>
           </md-menu>
         </div>

@@ -15,22 +15,30 @@ DialogController = ($scope, $mdDialog, $localStorage, $mdToast) ->
     toast = $mdToast.simple().content(s).position('bottom right').hideDelay(3000)
     $mdToast.show toast
 
-  $scope.answer = () ->
+  apiError = (error) ->
+    console.log error
+    $scope.showToast error.error
+
+  userFound = (json) ->
+    $localStorage.accounts.push
+      api_key: json.api_key
+      secret: json.secret
+    $mdDialog.hide 'refresh'
+
+  $scope.register = () ->
+    jNorthPole.createUser($scope.user.api_key, $scope.user.secret, userFound, apiError)
+    return
+
+  $scope.connect = () ->
     jNorthPole.getUser($scope.user, (data) ->
       json = data[0]
       exists = (item for item in $localStorage.accounts when item.api_key == json.api_key)
       if exists.length == 0
-        $localStorage.accounts.push
-          api_key: json.api_key
-          secret: json.secret
-        $mdDialog.hide 'refresh'
+        foo(json)
       else
         $scope.showToast "account already connected"
         console.log "account already connected"
-    , (error) ->
-      console.log error
-      $scope.showToast error.error
-    )
+    , apiError)
     return
 
   return
