@@ -2,37 +2,14 @@
   <md-content flex>
     <md-card ng-repeat="item in items">
       <md-card-content>
-        <div layout="row" layout-wrap ng-show="item.type == 'list'">
-          <md-input-container flex>
+        <div layout="row" layout-wrap>
+          <md-input-container flex ng-show="item.type == 'list'">
             <label>Add new</label>
             <input ng-model="newListItemText" ng-change="addItemToList(item, newListItemText)" ng-model-options="{ debounce: 1000 }">
           </md-input-container>
-          <md-menu md-position-mode="target-right target">
-            <md-button aria-label="Open cog menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-              <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
-            </md-button>
-            <md-menu-content width="3" >
-
-              <md-menu-item>
-                <md-button ng-click="toggleType(item)">
-                  <div layout="row">
-                    <p flex>{{item.type || 'text'}} view</p>
-                    <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
-                  </div>
-                </md-button>
-              </md-menu-item>
-
-              <md-menu-item>
-                <md-button ng-click="showContactOptions($event, item)">
-                  <div layout="row">
-                    <p flex>delete</p>
-                    <md-icon md-menu-align-target md-svg-icon="delete" style="margin: auto 3px auto 0;"></md-icon>
-                  </div>
-                </md-button>
-              </md-menu-item>
-
-            </md-menu-content>
-          </md-menu>
+          <md-input-container flex ng-show="item.type != 'list'">
+          </md-input-container>
+          <div ng-include="'./js/templates/dropdown.tmpl.html'"></div>
         </div>
         <div layout="row" layout-wrap>
           <md-input-container flex ng-show="item.type != 'list'">
@@ -52,32 +29,6 @@
               </md-button>
             </md-container>
           </md-container>
-          <md-menu md-position-mode="target-right target" ng-show="item.type != 'list'">
-            <md-button aria-label="Open cog menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-              <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
-            </md-button>
-            <md-menu-content width="3" >
-
-              <md-menu-item>
-                <md-button ng-click="toggleType(item)">
-                  <div layout="row">
-                    <p flex>{{item.type || 'text'}} view</p>
-                    <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
-                  </div>
-                </md-button>
-              </md-menu-item>
-
-              <md-menu-item>
-                <md-button ng-click="showContactOptions($event, item)">
-                  <div layout="row">
-                    <p flex>delete</p>
-                    <md-icon md-menu-align-target md-svg-icon="delete" style="margin: auto 3px auto 0;"></md-icon>
-                  </div>
-                </md-button>
-              </md-menu-item>
-
-            </md-menu-content>
-          </md-menu>
         </div>
       </md-card-content>
     </md-card>

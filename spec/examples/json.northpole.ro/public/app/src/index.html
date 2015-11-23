@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="./css/vendor.css"/>
     <link rel="stylesheet" href="./css/app.css"/>
+
   </head>
 
   <body layout="row" layout-fill ng-controller="MainController as ul" ng-cloak>
@@ -49,6 +50,87 @@
       <md-content id="content" ng-view flex layout="column" layout-fill></md-content>
     </div>
 
+    <!-- TODO: templates are here for fast loading. A mechanism is needed to keep sanity -->
+    <script type="text/ng-template" id="./js/templates/contactSheet.html">
+      <md-bottom-sheet class="md-list md-has-header">
+
+        <!-- <md-subheader> -->
+          <!-- Contact <span class="name">{{ cp.json.text }}</span>: -->
+          <!-- </md-subheader> -->
+
+        <md-list>
+          <md-item ng-repeat="item in cp.actions">
+            <md-button ng-click="cp.submitContact(item)" id="item_{{$index}}">
+              <md-icon md-svg-icon="{{ item.icon }}"></md-icon>
+              {{item.name}}
+            </md-button>
+          </md-item>
+        </md-list>
+
+      </md-bottom-sheet>
+    </script>
+    <script type="text/ng-template" id="./js/templates/dropdown.tmpl.html">
+      <md-menu md-position-mode="target-right target">
+        <md-button aria-label="Open cog menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
+        </md-button>
+        <md-menu-content width="3" >
+
+          <md-menu-item>
+            <md-button ng-click="toggleType(item)">
+              <div layout="row">
+                <p flex>{{item.type || 'text'}} view</p>
+                <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
+              </div>
+            </md-button>
+          </md-menu-item>
+
+          <md-menu-item>
+            <md-button ng-click="showContactOptions($event, item)">
+              <div layout="row">
+                <p flex>delete</p>
+                <md-icon md-menu-align-target md-svg-icon="delete" style="margin: auto 3px auto 0;"></md-icon>
+              </div>
+            </md-button>
+          </md-menu-item>
+
+        </md-menu-content>
+      </md-menu>
+    </script>
+    <script type="text/ng-template" id="./js/templates/dialog1.tmpl.html">
+      <md-dialog aria-label="mango (fruit)">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>connect account</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+              <md-icon md-svg-icon="clear" aria-label="Close dialog"></md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+          <form name="userForm">
+            <md-input-container>
+              <label>api key</label>
+              <input ng-model="user.api_key" ng-required>
+            </md-input-container>
+            <md-input-container>
+              <label>secret</label>
+              <input ng-model="user.secret" ng-required>
+            </md-input-container>
+            <div class="md-actions" layout="row">
+              <md-button ng-click="register()" style="margin-right:20px;">
+                Register
+              </md-button>
+              <md-button ng-click="connect()" style="margin-right:20px;">
+                Connect
+              </md-button>
+            </div>
+          </form>
+        </md-dialog-content>
+      </md-dialog>
+    </script>
+
     <script src="./js/vendor.js"></script>
 
     <script src="/javascripts/jnorthpole.js"></script>
@@ -60,7 +142,7 @@
     <script src="./js/users/Users.js"></script>
     <script src="./js/users/UserService.js"></script>
 
-    <script src="./js/blobs/BlobController.js"></script>
+    <script src="./js/blobs/BlobsController.js"></script>
 
   </body>
 </html>

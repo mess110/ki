@@ -37,8 +37,8 @@ app.config ['$mdThemingProvider', '$mdIconProvider', ($mdThemingProvider, $mdIco
 app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when('/tutorial', templateUrl: 'js/tutorial/tutorial.html')
-    .when('/blobs', templateUrl: 'js/blobs/blobs.html', controller: 'BlobController')
-    .when('/blobs/:id', templateUrl: 'js/blobs/blobs.html', controller: 'BlobController')
+    .when('/blobs', templateUrl: 'js/blobs/blobs.html', controller: 'BlobsController')
+    .when('/blobs/:id', templateUrl: 'js/blobs/blobs.html', controller: 'BlobsController')
     .otherwise(redirectTo: '/blobs')
   return
 ]

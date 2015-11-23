@@ -19,10 +19,10 @@ app.config([
       templateUrl: 'js/tutorial/tutorial.html'
     }).when('/blobs', {
       templateUrl: 'js/blobs/blobs.html',
-      controller: 'BlobController'
+      controller: 'BlobsController'
     }).when('/blobs/:id', {
       templateUrl: 'js/blobs/blobs.html',
-      controller: 'BlobController'
+      controller: 'BlobsController'
     }).otherwise({
       redirectTo: '/blobs'
     });

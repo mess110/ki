@@ -1,4 +1,4 @@
-BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet) ->
+BlobsController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet) ->
   if !$routeParams.id? and $localStorage.selected?
     $location.path "/blobs/#{$localStorage.selected.api_key}"
     return
@@ -104,4 +104,4 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
 
   return
 
-angular.module('users').controller 'BlobController', ['$scope', '$routeParams', '$location', '$localStorage', '$mdBottomSheet', BlobController]
+angular.module('users').controller 'BlobsController', ['$scope', '$routeParams', '$location', '$localStorage', '$mdBottomSheet', BlobsController]
