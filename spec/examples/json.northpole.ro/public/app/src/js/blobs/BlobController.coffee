@@ -34,6 +34,24 @@ BlobController = ($scope, $routeParams, $location, $localStorage, $mdBottomSheet
     )
     return
 
+  $scope.addItemToList = (item, s) ->
+    return if s == ''
+    item.list = [] unless item.list?
+    item.list.push { checked: false, text: s }
+    $scope.save(item)
+
+  $scope.removeItemFromList = (item, listItem) ->
+    index = item.list.indexOf(listItem)
+    item.list.splice(index, 1)
+    $scope.save(item)
+
+  $scope.toggleType = (item) ->
+    if item.type == 'list'
+      item.type = 'text'
+    else
+      item.type = 'list'
+    $scope.save(item)
+
   $scope.save = (item) ->
     item = angular.copy(item)
     item.api_key = $scope.user.api_key

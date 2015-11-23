@@ -2,32 +2,67 @@
   <md-content flex>
     <md-card ng-repeat="item in items">
       <md-card-content>
-        <div layout="row" layout-wrap>
+        <div layout="row" layout-wrap ng-show="item.type == 'list'">
           <md-input-container flex>
-            <label>Text</label>
-            <textarea ng-model="item.text" columns="1" md-maxlength="1024" ng-change="save(item)" ng-model-options="{ debounce: 1000 }"></textarea>
+            <label>Add new</label>
+            <input ng-model="newListItemText" ng-change="addItemToList(item, newListItemText)" ng-model-options="{ debounce: 1000 }">
           </md-input-container>
-
-          <md-menu md-position-mode="target-right target" >
-            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          <md-menu md-position-mode="target-right target">
+            <md-button aria-label="Open cog menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
               <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
             </md-button>
             <md-menu-content width="3" >
 
               <md-menu-item>
-                <md-button ng-click="showToast('not implemented')">
+                <md-button ng-click="toggleType(item)">
                   <div layout="row">
-                    <p flex>share</p>
+                    <p flex>{{item.type || 'text'}} view</p>
                     <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
                   </div>
                 </md-button>
               </md-menu-item>
 
               <md-menu-item>
-                <md-button ng-click="showToast('not implemented')">
+                <md-button ng-click="showContactOptions($event, item)">
                   <div layout="row">
-                    <p flex>encrypt</p>
-                    <md-icon md-menu-align-target md-svg-icon="lock" style="margin: auto 3px auto 0;"></md-icon>
+                    <p flex>delete</p>
+                    <md-icon md-menu-align-target md-svg-icon="delete" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div layout="row" layout-wrap>
+          <md-input-container flex ng-show="item.type != 'list'">
+            <label>Text</label>
+            <textarea ng-model="item.text" columns="1" md-maxlength="1024" ng-change="save(item)" ng-model-options="{ debounce: 1000 }"></textarea>
+          </md-input-container>
+
+          <md-container flex ng-show="item.type == 'list'">
+            <md-container flex ng-repeat="listItem in item.list" layout="row">
+              <md-checkbox aria-label="Checkbox" ng-model="listItem.checked" ng-change="save(item)" class="md-primary">
+              </md-checkbox>
+              <md-input-container flex class="small-bot">
+                <input aria-label="checkbox text" ng-model="listItem.text" ng-change="save(item)" ng-model-options="{ debounce: 1000 }" ng-class="{ done: listItem.checked }" ng-disabled="listItem.checked">
+              </md-input-container>
+              <md-button aria-label="delete checkbox item" class="md-icon-button" ng-click="removeItemFromList(item, listItem)">
+                <md-icon md-menu-origin md-svg-icon="delete"></md-icon>
+              </md-button>
+            </md-container>
+          </md-container>
+          <md-menu md-position-mode="target-right target" ng-show="item.type != 'list'">
+            <md-button aria-label="Open cog menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+              <md-icon md-menu-origin md-svg-icon="cog"></md-icon>
+            </md-button>
+            <md-menu-content width="3" >
+
+              <md-menu-item>
+                <md-button ng-click="toggleType(item)">
+                  <div layout="row">
+                    <p flex>{{item.type || 'text'}} view</p>
+                    <md-icon md-menu-align-target md-svg-icon="share" style="margin: auto 3px auto 0;"></md-icon>
                   </div>
                 </md-button>
               </md-menu-item>

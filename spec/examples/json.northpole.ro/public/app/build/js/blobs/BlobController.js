@@ -39,6 +39,33 @@ BlobController = function($scope, $routeParams, $location, $localStorage, $mdBot
       return console.log(error);
     });
   };
+  $scope.addItemToList = function(item, s) {
+    if (s === '') {
+      return;
+    }
+    if (item.list == null) {
+      item.list = [];
+    }
+    item.list.push({
+      checked: false,
+      text: s
+    });
+    return $scope.save(item);
+  };
+  $scope.removeItemFromList = function(item, listItem) {
+    var index;
+    index = item.list.indexOf(listItem);
+    item.list.splice(index, 1);
+    return $scope.save(item);
+  };
+  $scope.toggleType = function(item) {
+    if (item.type === 'list') {
+      item.type = 'text';
+    } else {
+      item.type = 'list';
+    }
+    return $scope.save(item);
+  };
   $scope.save = function(item) {
     var callback;
     item = angular.copy(item);
