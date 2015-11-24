@@ -22,6 +22,8 @@ app.config ['$mdThemingProvider', '$mdIconProvider', ($mdThemingProvider, $mdIco
     .icon('share', './assets/svg/ic_share_48px.svg', 48)
     .icon('music', './assets/svg/ic_music_note_48px.svg', 48)
     .icon('note_add', './assets/svg/ic_note_add_48px.svg', 48)
+    .icon('fullscreen', './assets/svg/ic_fullscreen_48px.svg', 48)
+    .icon('fullscreen_exit', './assets/svg/ic_fullscreen_exit_48px.svg', 48)
 
   $mdThemingProvider
     .theme('default')
@@ -50,7 +52,6 @@ app.config(['$localStorageProvider', ($localStorageProvider) ->
   $localStorageProvider.setKeyPrefix 'app'
   return
 ])
-
 
 app.run ($rootScope, myConfig) ->
   $rootScope.myConfig = myConfig
