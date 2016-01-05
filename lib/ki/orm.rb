@@ -103,7 +103,14 @@ module Ki
       #
       def find(name, hash = {})
         hash = nourish_hash_id hash
-        @db[name].find(hash).to_a.stringify_ids
+        a = nourish_hash_limit hash
+        hash = a[0]
+        limit = a[1]
+        a = nourish_hash_sort hash
+        hash = a[0]
+        sort = a[1]
+
+        @db[name].find(hash, limit).sort(sort).to_a.stringify_ids
       end
 
       # Update a hash from the database
@@ -197,6 +204,35 @@ module Ki
           hash['_id'] = BSON::ObjectId(hash['_id'].to_s)
         end
         hash
+      end
+
+      def nourish_hash_limit(hash)
+        tmp = {}
+        if hash['__limit']
+          # really need to work on hash_with_indifferent access
+          # if you change how you access the symbol you will have a bad time
+          tmp[:limit] = hash['__limit']
+          hash.delete('__limit')
+        end
+        [hash, tmp]
+      end
+
+      def nourish_hash_sort(hash)
+        tmp = {}
+        if hash['__sort']
+          if hash['__sort'].class != Hash
+            tmp = {}
+          else
+            # TODO: validate for size and number of elements
+            # TODO: validate value
+            # TODO: handle sorting by id
+            hash['__sort'].to_a.each do |e|
+              tmp[e[0].to_sym] = e[1].to_sym
+            end
+          end
+          hash.delete('__sort')
+        end
+        [hash, tmp]
       end
     end
   end

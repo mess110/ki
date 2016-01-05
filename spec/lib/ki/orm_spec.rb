@@ -68,6 +68,32 @@ describe Ki::Orm do
       expect(r.class).to eq Array
       expect(r).to be_empty
     end
+
+    it 'applies sorting according to __sort key' do
+      @db.delete('sort_tests', {})
+
+      @db.insert('sort_tests', { 'value' => 1 })
+      @db.insert('sort_tests', { 'value' => 2 })
+
+      r = @db.find('sort_tests', { '__sort' => { 'value' => 'desc' } })
+      expect(r.size).to eq 2
+      expect(r[0]['value']).to eq 2
+      expect(r[1]['value']).to eq 1
+
+      r = @db.find('sort_tests', { '__sort' => { 'value' => 'asc' } })
+      expect(r.size).to eq 2
+      expect(r[0]['value']).to eq 1
+      expect(r[1]['value']).to eq 2
+    end
+
+    it 'applies limiting according to __limit key' do
+      3.times do
+        @db.insert('limit_tests', { 'created_at' => Time.now.to_i })
+      end
+
+      r = @db.find('limit_tests', { '__limit' => 2 })
+      expect(r.size).to eq 2
+    end
   end
 
   it 'should update' do

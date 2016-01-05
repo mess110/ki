@@ -252,6 +252,17 @@ OR Query
 curl -k -X GET -d '{"$or": [{"category": "music"}, {"category": "band"}]}' "https://json.northpole.ro/storage.json?api_key=secret&secret=secret"
 ```
 
+To limit the number of results use a param called *__limit* and the value desired.
+For example, the request below will limit itself to 10 results.
+
+```
+curl -k -X GET -d '{"__limit": 10}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
+To sort the results, use a param called *__sort* and the key value desired. Example
+
+curl -k -X GET -d '{"__sort": { "name": "desc" }}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+
 #### Update
 
 ```shell
