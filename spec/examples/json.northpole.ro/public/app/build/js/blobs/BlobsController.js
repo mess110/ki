@@ -5,6 +5,7 @@ BlobsController = function($scope, $routeParams, $location, $localStorage, $mdBo
     $location.path("/blobs/" + $localStorage.selected.api_key);
     return;
   }
+  $scope.fullItem = null;
   if ($routeParams.id != null) {
     if ($localStorage.selected == null) {
       $location.path('/blobs');
@@ -12,7 +13,7 @@ BlobsController = function($scope, $routeParams, $location, $localStorage, $mdBo
     }
     $scope.user = $localStorage.selected;
     jNorthPole.getStorage($scope.user, function(data) {
-      $scope.items = data;
+      $scope.items = data.reverse();
       return $scope.$apply();
     }, function(error) {
       return console.log(error);
@@ -58,6 +59,13 @@ BlobsController = function($scope, $routeParams, $location, $localStorage, $mdBo
     item.list.splice(index, 1);
     return $scope.save(item);
   };
+  $scope.fullscreen = function(item) {
+    if ($scope.fullItem != null) {
+      return $scope.fullItem = null;
+    } else {
+      return $scope.fullItem = item;
+    }
+  };
   $scope.toggleType = function(item) {
     if (item.type === 'list') {
       item.type = 'text';
@@ -78,7 +86,7 @@ BlobsController = function($scope, $routeParams, $location, $localStorage, $mdBo
       return jNorthPole.putStorage(item, callback);
     } else {
       return jNorthPole.createStorage(item, function(data) {
-        $scope.items.push(data);
+        $scope.items.unshift(data);
         return $scope.$apply();
       }, callback);
     }

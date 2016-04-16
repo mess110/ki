@@ -3,6 +3,8 @@ BlobsController = ($scope, $routeParams, $location, $localStorage, $mdBottomShee
     $location.path "/blobs/#{$localStorage.selected.api_key}"
     return
 
+  $scope.fullItem = null
+
   if $routeParams.id?
     unless $localStorage.selected?
       $location.path '/blobs'
@@ -10,7 +12,7 @@ BlobsController = ($scope, $routeParams, $location, $localStorage, $mdBottomShee
 
     $scope.user = $localStorage.selected
     jNorthPole.getStorage($scope.user, (data) ->
-      $scope.items = data
+      $scope.items = data.reverse()
       $scope.$apply()
     , (error) ->
       console.log error
@@ -45,6 +47,12 @@ BlobsController = ($scope, $routeParams, $location, $localStorage, $mdBottomShee
     item.list.splice(index, 1)
     $scope.save(item)
 
+  $scope.fullscreen = (item) ->
+    if $scope.fullItem?
+      $scope.fullItem = null
+    else
+      $scope.fullItem = item
+
   $scope.toggleType = (item) ->
     if item.type == 'list'
       item.type = 'text'
@@ -64,7 +72,7 @@ BlobsController = ($scope, $routeParams, $location, $localStorage, $mdBottomShee
       jNorthPole.putStorage(item, callback)
     else
       jNorthPole.createStorage(item, (data) ->
-        $scope.items.push data
+        $scope.items.unshift data
         $scope.$apply()
       , callback)
 

@@ -77,6 +77,15 @@
         <md-menu-content width="3" >
 
           <md-menu-item>
+            <md-button ng-click="fullscreen(item)">
+              <div layout="row">
+                  <p flex>fullscreen</p>
+                <md-icon md-menu-align-target md-svg-icon="fullscreen" style="margin: auto 3px auto 0;"></md-icon>
+              </div>
+            </md-button>
+          </md-menu-item>
+
+          <md-menu-item>
             <md-button ng-click="toggleType(item)">
               <div layout="row">
                 <p flex>toggle view</p>

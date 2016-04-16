@@ -1,0 +1,138 @@
+html, body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+.boobs {
+  background: url("//media.giphy.com/media/EFIwNN4wo9Tig/giphy.gif") no-repeat center center; }
+
+.menu {
+  background-color: transparent;
+  border: none;
+  height: 38px;
+  margin: 16px;
+  width: 36px; }
+
+md-list .md-button {
+  color: inherit;
+  font-weight: 500;
+  text-align: left;
+  width: 100%; }
+
+.selected:hover {
+  background-color: #FFCDD2 !important; }
+
+.selected {
+  background-color: #FFEBEE; }
+
+md-sidenav md-list {
+  padding: 0px 0px 8px 0px; }
+
+#content {
+  overflow: hidden; }
+  #content .md-button.contact {
+    background-color: transparent;
+    border: none;
+    width: 48px;
+    height: 48px;
+    margin: 8px auto 16px 0;
+    position: absolute;
+    top: 10px;
+    right: 40px; }
+  #content md-icon.avatar {
+    margin-top: 10px; }
+  #content .md-button.contact > md-icon {
+    fill: black;
+    width: 36px;
+    height: 36px; }
+
+md-button.menuBtn > md-icon {
+  fill: white;
+  width: 24px;
+  height: 24px; }
+
+#content .md-button.contact:active > md-icon {
+  background-color: #dadada;
+  border-radius: 75%;
+  padding: 4px;
+  transition: all 100ms ease-out 30ms; }
+
+.content-wrapper {
+  position: relative; }
+
+md-toolbar h1 {
+  font-size: 1.25em;
+  font-weight: 400; }
+
+h1.center-it {
+  margin: auto; }
+
+.avatar {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0px;
+  vertical-align: middle;
+  zoom: 0.7;
+  transform: translateZ(0);
+  -webkit-transform: scale(0.7);
+  -moz-transform: scale(0.7); }
+
+md-bottom-sheet md-icon {
+  margin-right: 20px; }
+
+span.name {
+  font-weight: bold;
+  font-size: 1.1em;
+  padding-left: 5px; }
+
+.small-bot {
+  padding-top: 6px !important;
+  padding-bottom: 2px !important; }
+
+.done {
+  text-decoration: line-through; }
+
+form[name=userForm] md-input-container {
+  padding-left: 12px;
+  padding-right: 12px; }
+
+input {
+  color: rgba(0, 0, 0, 0.87) !important; }
+
+/* you can also define the transition style
+ * on the base class as well (.repeat-item) */
+.repeat-item.ng-enter, .repeat-item.ng-leave {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all; }
+.repeat-item.ng-enter {
+  opacity: 0; }
+.repeat-item.ng-leave {
+  opacity: 1; }
+  .repeat-item.ng-leave.ng-leave-active {
+    opacity: 0; }
+.repeat-item.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.delete {
+  float: right; }
+
+label.add-new {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+/*# sourceMappingURL=app.css.map */
