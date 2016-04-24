@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'mongo', '1.9.2'
   spec.add_runtime_dependency 'bson_ext'
   spec.add_runtime_dependency 'rack-cors'
+  spec.add_runtime_dependency 'faye-websocket'
 
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rack-test'

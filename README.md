@@ -15,6 +15,7 @@ and provides a fullblown REST api on top.
 - [Install](#install)
 - [Getting started](#getting-started)
   - [Create a new app](#create-a-new-app)
+  - [Realtime](#realtime)
   - [Adding a view](#adding-a-view)
   - [Adding assets](#adding-assets)
   - [View layout](#view-layout)
@@ -81,7 +82,7 @@ development: the dreaded TODO app.
 View the [code](https://github.com/mess110/ki/tree/master/spec/examples/todo) for
 the final webapp.
 
-### Creating a new app
+### Create a new app
 
 ```shell
 ki new todo
@@ -118,6 +119,12 @@ irb session with your application context already loaded.
 ```shell
 ki console
 ```
+
+### Realtime
+
+ki supports realtime communication though [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+
+To learn how to use the realtime api, [read this](REALTIME.md).
 
 ### Adding a view
 

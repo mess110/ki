@@ -10,6 +10,8 @@ require 'haml'
 require 'sass'
 require 'coffee-script'
 require 'mongo'
+require 'faye/websocket'
+require 'eventmachine'
 
 # code
 require 'ki/utils/api_error'
@@ -35,11 +37,13 @@ require 'ki/middleware/haml_compiler'
 require 'ki/middleware/coffee_compiler'
 require 'ki/middleware/doc_generator'
 require 'ki/middleware/admin_interface_generator'
+require 'ki/middleware/realtime'
 
 require 'ki/ki_config'
 require 'ki/helpers'
 require 'ki/orm'
 require 'ki/model'
+require 'ki/channel_manager'
 require 'ki/base_request'
 require 'ki/ki_app'
 

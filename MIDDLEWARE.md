@@ -5,6 +5,8 @@ Rack handles everything™
 
 ## Middleware
 
+It is configured in the config.yml of the application.
+
 The default enabled middleware list:
 
 * ApiHandler
@@ -36,10 +38,28 @@ Similar to CoffeeCompiler, compiles haml to html.
 
 Serves static files from the *public/* folder.
 
-## Make your own
+### example middleware configuration
 
-TODO
+```yml
+development:
+  database:
+    name: base_development
+    host: 127.0.0.1
+    port: 27017
+  add_middleware: ['Realtime', 'DocGenerator', 'AdminInterfaceGenerator']
+  rm_middleware: ['SassCompiler']
 
-### config.yml
+test:
+  database:
+    name: np_test
+    host: 127.0.0.1
+    port: 27017
 
-TODO middleware config example.
+production:
+  middleware: ['ApiHandler', 'PublicFileServer']
+  add_middleware: ['Realtime', 'DocGenerator', 'AdminInterfaceGenerator']
+  database:
+    name: np
+    host: 127.0.0.1
+    port: 27017
+```
