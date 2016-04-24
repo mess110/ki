@@ -6,13 +6,13 @@ describe Ki::Middleware::InitMiddleware do
   let(:req) { Ki::BaseRequest }
 
   it 'redirects to /index if public/index.html does not exist' do
-    env = Rack::MockRequest.env_for('/', {'REQUEST_METHOD' => 'GET' })
+    env = Rack::MockRequest.env_for('/', { 'REQUEST_METHOD' => 'GET' })
     resp = init.call env
     expect(resp[0]).to eq 302 # redirect
   end
 
   it 'renders index.html if it exists' do
-    env = Rack::MockRequest.env_for('/', {'REQUEST_METHOD' => 'GET' })
+    env = Rack::MockRequest.env_for('/', { 'REQUEST_METHOD' => 'GET' })
 
     Ki::Middleware::InitMiddleware.any_instance.stub(:public_file_exists?).and_return(true)
     resp = init.call env
