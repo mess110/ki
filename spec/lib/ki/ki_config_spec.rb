@@ -23,4 +23,32 @@ describe Ki::KiConfig do
   it 'has a middleware method' do
     expect(config.middleware).to_not be_empty
   end
+
+  it 'rm_middleware' do
+    config.config['rm_middleware'] = 'AdminInterfaceGenerator'
+    expect(config.middleware).to_not include(Ki::Middleware::AdminInterfaceGenerator)
+  end
+
+  it 'add_middleware' do
+    config.config['rm_middleware'] = 'Realtime'
+    config.middleware
+    expect(config.middleware).to_not include(Ki::Middleware::Realtime)
+    config.config['rm_middleware'] = []
+    config.config['add_middleware'] = 'Realtime'
+    expect(config.middleware).to include(Ki::Middleware::Realtime)
+  end
+
+  it 'add_middleware/rm_middleware accepts an array' do
+    config.config['rm_middleware'] = 'Realtime'
+    expect(config.middleware).to_not include(Ki::Middleware::Realtime)
+    config.config['rm_middleware'] = []
+
+    config.config['add_middleware'] = ['Realtime']
+    expect(config.middleware).to include(Ki::Middleware::Realtime)
+  end
+
+  it 'does not add duplicate middleware' do
+    config.config['add_middleware'] = %w(Realtime Realtime)
+    expect(config.middleware.to_s.scan(/Realtime/).count).to eq 1
+  end
 end

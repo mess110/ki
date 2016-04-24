@@ -17,7 +17,7 @@ The following webservers are supported:
 ## Documentation
 
 Ki realtime offers channels to which a user subscribes to. Once a user is subscribed
-to a channel he/she will recive messages from that channel. Anybody can publish
+to a channel he/she will receive messages from that channel. Anybody can publish
 messages in a channel.
 
 Upon connecting, the user will receive a unique id.
@@ -45,5 +45,4 @@ send({type: 'unsubscribe', channel_name: 'my-channel'})
 
 // Send a message to a channel
 send({type: 'publish', channel_name: 'my-channel', text: 'asd', custom_attribute: [1, 'text']})
-
 ```

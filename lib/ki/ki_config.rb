@@ -23,35 +23,33 @@ module Ki
     def middleware
       used_middleware = %w(ApiHandler CoffeeCompiler SassCompiler HamlCompiler
                            PublicFileServer)
-      used_middleware = @config['middleware'] if @config['middleware'].present?
+      used_middleware = @config['middleware'] if @config['middleware']
 
-      # TODO: test
-      if @config['add_middleware'].present?
-        if @config['add_middleware'].class != Array
-          @config['add_middleware'] = [@config['add_middleware']]
-        end
-        @config['add_middleware'].each do |mid|
-          used_middleware.push mid
-        end
-      end
-
-      if @config['rm_middleware'].present?
-        if @config['rm_middleware'].class != Array
-          @config['rm_middleware'] = [@config['rm_middleware']]
-        end
-        @config['rm_middleware'].each do |mid|
-          used_middleware.delete mid
-        end
-      end
+      used_middleware = add_rm_middleware used_middleware, 'add_middleware', 'push'
+      used_middleware = add_rm_middleware used_middleware, 'rm_middleware', 'delete'
 
       # convert middleware to ruby object
-      used_middleware.map do |middleware|
+      used_middleware.uniq.map do |middleware|
         Object.const_get('Ki').const_get('Middleware').const_get(middleware)
       end
     end
 
     def database
       @config['database']
+    end
+
+    private
+
+    def add_rm_middleware(used_middleware, key, action)
+      if @config.key?(key)
+        if @config[key].class != Array
+          @config[key] = [@config[key]]
+        end
+        @config[key].each do |mid|
+          used_middleware.send(action, mid)
+        end
+      end
+      used_middleware
     end
   end
 end
