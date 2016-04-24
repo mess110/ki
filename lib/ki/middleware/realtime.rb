@@ -55,8 +55,8 @@ module Ki
         json = JSON.parse(data)
         json['socket_id'] = socket['id']
         if json['type'] == 'subscribe'
-          output = ::Ki::ChannelManager.subscribe json
           if json['channel_name']
+            output = ::Ki::ChannelManager.subscribe json
             ws_send(ws, output)
           else
             ws_send(ws, { message: 'Please specify a channel_name' })
