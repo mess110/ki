@@ -1,7 +1,6 @@
 module Ki
   class ChannelManager
     def self.connect
-      cleanup
       db.insert 'realtime_channel_sockets', {}
     end
 

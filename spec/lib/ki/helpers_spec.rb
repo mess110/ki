@@ -14,4 +14,15 @@ describe Ki::Helpers do
   it 'renders js tag' do
     expect(js('asd')).to eq "<script src='asd'></script>\n"
   end
+
+  it 'renders 404 if partial not found' do
+    expect {
+      partial('does_not_exist')
+    }.to raise_error Ki::PartialNotFoundError
+  end
+
+  it 'renders haml' do
+    File.stub(:join).and_return('lib/ki/views/404.haml')
+    expect(partial('404')).to include('h1')
+  end
 end
