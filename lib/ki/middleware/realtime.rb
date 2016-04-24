@@ -55,27 +55,26 @@ module Ki
         json = JSON.parse(data)
         json['socket_id'] = socket['id']
         if json['type'] == 'subscribe'
-          if json['channel_name']
-            output = ::Ki::ChannelManager.subscribe json
-            ws_send(ws, output)
-          else
-            ws_send(ws, { message: 'Please specify a channel_name' })
-          end
+          channel_manager_action(json, ws, 'subscribe')
         elsif json['type'] == 'unsubscribe'
           output = ::Ki::ChannelManager.unsubscribe json
           ws_send(ws, output)
         elsif json['type'] == 'publish'
-          if json['channel_name']
-            output = ::Ki::ChannelManager.publish json
-            ws_send(ws, output)
-          else
-            ws_send(ws, { message: 'Please specify a channel_name' })
-          end
+          channel_manager_action(json, ws, 'publish')
         else
           ws_send(ws, { message: 'Please specify a valid type' })
         end
       rescue JSON::ParserError
         ws_send(ws, { message: 'Please send a valid json string' })
+      end
+
+      def channel_manager_action(json, ws, action)
+        if json['channel_name']
+          output = ::Ki::ChannelManager.send(action, json)
+          ws_send(ws, output)
+        else
+          ws_send(ws, { message: 'Please specify a channel_name' })
+        end
       end
     end
   end
