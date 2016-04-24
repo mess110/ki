@@ -34,32 +34,7 @@ module Ki
         ws_send(ws, socket)
 
         ws.on :message do |event|
-          begin
-            json = JSON.parse(event.data)
-            json['socket_id'] = socket['id']
-            if json['type'] == 'subscribe'
-              output = ::Ki::ChannelManager.subscribe json
-              if json['channel_name']
-                ws_send(ws, output)
-              else
-                ws_send(ws, { message: 'Please specify a channel_name' })
-              end
-            elsif json['type'] == 'unsubscribe'
-              output = ::Ki::ChannelManager.unsubscribe json
-              ws_send(ws, output)
-            elsif json['type'] == 'publish'
-              if json['channel_name']
-                output = ::Ki::ChannelManager.publish json
-                ws_send(ws, output)
-              else
-                ws_send(ws, { message: 'Please specify a channel_name' })
-              end
-            else
-              ws_send(ws, { message: 'Please specify a valid type' })
-            end
-          rescue JSON::ParserError
-            ws_send(ws, { message: 'Please send a valid json string' })
-          end
+          on_message(ws, socket, event.data)
         end
 
         timer = EventMachine::PeriodicTimer.new(1) do
@@ -74,6 +49,33 @@ module Ki
         end
 
         ws.rack_response
+      end
+
+      def on_message(ws, socket, data)
+        json = JSON.parse(data)
+        json['socket_id'] = socket['id']
+        if json['type'] == 'subscribe'
+          output = ::Ki::ChannelManager.subscribe json
+          if json['channel_name']
+            ws_send(ws, output)
+          else
+            ws_send(ws, { message: 'Please specify a channel_name' })
+          end
+        elsif json['type'] == 'unsubscribe'
+          output = ::Ki::ChannelManager.unsubscribe json
+          ws_send(ws, output)
+        elsif json['type'] == 'publish'
+          if json['channel_name']
+            output = ::Ki::ChannelManager.publish json
+            ws_send(ws, output)
+          else
+            ws_send(ws, { message: 'Please specify a channel_name' })
+          end
+        else
+          ws_send(ws, { message: 'Please specify a valid type' })
+        end
+      rescue JSON::ParserError
+        ws_send(ws, { message: 'Please send a valid json string' })
       end
     end
   end
