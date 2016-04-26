@@ -1,6 +1,6 @@
 window.jNorthPole =
 
-  BASE_URL: '/'
+  BASE_URL: 'https://json.northpole.ro/'
 
   help: """
     NorthPole JS wrapper example usage:
@@ -11,6 +11,10 @@ window.jNorthPole =
 
     jNorthPole.BASE_URL = '/';
     jNorthPole.getStorage(json, responseHandler);
+
+    socket = jNorthPole.getNewRealtimeSocket(responseHandler)
+    jNorthPole.subscribe(socket, 'foo')
+    jNorthPole.publish(socket, 'foo', { message: 'hello' })
     """
 
   genericRequest: (jsonObj, method, endPoint, responseHandler, errorHandler=responseHandler) ->
@@ -53,3 +57,29 @@ window.jNorthPole =
   deleteStorage: (jsonObj, responseHandler, errorHandler) ->
     @genericRequest(jsonObj, 'DELETE', 'storage', responseHandler, errorHandler)
     return
+
+  getNewRealtimeSocket: (responseHandler, errorHandler=responseHandler) ->
+    socketUrl = @BASE_URL.replace('https', 'wss')
+    socket = new WebSocket("#{socketUrl}realtime")
+    socket.onmessage = responseHandler
+    socket.onclose = errorHandler
+    socket
+
+  subscribe: (socket, channel_name) ->
+    socket.send(JSON.stringify(
+      type: 'subscribe'
+      channel_name: channel_name
+    ))
+
+  unsubscribe: (socket, channel_name) ->
+    socket.send(JSON.stringify(
+      type: 'unsubscribe'
+      channel_name: channel_name
+    ))
+
+  publish: (socket, channel_name, json) ->
+    socket.send(JSON.stringify(
+      type: 'publish'
+      channel_name: channel_name
+      content: json
+    ))
