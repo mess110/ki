@@ -40,7 +40,7 @@ module Ki
 
       messages = db.find 'realtime_channel_messages', {
         'channel_name' => { '$in' => channel_names },
-        'created_at' => { '$gt' => t - 1 }
+        'created_at' => { '$gt' => t - 5 }
       }
       messages
     end

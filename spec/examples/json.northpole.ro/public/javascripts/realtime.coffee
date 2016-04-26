@@ -5,12 +5,13 @@ $(document).ready ->
   socket = jNorthPole.getNewRealtimeSocket((data) ->
     return unless data.data?
     json = JSON.parse(data.data)
-    if json.type == 'publish'
-      output.text(data.data)
+    # if json.type == 'publish'
+      # console.log json
+    output.text(JSON.stringify(json.messages))
   )
   setTimeout ->
     jNorthPole.subscribe(socket, 'jNorthPoleChat')
-  , 1000
+  , 2000
 
   $('.realtime-input').keypress((event) ->
     keycode = if event.keyCode then event.keyCode else event.which
