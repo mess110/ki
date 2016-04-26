@@ -3,6 +3,7 @@ development:
     name: np_development
     host: 127.0.0.1
     port: 27017
+  add_middleware: 'Realtime'
 
 test:
   database:
@@ -15,3 +16,4 @@ production:
     name: np
     host: 127.0.0.1
     port: 27017
+  add_middleware: 'Realtime'

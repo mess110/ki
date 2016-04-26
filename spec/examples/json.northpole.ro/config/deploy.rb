@@ -30,7 +30,7 @@ set :deploy_to, '/home/kiki/json.northpole.ro'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :rvm_ruby_version, '2.1.0@coinmarketcap'
+set :rvm_ruby_version, '2.1.2@json.northpole.ro'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
