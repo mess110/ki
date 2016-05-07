@@ -1,4 +1,6 @@
 $(document).ready ->
+  receivedMessages = []
+
   output = $('.realtime-output')
   return if output.length <= 0
 
@@ -6,9 +8,12 @@ $(document).ready ->
     console.log data
     return unless data.data?
     json = JSON.parse(data.data)
-    if json.messages?
-      txt = (json.messages.map (e) -> e.content.message).join(' - ')
-      output.text(txt)
+    return unless json.messages?
+
+    for message in json.messages
+      if $.inArray(message.id, receivedMessages) == -1
+        receivedMessages.push(message.id)
+        output.append("#{message.content.message}<br />")
   )
   setTimeout ->
     jNorthPole.subscribe(socket, 'jNorthPoleChat')
@@ -19,4 +24,5 @@ $(document).ready ->
     if (keycode == 13)
       inptz = $(@)
       jNorthPole.publish(socket, 'jNorthPoleChat', { message: inptz.val() })
+      inptz.val('')
   )
