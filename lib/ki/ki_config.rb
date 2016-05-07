@@ -25,7 +25,7 @@ module Ki
                            PublicFileServer)
       used_middleware = @config['middleware'] if @config['middleware']
 
-      used_middleware = add_rm_middleware used_middleware, 'add_middleware', 'unshift'
+      used_middleware = add_rm_middleware used_middleware, 'add_middleware', 'push'
       used_middleware = add_rm_middleware used_middleware, 'rm_middleware', 'delete'
 
       # convert middleware to ruby object

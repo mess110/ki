@@ -9,7 +9,6 @@ window.jNorthPole =
       console.log(data);
     };
 
-    jNorthPole.BASE_URL = '/';
     jNorthPole.getStorage(json, responseHandler);
 
     socket = jNorthPole.getNewRealtimeSocket(responseHandler)
@@ -59,7 +58,7 @@ window.jNorthPole =
     return
 
   getNewRealtimeSocket: (responseHandler, errorHandler=responseHandler) ->
-    socketUrl = @BASE_URL.replace('https', 'wss')
+    socketUrl = @BASE_URL.replace('http', 'ws')
     socket = new WebSocket("#{socketUrl}realtime")
     socket.onmessage = responseHandler
     socket.onclose = errorHandler

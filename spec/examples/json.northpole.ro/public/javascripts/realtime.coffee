@@ -3,11 +3,12 @@ $(document).ready ->
   return if output.length <= 0
 
   socket = jNorthPole.getNewRealtimeSocket((data) ->
+    console.log data
     return unless data.data?
     json = JSON.parse(data.data)
-    # if json.type == 'publish'
-      # console.log json
-    output.text(JSON.stringify(json.messages))
+    if json.messages?
+      txt = (json.messages.map (e) -> e.content.message).join(' - ')
+      output.text(txt)
   )
   setTimeout ->
     jNorthPole.subscribe(socket, 'jNorthPoleChat')
