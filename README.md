@@ -407,4 +407,4 @@ and access */instadmin*.
 
 ## Tasks
 
-Ki offers a simple task framework. [More info here](https://github.com/mess110/ki/tree/master/spec/examples/tasks-examples/).
+Ki offers a simple task framework. [More info here](https://github.com/mess110/ki/tree/master/spec/examples/tasks-example/).
