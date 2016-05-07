@@ -15,8 +15,8 @@ module Ki
           use Rack::Cors do
             allow do
               origins '*'
-              # resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
-              resource '*', headers: :any, methods: :any
+              resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
+              # resource '*', headers: :any, methods: :any # TODO: find out why :any doesn't work
             end
           end
         end
