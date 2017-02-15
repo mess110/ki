@@ -9,6 +9,7 @@ module Ki
     # json output from the url, instead it will redirect to the url given
     class ApiHandler
       include BaseMiddleware
+      include Helpers::RedirectTo
 
       def call(env)
         req = BaseRequest.new env
@@ -26,26 +27,20 @@ module Ki
           fail InvalidUrlError.new("invalid url '#{req.path}'", 404)
         end
 
-        model = klass.new(req.to_action, req.params)
-        if req.params['redirect_to'].nil? # TODO: document this
-          render model
-        else
-          redirect_to req.params['redirect_to'] # TODO: check for injection
-        end
+        model = klass.new(req)
+        render model
       rescue ApiError => e
         render e
       end
 
-      def redirect_to(s)
-        resp = Rack::Response.new
-        resp.redirect(s)
-        resp.finish
-      end
-
-      def render(r)
-        resp = Rack::Response.new(r.result.to_json, r.status)
-        resp['Content-Type'] = 'application/json'
-        resp.finish
+      def render(model)
+        if model.params['redirect_to'].nil?
+          resp = Rack::Response.new(model.result.to_json, model.status)
+          resp['Content-Type'] = 'application/json'
+          resp.finish
+        else
+          redirect_to model.params['redirect_to']
+        end
       end
     end
   end

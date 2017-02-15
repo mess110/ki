@@ -26,6 +26,7 @@ require 'ki/modules/model_helper'
 require 'ki/middleware/helpers/format_of_helper'
 require 'ki/middleware/helpers/public_file_helper'
 require 'ki/middleware/helpers/haml_compiler_helper'
+require 'ki/middleware/helpers/redirect_to_helper'
 require 'ki/middleware/helpers/view_helper'
 
 require 'ki/middleware/base_middleware'
