@@ -18,6 +18,13 @@ module Ki
       content_type == 'application/json' || format_of(path) == 'json'
     end
 
+    def headers
+      Hash[*env.select {|k,v| k.start_with? 'HTTP_'}
+        .collect {|k,v| [k.sub(/^HTTP_/, ''), v]}
+        .sort
+        .flatten]
+    end
+
     def to_ki_model_class
       path.to_s.gsub('/', '').gsub(format_of(path), '').gsub('.', '').to_class
     end

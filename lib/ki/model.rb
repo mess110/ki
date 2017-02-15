@@ -4,12 +4,14 @@ module Ki
     extend Restrictions
     include Callbacks
     include ModelHelper
+    include Middleware::Helpers::RedirectTo
 
-    attr_accessor :action, :result, :params, :status
+    attr_accessor :action, :result, :params, :status, :req
 
-    def initialize(action, params)
-      @action = action
-      @params = params
+    def initialize(req)
+      @req = req
+      @action = req.to_action
+      @params = req.params
       @status = 200
 
       fail ForbiddenAction if forbidden_actions.include? @action
