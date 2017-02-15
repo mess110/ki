@@ -42,9 +42,8 @@ module Ki
 
     def add_rm_middleware(used_middleware, key, action)
       if @config.key?(key)
-        if @config[key].class != Array
-          @config[key] = [@config[key]]
-        end
+        # TODO: concat should work here
+        @config[key] = [@config[key]] if @config[key].class != Array
         @config[key].each do |mid|
           used_middleware.send(action, mid)
         end

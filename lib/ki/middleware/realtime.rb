@@ -42,7 +42,7 @@ module Ki
           ws_send(ws, { messages: msgs }) if msgs.count > 0
         end
 
-        ws.on :close do |event|
+        ws.on :close do # |event|
           timer.cancel
           ::Ki::ChannelManager.disconnect socket
           ws = nil
