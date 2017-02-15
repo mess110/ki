@@ -4,7 +4,7 @@ development:
     host: 127.0.0.1
     # host: 172.17.0.3
     port: 27017
-  add_middleware: 'Realtime'
+  add_middleware: ['Realtime', 'DocGenerator', 'AdminInterfaceGenerator']
 
 test:
   database:

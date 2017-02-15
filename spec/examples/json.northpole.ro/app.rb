@@ -21,7 +21,7 @@ module Ki
 
   class Model
     def before_all
-      ensure_authorization
+      # ensure_authorization
     end
 
     private
@@ -60,6 +60,13 @@ class User < Ki::Model
 
   def valid_api_key? s
     s.gsub(/(\W|\d)/, "") == s
+  end
+end
+
+class Redirector < Ki::Model
+  def after_find
+    @result = @req.headers
+    # @params['redirect_to'] = 'http://localhost:1337/'
   end
 end
 
