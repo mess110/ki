@@ -28,13 +28,10 @@ module Ki
       private
 
       def generic_restriction(method_name, attributes)
-        send :define_method, method_name do
-          attributes
-        end
-
-        eigen_class = class << self; self; end
-        eigen_class.send(:define_method, method_name) do
-          attributes
+        [:define_method, :define_singleton_method].each do |definition_means|
+          send definition_means, method_name do
+            attributes
+          end
         end
       end
     end
