@@ -54,8 +54,12 @@ describe Ki::Model do
     end
 
     it 'should create object' do
+      mock_req = {}
+      mock_req.stub(:to_action).and_return(:create)
+      mock_req.stub(:params).and_return({})
+
       expect {
-        DefaultProperties.new(:create, { 'name' => 'zim' })
+        DefaultProperties.new(mock_req)
       }.to change { DefaultProperties.count }.by 1
     end
   end
@@ -72,28 +76,45 @@ describe Ki::Model do
       # keep in mind that delete does not call unique/requires/forbid filters
       # make sure there are no duplicates
       SpecialProperties.delete({ 'foo' => t })
+
+      mock_req = {}
+      mock_req.stub(:to_action).and_return(:create)
+      mock_req.stub(:params).and_return('name' => 'zim', 'foo' => t)
+
       expect {
-        SpecialProperties.new(:create, { 'name' => 'zim', 'foo' => t })
+        SpecialProperties.new(mock_req)
       }.to change { SpecialProperties.count }.by 1
     end
 
     it 'should check for required attributes' do
+      mock_req = {}
+      mock_req.stub(:to_action).and_return(:create)
+      mock_req.stub(:params).and_return({})
+
       expect {
-        SpecialProperties.new(:create, { 'name' => 'zim' })
+        SpecialProperties.new(mock_req)
       }.to raise_error Ki::RequiredAttributeMissing
     end
 
     it 'should check for unique attributes' do
+      t = Time.now.to_i
+      mock_req = {}
+      mock_req.stub(:to_action).and_return(:create)
+      mock_req.stub(:params).and_return({ 'name' => 'zim', 'foo' => t })
+
       expect {
-        t = Time.now.to_i
-        SpecialProperties.new(:create, { 'name' => 'zim', 'foo' => t })
-        SpecialProperties.new(:create, { 'name' => 'zim', 'foo' => t })
+        SpecialProperties.new(mock_req)
+        SpecialProperties.new(mock_req)
       }.to raise_error Ki::AttributeNotUnique
     end
 
     it 'should not allow forbidden actions' do
+      mock_req = {}
+      mock_req.stub(:to_action).and_return(:delete)
+      mock_req.stub(:params).and_return({})
+
       expect {
-        SpecialProperties.new(:delete, {})
+        SpecialProperties.new(mock_req)
       }.to raise_error Ki::ForbiddenAction
     end
   end

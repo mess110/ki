@@ -34,7 +34,7 @@ module Ki
       end
 
       def render(model)
-        if model.params['redirect_to'].nil?
+        if model.is_a?(ApiError) || model.params['redirect_to'].nil?
           resp = Rack::Response.new(model.result.to_json, model.status)
           resp['Content-Type'] = 'application/json'
           resp.finish
