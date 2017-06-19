@@ -28,12 +28,14 @@ and provides a fullblown REST api on top.
     - [Get advanced queries](#advanced-queries)
     - [Update](#update)
     - [Delete](#delete)
+  - [Headers](#headers)
   - [Required attributes](#required-attributes)
   - [Unique attributes](#unique-attributes)
   - [Restricting resource requests](#restricting-resource-requests)
   - [Before/after callbacks](#beforeafter-callbacks)
     - [Accessing the json object within the callback](#accessing-the-json-object-within-the-callback)
   - [Exceptions](#exceptions)
+  - [Magic](#magic)
 - [Deploy](#deploy)
   - [Heroku deployment](#heroku-deployment)
 - [CORS enabled](#cors-enabled)
@@ -282,6 +284,18 @@ curl -X PATCH -d '{"id": "ITEM_ID", "title": "finish the todo tutorial"}' http:/
 curl -X DELETE -d http://localhost:9292/todo.json?id=ITEM_ID
 ```
 
+### Headers
+
+To access headers, simply call `@req.headers`. In this example, the headers are returned by the API.
+
+```ruby
+class Headers < Ki::Model
+  def after_find
+    @result = @req.headers
+  end
+end
+```
+
 ### Required attributes
 
 You can add mandatory attributes on resources with the *requires* method. It
@@ -366,6 +380,17 @@ class Todo < Ki::Model
     end
   end
 end
+```
+
+### Magic
+
+#### redirect_to param
+
+By setting the param `redirect_to`, you can set an endpoint on where to redirect
+once the request is completed.
+
+```
+http://localhost:1337/storage.json?api_key=guest&secret=guest&redirect_to=/examples
 ```
 
 ## Deploy
