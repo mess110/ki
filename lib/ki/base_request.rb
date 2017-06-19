@@ -19,8 +19,8 @@ module Ki
     end
 
     def headers
-      Hash[*env.select {|k,v| k.start_with? 'HTTP_'}
-        .collect {|k,v| [k.sub(/^HTTP_/, ''), v]}
+      Hash[*env.select { |k, _v| k.start_with? 'HTTP_' }
+        .collect { |k, v| [k.sub(/^HTTP_/, ''), v] }
         .sort
         .flatten]
     end
