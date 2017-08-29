@@ -1,14 +1,19 @@
 module Ki
   class ApiError < StandardError #:nodoc:
+    extend Descendants
+
     attr_reader :status
 
-    def initialize(body, status = 400)
-      super body
+    def initialize(body = nil, status = 400)
+      super body.nil? ? to_s : body
       @status = status
     end
 
     def result
-      { 'error' => to_s }
+      {
+        'error' => to_s,
+        'status' => @status
+      }
     end
   end
 
@@ -34,8 +39,11 @@ module Ki
   end
 
   class PartialNotFoundError < ApiError #:nodoc:
-    def initialize(s)
+    def initialize(s = '"partial"')
       super "partial #{s} not found", 404
     end
   end
+end
+
+class CustomError < Ki::ApiError
 end

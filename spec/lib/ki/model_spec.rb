@@ -6,10 +6,10 @@ describe Ki::Model do
     class Bar < Ki::Model; end
   end
 
-  it 'should know about all descendants' do
+  it 'knows about descendants' do
     desc = Ki::Model.descendants
-    desc.include?(Foo).should be_true
-    desc.include?(Bar).should be_true
+    expect(desc).to include(Foo)
+    expect(desc).to include(Bar)
   end
 
   context Ki::Model::QueryInterface do

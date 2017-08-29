@@ -422,8 +422,22 @@ Yes.
 
 ## Documentation
 
-Ki offers instant documentation. Add the middleware 'DocGenerator' and access
+Ki offers instant documentation. Add the middleware 'InstaDoc' and access
 */instadoc*.
+
+```
+class Todo < Ki::Model
+  _body 'is required because reasons'
+  requires :body
+
+  _desc 'This is a before all description'
+  def before_all
+  end
+
+  _desc 'This is a general description. Needs to be above a method called "doc"'
+  def doc; end
+end
+```
 
 ## Administration Interface
 

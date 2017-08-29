@@ -7,7 +7,7 @@ development:
 test:
   middleware: [
     'ApiHandler',
-    'DocGenerator',
+    'InstaDoc',
     'AdminInterfaceGenerator',
     'CoffeeCompiler',
     'SassCompiler',

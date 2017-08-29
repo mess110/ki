@@ -5,12 +5,52 @@
     %li
       %div
         %h2= model.to_s
-        %p
-          Required attributes:
-          = model.required_attributes
-        %p
-          Forbidden actions:
-          = model.forbidden_actions
-        %p
-          Unique attributes:
-          = model.unique_attributes
+        - unless model.annotations.nil?
+          - unless model.annotations[:doc].nil?
+            %p= model.annotations[:doc][:desc]
+        %sub
+          Endpoint:
+          = "/#{model.to_s.downcase}.json"
+        -# TODO: if any attributes
+        %h3 Attributes
+        - [ { items: model.required_attributes, key: :required_attributes }, { items: model.forbidden_actions, key: :forbidden_actions }, { items: model.unique_attributes, key: :unique_attributes }].each do |array|
+          - if array[:items].any?
+            %p
+              %b= array[:key]
+              - array[:items].each do |item|
+                %p
+                  = item
+                  - unless model.annotations.nil?
+                    - unless model.annotations[array[:key]].nil?
+                      %i= model.annotations[array[:key]][item]
+        -# TODO: if any callbacks
+        %h3 Callbacks
+        - Ki::Model::Callbacks.public_instance_methods.each do |pim|
+          - unless model.annotations.nil?
+            - unless model.annotations[pim].nil?
+              %b= pim
+              - model.annotations[pim].keys.each do |pim_key|
+                %p
+                  = pim_key
+                  %i= model.annotations[pim][pim_key]
+        -# %p{style: 'color: gray'}
+          -# = model.annotations
+  %li
+    %div
+      %h2 Errors
+      %h3 Api Errors
+      %ul
+        %li
+          = Ki::ApiError
+        - Ki::ApiError.descendants.each do |error|
+          %li
+            = error
+      %h3 Custom Errors
+      %ul
+        - CustomError.descendants.each do |error|
+          %li
+            = error
+
+      %h3 Sample response
+      %pre
+        = Ki::ApiError.new('Bad request').result.to_json

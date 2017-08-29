@@ -1,6 +1,6 @@
 module Ki
   module Middleware
-    class DocGenerator < HamlCompiler
+    class InstaDoc < HamlCompiler
       include BaseMiddleware
 
       def call(env)

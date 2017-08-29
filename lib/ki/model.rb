@@ -1,10 +1,13 @@
 module Ki
   class Model
+    extend Descendants
     extend QueryInterface
     extend Restrictions
     include Callbacks
     include ModelHelper
     include Middleware::Helpers::RedirectTo
+
+    annotate!
 
     attr_accessor :action, :result, :params, :status, :req
 
@@ -62,10 +65,6 @@ module Ki
       send @action.to_sym
       send "after_#{@action}".to_sym
       after_all
-    end
-
-    def self.descendants
-      ObjectSpace.each_object(Class).select { |klass| klass < self }
     end
   end
 end

@@ -46,7 +46,7 @@ development:
     name: base_development
     host: 127.0.0.1
     port: 27017
-  add_middleware: ['Realtime', 'DocGenerator', 'AdminInterfaceGenerator']
+  add_middleware: ['Realtime', 'InstaDoc', 'AdminInterfaceGenerator']
   rm_middleware: ['SassCompiler']
 
 test:
@@ -57,7 +57,7 @@ test:
 
 production:
   middleware: ['ApiHandler', 'PublicFileServer']
-  add_middleware: ['Realtime', 'DocGenerator', 'AdminInterfaceGenerator']
+  add_middleware: ['Realtime', 'InstaDoc', 'AdminInterfaceGenerator']
   database:
     name: np
     host: 127.0.0.1

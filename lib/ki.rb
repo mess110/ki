@@ -14,6 +14,8 @@ require 'faye/websocket'
 require 'eventmachine'
 
 # code
+require 'ki/utils/annotations'
+require 'ki/utils/descendants'
 require 'ki/utils/api_error'
 require 'ki/utils/extra_ruby'
 require 'ki/utils/indifferent_hash'
@@ -36,7 +38,7 @@ require 'ki/middleware/public_file_server'
 require 'ki/middleware/sass_compiler'
 require 'ki/middleware/haml_compiler'
 require 'ki/middleware/coffee_compiler'
-require 'ki/middleware/doc_generator'
+require 'ki/middleware/insta_doc'
 require 'ki/middleware/admin_interface_generator'
 require 'ki/middleware/realtime'
 

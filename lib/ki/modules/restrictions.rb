@@ -28,9 +28,10 @@ module Ki
       private
 
       def generic_restriction(method_name, attributes)
+        attributes += send(method_name) if defined? method_name
         [:define_method, :define_singleton_method].each do |definition_means|
           send definition_means, method_name do
-            attributes
+            attributes.sort.uniq
           end
         end
       end
