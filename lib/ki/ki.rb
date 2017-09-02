@@ -9,10 +9,11 @@ module Ki
       @app = Rack::Builder.new do
         use Middleware::InitMiddleware
 
-        # TODO: what if logs folder doesn't exist?
-        logfile = ::File.join('logs', 'requests.log')
-        logger  = ::Logger.new(logfile, 'weekly')
-        use Rack::CommonLogger, logger
+        if Dir.exists?('logs')
+          logfile = ::File.join('logs', 'requests.log')
+          logger  = ::Logger.new(logfile, 'weekly')
+          use Rack::CommonLogger, logger
+        end
 
         use Rack::Parser, content_types: {
           'application/json' => proc { |body| ::MultiJson.decode body }

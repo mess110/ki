@@ -385,7 +385,8 @@ end
 
 ### Logging
 
-By default, logs are written in the `logs` folder and are rotated weekly.
+By default, logs are written in the `logs` folder and are rotated weekly if and
+only if the `logs` folder exists.
 
 ### Magic
 
