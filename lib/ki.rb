@@ -12,12 +12,14 @@ require 'coffee-script'
 require 'mongo'
 require 'faye/websocket'
 require 'eventmachine'
+require 'logger'
 
 # code
 require 'ki/utils/annotations'
 require 'ki/utils/descendants'
 require 'ki/utils/api_error'
 require 'ki/utils/extra_ruby'
+require 'ki/utils/logger'
 require 'ki/utils/indifferent_hash'
 
 require 'ki/modules/query_interface'

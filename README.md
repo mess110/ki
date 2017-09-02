@@ -35,6 +35,7 @@ and provides a fullblown REST api on top.
   - [Before/after callbacks](#beforeafter-callbacks)
     - [Accessing the json object within the callback](#accessing-the-json-object-within-the-callback)
   - [Exceptions](#exceptions)
+  - [Logging](#logging)
   - [Magic](#magic)
 - [Deploy](#deploy)
   - [Heroku deployment](#heroku-deployment)
@@ -381,6 +382,10 @@ class Todo < Ki::Model
   end
 end
 ```
+
+### Logging
+
+By default, logs are written in the `logs` folder and are rotated weekly.
 
 ### Magic
 
