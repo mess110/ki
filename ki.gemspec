@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w(lib examples)
 
   spec.add_runtime_dependency 'bundler', '~> 1.5'
-  spec.add_runtime_dependency 'rack'
+  spec.add_runtime_dependency 'rack', '~> 1.5.4'
   spec.add_runtime_dependency 'rack-parser'
   spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'haml'
@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'guard-rspec'
-  spec.add_development_dependency 'guard-rubocop'
+  # spec.add_development_dependency 'guard-rspec'
+  # spec.add_development_dependency 'guard-rubocop', '~> 1.3.0'
   spec.add_development_dependency 'codeclimate-test-reporter'
 end
