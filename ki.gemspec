@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 lib = File.expand_path('../lib', __FILE__)
@@ -32,7 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'sass'
   spec.add_runtime_dependency 'thor'
 
-  spec.add_development_dependency 'codeclimate-test-reporter'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'guard-rubocop'
   spec.add_development_dependency 'rack-test'
