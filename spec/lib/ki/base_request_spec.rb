@@ -4,8 +4,8 @@ describe Ki::BaseRequest do
   let(:req) { Ki::BaseRequest }
 
   it 'knows if current path is root' do
-    req.new({ 'PATH_INFO' => '/' }).root?.should be true
-    req.new({ 'PATH_INFO' => '/foo' }).root?.should be false
+    expect(req.new({ 'PATH_INFO' => '/' })).to be_root
+    expect(req.new({ 'PATH_INFO' => '/foo' })).to_not be_root
   end
 
   it 'coverts path to class' do
@@ -13,37 +13,37 @@ describe Ki::BaseRequest do
     class Bar < Ki::Model; end
     class FooBar < Ki::Model; end
 
-    req.new({ 'PATH_INFO' => '' }).to_ki_model_class.should be nil
-    req.new({ 'PATH_INFO' => '/' }).to_ki_model_class.should be nil
-    req.new({ 'PATH_INFO' => 'foo' }).to_ki_model_class.should be Foo
-    req.new({ 'PATH_INFO' => '/foo' }).to_ki_model_class.should be Foo
-    req.new({ 'PATH_INFO' => '/Foo.json' }).to_ki_model_class.should be Foo
-    req.new({ 'PATH_INFO' => '/bar.json' }).to_ki_model_class.should be Bar
-    req.new({ 'PATH_INFO' => '/Foo/bar.json' }).to_ki_model_class.should be nil
-    req.new({ 'PATH_INFO' => '/Foo/bar' }).to_ki_model_class.should be nil
-    req.new({ 'PATH_INFO' => '/Foo_bar' }).to_ki_model_class.should be FooBar
-    req.new({ 'PATH_INFO' => '/foo_bar' }).to_ki_model_class.should be FooBar
-    req.new({ 'PATH_INFO' => '/foo_bar.json' }).to_ki_model_class.should be FooBar
+    expect(req.new({ 'PATH_INFO' => '' }).to_ki_model_class).to be nil
+    expect(req.new({ 'PATH_INFO' => '/' }).to_ki_model_class).to be nil
+    expect(req.new({ 'PATH_INFO' => 'foo' }).to_ki_model_class).to be Foo
+    expect(req.new({ 'PATH_INFO' => '/foo' }).to_ki_model_class).to be Foo
+    expect(req.new({ 'PATH_INFO' => '/Foo.json' }).to_ki_model_class).to be Foo
+    expect(req.new({ 'PATH_INFO' => '/bar.json' }).to_ki_model_class).to be Bar
+    expect(req.new({ 'PATH_INFO' => '/Foo/bar.json' }).to_ki_model_class).to be nil
+    expect(req.new({ 'PATH_INFO' => '/Foo/bar' }).to_ki_model_class).to be nil
+    expect(req.new({ 'PATH_INFO' => '/Foo_bar' }).to_ki_model_class).to be FooBar
+    expect(req.new({ 'PATH_INFO' => '/foo_bar' }).to_ki_model_class).to be FooBar
+    expect(req.new({ 'PATH_INFO' => '/foo_bar.json' }).to_ki_model_class).to be FooBar
   end
 
   it 'converts verb to action' do
-    req.new({ 'REQUEST_METHOD' => 'GET' }).to_action.should be :find
-    req.new({ 'REQUEST_METHOD' => 'POST' }).to_action.should be :create
-    req.new({ 'REQUEST_METHOD' => 'PUT' }).to_action.should be :update
-    req.new({ 'REQUEST_METHOD' => 'DELETE' }).to_action.should be :delete
-    req.new({ 'REQUEST_METHOD' => 'SEARCH' }).to_action.should be :find
+    expect(req.new({ 'REQUEST_METHOD' => 'GET' }).to_action).to be :find
+    expect(req.new({ 'REQUEST_METHOD' => 'POST' }).to_action).to be :create
+    expect(req.new({ 'REQUEST_METHOD' => 'PUT' }).to_action).to be :update
+    expect(req.new({ 'REQUEST_METHOD' => 'DELETE' }).to_action).to be :delete
+    expect(req.new({ 'REQUEST_METHOD' => 'SEARCH' }).to_action).to be :find
   end
 
   context 'json' do
     it 'considers application/json content type as a json request' do
-      req.new({ 'CONTENT_TYPE' => 'application/xml' }).json?.should be false
-      req.new({}).json?.should be false
-      req.new({ 'CONTENT_TYPE' => 'application/json' }).json?.should be true
+      expect(req.new({ 'CONTENT_TYPE' => 'application/xml' })).to_not be_json
+      expect(req.new({})).to_not be_json
+      expect(req.new({ 'CONTENT_TYPE' => 'application/json' })).to be_json
     end
 
     it 'considers .json url format as a json request' do
-      req.new({ 'PATH_INFO' => '/foo' }).json?.should be false
-      req.new({ 'PATH_INFO' => '/foo.json' }).json?.should be true
+      expect(req.new({ 'PATH_INFO' => '/foo' })).to_not be_json
+      expect(req.new({ 'PATH_INFO' => '/foo.json' })).to be_json
     end
 
     # context 'params' do

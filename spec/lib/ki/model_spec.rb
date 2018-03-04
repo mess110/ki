@@ -14,12 +14,12 @@ describe Ki::Model do
 
   context Ki::Model::QueryInterface do
     it 'should have the query interface' do
-      Foo.class_name.should eq 'Foo'
+      expect(Foo.class_name).to eq 'Foo'
       expect do
         id = Foo.create({ hello: 'world' })['id']
-        Foo.find(id).first['hello'].should eq 'world'
+        expect(Foo.find(id).first['hello']).to eq 'world'
         Foo.update('id' => id, 'hello' => 'universe')
-        Foo.find(id).first['hello'].should eq 'universe'
+        expect(Foo.find(id).first['hello']).to eq 'universe'
         Foo.delete(id)
       end.to change { Foo.count }.by 0
     end
@@ -34,9 +34,9 @@ describe Ki::Model do
   end
 
   it 'should have restrictions configured' do
-    Bar.unique_attributes.should eq []
-    Bar.required_attributes.should eq []
-    Bar.forbidden_actions.should eq []
+    expect(Bar.unique_attributes).to eq []
+    expect(Bar.required_attributes).to eq []
+    expect(Bar.forbidden_actions).to eq []
 
     class Bar < Ki::Model
       unique :foo
@@ -44,9 +44,9 @@ describe Ki::Model do
       forbid :delete
     end
 
-    Bar.unique_attributes.should eq [:foo]
-    Bar.required_attributes.should eq [:foo]
-    Bar.forbidden_actions.should eq [:delete]
+    expect(Bar.unique_attributes).to eq [:foo]
+    expect(Bar.required_attributes).to eq [:foo]
+    expect(Bar.forbidden_actions).to eq [:delete]
   end
 
   context 'default properties' do
@@ -55,8 +55,10 @@ describe Ki::Model do
 
     it 'should create object' do
       mock_req = {}
-      mock_req.stub(:to_action).and_return(:create)
-      mock_req.stub(:params).and_return({})
+      expect(mock_req).to receive(:to_action).and_return(:create)
+      # mock_req.stub(:to_action).and_return(:create)
+      # mock_req.stub(:params).and_return({})
+      expect(mock_req).to receive(:params).and_return({})
 
       expect {
         DefaultProperties.new(mock_req)
@@ -78,8 +80,8 @@ describe Ki::Model do
       SpecialProperties.delete({ 'foo' => t })
 
       mock_req = {}
-      mock_req.stub(:to_action).and_return(:create)
-      mock_req.stub(:params).and_return('name' => 'zim', 'foo' => t)
+      expect(mock_req).to receive(:to_action).and_return(:create)
+      expect(mock_req).to receive(:params).and_return('name' => 'zim', 'foo' => t)
 
       expect {
         SpecialProperties.new(mock_req)
@@ -88,8 +90,8 @@ describe Ki::Model do
 
     it 'should check for required attributes' do
       mock_req = {}
-      mock_req.stub(:to_action).and_return(:create)
-      mock_req.stub(:params).and_return({})
+      expect(mock_req).to receive(:to_action).and_return(:create)
+      expect(mock_req).to receive(:params).and_return({})
 
       expect {
         SpecialProperties.new(mock_req)
@@ -99,8 +101,8 @@ describe Ki::Model do
     it 'should check for unique attributes' do
       t = Time.now.to_i
       mock_req = {}
-      mock_req.stub(:to_action).and_return(:create)
-      mock_req.stub(:params).and_return({ 'name' => 'zim', 'foo' => t })
+      expect(mock_req).to receive(:to_action).and_return(:create)
+      expect(mock_req).to receive(:params).and_return({ 'name' => 'zim', 'foo' => t })
 
       expect {
         SpecialProperties.new(mock_req)
@@ -110,8 +112,8 @@ describe Ki::Model do
 
     it 'should not allow forbidden actions' do
       mock_req = {}
-      mock_req.stub(:to_action).and_return(:delete)
-      mock_req.stub(:params).and_return({})
+      expect(mock_req).to receive(:to_action).and_return(:delete)
+      expect(mock_req).to receive(:params).and_return({})
 
       expect {
         SpecialProperties.new(mock_req)

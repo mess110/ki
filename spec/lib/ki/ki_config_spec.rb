@@ -4,12 +4,12 @@ describe Ki::KiConfig do
   let(:config) { Ki::KiConfig.instance }
 
   it 'should know db name in test env' do
-    config.environment.should == 'test'
+    expect(config.environment).to eq 'test'
   end
 
   it 'is overwritten for testing. see spec_helper' do
     path = config.config_file_path
-    path.start_with?('spec/config.yml').should be true
+    expect(path).to be_start_with('spec/config.yml')
   end
 
   it 'defaults cors to true' do

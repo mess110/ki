@@ -4,7 +4,7 @@ describe Ki::Helpers do
   include Ki::Helpers
 
   it 'should render_haml' do
-    haml('%div.foo').should == "<div class='foo'></div>\n"
+    expect(haml('%div.foo')).to eq "<div class='foo'></div>\n"
   end
 
   it 'renders css tag' do
@@ -22,7 +22,7 @@ describe Ki::Helpers do
   end
 
   it 'renders haml' do
-    File.stub(:join).and_return('lib/ki/views/404.haml')
+    expect(File).to receive(:join).and_return('lib/ki/views/404.haml')
     expect(partial('404')).to include('h1')
   end
 end
