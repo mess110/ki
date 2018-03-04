@@ -29,12 +29,15 @@ module Ki
       # config.yml.
       #
       def establish_connection
+        Mongo::Logger.logger.level = Logger::FATAL
+        # Mongo::Logger.logger       = Logger.new('mongo.log')
+        # Mongo::Logger.logger.level = Logger::INFO
+
         @config = KiConfig.instance.database
         if ENV['MONGODB_URI']
           @db = Mongo::Client.new
         else
           @db = Mongo::Client.new('mongodb://' + connection_string)
-          # @db = @connection.db(@config['name'])
         end
         self
       end
@@ -75,8 +78,8 @@ module Ki
       #   db.insert 'users', { name: 'Homer' }
       #
       def insert(name, hash)
-        asd = @db[name].insert_one(hash)
-        hash['id'] = asd.inserted_id.to_s
+        item = @db[name].insert_one(hash)
+        hash['id'] = item.inserted_id.to_s
         hash
       end
 

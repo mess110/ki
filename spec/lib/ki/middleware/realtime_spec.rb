@@ -42,12 +42,12 @@ describe Ki::Middleware::Realtime do
     expect(realtime.ws_send(ws, {})).to be true
   end
 
-  xdescribe 'on_message' do
+  describe 'on_message' do
     let(:ws) { {} }
     let(:db) { Ki::Orm::Db.instance }
 
     before :each do
-      realtime.stub(:ws_send) do |_arg1, arg2|
+      allow(realtime).to receive(:ws_send) do |_arg1, arg2|
         arg2
       end
     end

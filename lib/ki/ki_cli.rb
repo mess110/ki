@@ -7,7 +7,7 @@ module Ki
     class KiGenerator < Thor::Group #:nodoc:
       include Thor::Actions
 
-      def say s
+      def self.say s
         puts s
       end
 
