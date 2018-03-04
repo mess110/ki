@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class Model
     module Restrictions
@@ -29,7 +31,7 @@ module Ki
 
       def generic_restriction(method_name, attributes)
         attributes += send(method_name) if defined? method_name
-        [:define_method, :define_singleton_method].each do |definition_means|
+        %i[define_method define_singleton_method].each do |definition_means|
           send definition_means, method_name do
             attributes.sort.uniq
           end

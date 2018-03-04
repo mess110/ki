@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thor'
 
 require 'ki/utils/extra_irb'
@@ -7,7 +9,7 @@ module Ki
     class KiGenerator < Thor::Group #:nodoc:
       include Thor::Actions
 
-      def self.say s
+      def self.say(s)
         puts s
       end
 
@@ -27,7 +29,7 @@ module Ki
       argument :app_name
 
       def prepare_dir
-        unless app_name =~ /^[a-zA-Z0-9-]*$/
+        unless app_name.match?(/^[a-zA-Z0-9-]*$/)
           say 'App name must contain only alphanumeric characters and -'
           exit 1
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   module Middleware
     module Helpers
@@ -5,11 +7,11 @@ module Ki
         def render_haml_file(file_path, layout = true)
           file_contents = File.read(file_path)
 
-          if layout && view_exists?('layout')
-            layout_contents = File.read(view_path('layout'))
-          else
-            layout_contents = '= yield'
-          end
+          layout_contents = if layout && view_exists?('layout')
+                              File.read(view_path('layout'))
+                            else
+                              '= yield'
+                            end
 
           html = render_haml(layout_contents).render do
             render_haml(file_contents).render

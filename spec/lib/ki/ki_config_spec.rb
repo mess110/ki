@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Ki::KiConfig do
@@ -48,7 +50,7 @@ describe Ki::KiConfig do
   end
 
   it 'does not add duplicate middleware' do
-    config.config['add_middleware'] = %w(Realtime Realtime)
+    config.config['add_middleware'] = %w[Realtime Realtime]
     expect(config.middleware.to_s.scan(/Realtime/).count).to eq 1
   end
 end

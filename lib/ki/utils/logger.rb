@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ::Logger
-  alias_method :write, :<<
+  alias write <<
 end

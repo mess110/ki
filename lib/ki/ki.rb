@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class Ki
     PUBLIC_PATH = 'public'
@@ -9,7 +11,7 @@ module Ki
       @app = Rack::Builder.new do
         use Middleware::InitMiddleware
 
-        if Dir.exists?('logs')
+        if Dir.exist?('logs')
           logfile = ::File.join('logs', 'requests.log')
           logger  = ::Logger.new(logfile, 'weekly')
           use Rack::CommonLogger, logger
@@ -22,7 +24,7 @@ module Ki
           use Rack::Cors do
             allow do
               origins '*'
-              resource '*', headers: :any, methods: [:get, :search, :put, :post, :delete]
+              resource '*', headers: :any, methods: %i[get search put post delete]
               # resource '*', headers: :any, methods: :any # TODO: find out why :any doesn't work
             end
           end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class Model
     # the query interface does not respect before/after filters,

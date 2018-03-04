@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   module Helpers
     include Middleware::Helpers::View
@@ -19,7 +21,7 @@ module Ki
       if File.file?(path)
         haml(File.read(path))
       else
-        fail PartialNotFoundError, path
+        raise PartialNotFoundError, path
       end
     end
   end

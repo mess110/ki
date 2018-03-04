@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ruby stdlib
 require 'yaml'
 require 'uri'

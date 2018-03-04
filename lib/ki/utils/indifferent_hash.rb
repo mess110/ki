@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IndifferentHash < Hash
   def []=(key, val)
     key = key.to_sym

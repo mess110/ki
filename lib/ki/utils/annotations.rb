@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://stackoverflow.com/questions/3157426/how-to-simulate-java-like-annotations-in-ruby
 module Ki
   module Annotations
@@ -15,7 +17,7 @@ module Ki
     end
 
     def method_missing(meth, *args)
-      return super unless /\A_/ =~ meth
+      return super unless /\A_/.match?(meth)
       @__last_annotation__ ||= {}
       @__last_annotation__[meth[1..-1].to_sym] = args.size == 1 ? args.first : args
     end

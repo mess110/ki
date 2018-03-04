@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class Model
     extend Descendants
@@ -17,7 +19,7 @@ module Ki
       @params = req.params
       @status = 200
 
-      fail ForbiddenAction if forbidden_actions.include? @action
+      raise ForbiddenAction if forbidden_actions.include? @action
 
       ccall
     end
@@ -47,7 +49,7 @@ module Ki
     def check_for_required_attributes
       required_attributes.each do |ra|
         unless @params.keys.include?(ra.to_s)
-          fail RequiredAttributeMissing, "#{ra} missing"
+          raise RequiredAttributeMissing, "#{ra} missing"
         end
       end
     end
@@ -55,7 +57,7 @@ module Ki
     def check_for_unique_attributes
       unique_attributes.each do |ua|
         u = self.class.find({ ua.to_s => @params[ua.to_s] })
-        fail AttributeNotUnique, "#{ua} not unique" unless u.empty?
+        raise AttributeNotUnique, "#{ua} not unique" unless u.empty?
       end
     end
 

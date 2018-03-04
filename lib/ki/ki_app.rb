@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class KiApp
     include Middleware::Helpers::HamlCompiler

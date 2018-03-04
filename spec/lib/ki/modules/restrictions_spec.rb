@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Ki::Model::Restrictions do
@@ -9,6 +11,6 @@ describe Ki::Model::Restrictions do
   end
 
   it 'merges multiple generic_restrictions' do
-    expect(DoubleRestricted.required_attributes).to eq [:foo, :bar, :cez].sort
+    expect(DoubleRestricted.required_attributes).to eq %i[foo bar cez].sort
   end
 end

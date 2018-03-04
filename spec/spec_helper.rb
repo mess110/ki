@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start
 # require 'codeclimate-test-reporter'
@@ -43,7 +45,6 @@ module RackAppMethod
     Ki::Ki.new
   end
 end
-
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

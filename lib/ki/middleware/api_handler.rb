@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   module Middleware #:nodoc:
     # Handles all API calls
@@ -24,7 +26,7 @@ module Ki
         klass = req.to_ki_model_class
 
         unless Model.descendants.include?(klass)
-          fail InvalidUrlError.new("invalid url '#{req.path}'", 404)
+          raise InvalidUrlError.new("invalid url '#{req.path}'", 404)
         end
 
         model = klass.new(req)

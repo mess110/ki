@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'singleton'
 
 module Ki
@@ -21,8 +23,8 @@ module Ki
     end
 
     def middleware
-      used_middleware = %w(ApiHandler CoffeeCompiler SassCompiler HamlCompiler
-                           PublicFileServer)
+      used_middleware = %w[ApiHandler CoffeeCompiler SassCompiler HamlCompiler
+                           PublicFileServer]
       used_middleware = @config['middleware'] if @config['middleware']
 
       used_middleware = add_rm_middleware used_middleware, 'add_middleware', 'push'

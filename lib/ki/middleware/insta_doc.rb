@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   module Middleware
     class InstaDoc < HamlCompiler
@@ -6,11 +8,11 @@ module Ki
       def call(env)
         req = BaseRequest.new env
         if custom_check(req)
-          if view_exists?(req)
-            html = render_haml_file view_path(req)
-          else
-            html = render_haml_file custom_view_path
-          end
+          html = if view_exists?(req)
+                   render_haml_file view_path(req)
+                 else
+                   render_haml_file custom_view_path
+                 end
           Rack::Response.new(html).finish
         else
           @app.call env

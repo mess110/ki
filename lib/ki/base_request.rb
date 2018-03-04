@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ki
   class BaseRequest < Rack::Request
     include Middleware::Helpers::FormatOf
@@ -20,13 +22,13 @@ module Ki
 
     def headers
       Hash[*env.select { |k, _v| k.start_with? 'HTTP_' }
-        .collect { |k, v| [k.sub(/^HTTP_/, ''), v] }
-        .sort
-        .flatten]
+               .collect { |k, v| [k.sub(/^HTTP_/, ''), v] }
+               .sort
+               .flatten]
     end
 
     def to_ki_model_class
-      path.to_s.gsub('/', '').gsub(format_of(path), '').gsub('.', '').to_class
+      path.to_s.delete('/').gsub(format_of(path), '').delete('.').to_class
     end
 
     def to_action
@@ -42,7 +44,7 @@ module Ki
       when 'SEARCH'
         :find
       else
-        fail 'unkown action'
+        raise 'unkown action'
       end
     end
   end

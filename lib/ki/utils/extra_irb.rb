@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # http://jasonroelofs.com/2009/04/02/embedding-irb-into-your-ruby-application/
 require 'irb'
 
@@ -15,7 +17,7 @@ module IRB # :nodoc:
 
     irb = Irb.new(workspace)
 
-    @CONF[:IRB_RC].call(irb.context) if @CONF[:IRB_RC]
+    @CONF[:IRB_RC]&.call(irb.context)
     @CONF[:MAIN_CONTEXT] = irb.context
 
     catch(:IRB_EXIT) do

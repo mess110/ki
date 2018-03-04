@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'singleton'
 
 module Ki
@@ -34,11 +36,11 @@ module Ki
         # Mongo::Logger.logger.level = Logger::INFO
 
         @config = KiConfig.instance.database
-        if ENV['MONGODB_URI']
-          @db = Mongo::Client.new
-        else
-          @db = Mongo::Client.new('mongodb://' + connection_string)
-        end
+        @db = if ENV['MONGODB_URI']
+                Mongo::Client.new
+              else
+                Mongo::Client.new('mongodb://' + connection_string)
+              end
         self
       end
 
@@ -209,7 +211,7 @@ module Ki
         hash
       end
 
-      # TODO write tests
+      # TODO: write tests
       def nourish_hash_limit(hash)
         tmp = {}
         if hash['__limit']
@@ -221,7 +223,7 @@ module Ki
         [hash, tmp]
       end
 
-      # TODO write tests
+      # TODO: write tests
       def nourish_hash_sort(hash)
         tmp = {}
         if hash['__sort']
