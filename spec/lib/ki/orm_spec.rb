@@ -6,7 +6,7 @@ describe Ki::Orm do
   end
 
   it 'should know db name in test env' do
-    @db.config['name'].should == 'np_test'
+    expect(@db.config['name']).to eq 'np_test'
   end
 
   it 'has a connection string' do
@@ -16,7 +16,7 @@ describe Ki::Orm do
   it 'should create a db object' do
     expect {
       oid = @db.insert 'foo', { hello: 'world' }
-      oid.class.should == Hash
+      expect(oid).to be_a(Hash)
     }.to change { @db.count('foo') }.by(1)
   end
 
@@ -39,28 +39,29 @@ describe Ki::Orm do
     it 'should find all' do
       @db.insert 'foo', { hello: 'world' }
       @db.insert 'foo', { hello: 'world' }
-      @db.find('foo').to_a.size.should >= 2
+      expect(@db.find('foo').to_a.size).to be >= 2
     end
 
     it 'should find by string id' do
       obj_id = @db.insert('foo', { hello: 'world' })['id']
-      @db.find('foo', obj_id).first['id'].should eq obj_id
+      expect(@db.find('foo', obj_id).first['id']).to eq obj_id
     end
 
     it 'should find by hash["id"]' do
-      obj_id = @db.insert 'foo', { 'hello' => 'world' }
-      @db.find('foo', { 'id' => obj_id['id'] }).first.should eq obj_id
+      obj_id = @db.insert('foo', { 'hello' => 'world' })['id']
+      find_query = @db.find('foo', { 'id' => obj_id })
+      expect(find_query.first['id']).to eq obj_id
     end
 
     it 'should find by hash["_id"]' do
       obj_id = @db.insert('foo', { hello: 'world' })['id']
-      @db.find('foo', { '_id' => obj_id }).first['id'].should eq obj_id
+      expect(@db.find('foo', { '_id' => obj_id }).first['id']).to eq obj_id
     end
 
     it 'should find by BSON::ObjectId(id)' do
       obj_id = @db.insert('foo', { 'hello' => 'world' })['id']
-      @db.find('foo', { 'id' => BSON::ObjectId(obj_id) }).first['id'].should eq obj_id
-      @db.find('foo', { '_id' => BSON::ObjectId(obj_id) }).first['id'].should eq obj_id
+      expect(@db.find('foo', { 'id' => BSON::ObjectId(obj_id) }).first['id']).to eq obj_id
+      expect(@db.find('foo', { '_id' => BSON::ObjectId(obj_id) }).first['id']).to eq obj_id
     end
 
     it 'should return empty array when nothing found' do
@@ -75,12 +76,12 @@ describe Ki::Orm do
       @db.insert('sort_tests', { 'value' => 1 })
       @db.insert('sort_tests', { 'value' => 2 })
 
-      r = @db.find('sort_tests', { '__sort' => { 'value' => 'desc' } })
+      r = @db.find('sort_tests', { '__sort' => { 'value' => -1 } })
       expect(r.size).to eq 2
       expect(r[0]['value']).to eq 2
       expect(r[1]['value']).to eq 1
 
-      r = @db.find('sort_tests', { '__sort' => { 'value' => 'asc' } })
+      r = @db.find('sort_tests', { '__sort' => { 'value' => 1 } })
       expect(r.size).to eq 2
       expect(r[0]['value']).to eq 1
       expect(r[1]['value']).to eq 2
@@ -98,16 +99,16 @@ describe Ki::Orm do
 
   it 'should update' do
     obj_id = @db.insert('foo', { 'hello' => 'world' })['id']
-    @db.find('foo', obj_id).first['hello'].should eq 'world'
+    expect(@db.find('foo', obj_id).first['hello']).to eq 'world'
     up = @db.update('foo', { 'id' => obj_id, 'hello' => 'universe' })['id']
-    up.should eq obj_id
-    @db.find('foo', obj_id).first['hello'].should eq 'universe'
+    expect(up).to eq obj_id
+    expect(@db.find('foo', obj_id).first['hello']).to eq 'universe'
   end
 
   it 'should delete by id' do
     obj_id = @db.insert 'foo', { 'hello' => 'world' }
     expect {
-      @db.delete('foo', obj_id).should == { deleted_item_count: 1 }
+      expect(@db.delete('foo', obj_id)).to eq({ deleted_item_count: 1 })
     }.to change { @db.count 'foo' }.by(-1)
   end
 end

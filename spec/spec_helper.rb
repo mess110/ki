@@ -1,11 +1,12 @@
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
+require 'simplecov'
+SimpleCov.start
+# require 'codeclimate-test-reporter'
+# CodeClimate::TestReporter.start
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 ENV['RACK_ENV'] = 'test'
 
 require 'rack/test'
-include Rack::Test::Methods
 
 require 'ki'
 
@@ -35,17 +36,23 @@ module Requests
   end
 end
 
-def app
-  Ki::Ki.new
+module RackAppMethod
+  include Rack::Test::Methods
+
+  def app
+    Ki::Ki.new
+  end
 end
+
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+  # config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 
   config.include Requests::JsonHelpers
+  config.include RackAppMethod
 
-  config.order = 'random'
+  # config.order = 'random'
 end

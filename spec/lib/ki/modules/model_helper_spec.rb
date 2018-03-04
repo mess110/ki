@@ -28,8 +28,8 @@ describe Ki::Model::ModelHelper do
     end
 
     @req = TmpClassModelHelper.new
-    expect(post?).to be_true
-    expect(put?).to be_true
-    expect(delete?).to be_true
+    expect(post?).to be true
+    expect(put?).to be true
+    expect(delete?).to be true
   end
 end

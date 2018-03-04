@@ -35,7 +35,7 @@ describe Ki::Middleware::Realtime do
   it 'has ws_send' do
     ws = {}
     ws.stub(:send).and_return true
-    expect(realtime.ws_send(ws, {})).to be_true
+    expect(realtime.ws_send(ws, {})).to be true
   end
 
   describe 'on_message' do

@@ -31,11 +31,10 @@ module Ki
       def establish_connection
         @config = KiConfig.instance.database
         if ENV['MONGODB_URI']
-          @connection = Mongo::Connection.new
-          @db = @connection.db
+          @db = Mongo::Client.new
         else
-          @connection = Mongo::Connection.new(@config['host'], @config['port'])
-          @db = @connection.db(@config['name'])
+          @db = Mongo::Client.new('mongodb://' + connection_string)
+          # @db = @connection.db(@config['name'])
         end
         self
       end
@@ -76,8 +75,9 @@ module Ki
       #   db.insert 'users', { name: 'Homer' }
       #
       def insert(name, hash)
-        @db[name].insert(hash)
-        [hash].stringify_ids.first
+        asd = @db[name].insert_one(hash)
+        hash['id'] = asd.inserted_id.to_s
+        hash
       end
 
       # Find a hash in the database
@@ -137,7 +137,7 @@ module Ki
         hash = nourish_hash_id hash
         id = hash['_id'].to_s
         hash.delete('_id')
-        @db[name].update({ '_id' => BSON::ObjectId(id) }, hash)
+        @db[name].update_one({ '_id' => BSON::ObjectId(id) }, hash)
         hash['id'] = id
         hash
       end
@@ -161,9 +161,9 @@ module Ki
       #
       def delete(name, hash)
         hash = nourish_hash_id hash
-        r = @db[name].remove hash
+        r = @db[name].delete_many hash
         {
-          deleted_item_count: r['n'] || 0
+          deleted_item_count: r.documents[0]['n']
         }
       end
 
@@ -206,6 +206,7 @@ module Ki
         hash
       end
 
+      # TODO write tests
       def nourish_hash_limit(hash)
         tmp = {}
         if hash['__limit']
@@ -217,6 +218,7 @@ module Ki
         [hash, tmp]
       end
 
+      # TODO write tests
       def nourish_hash_sort(hash)
         tmp = {}
         if hash['__sort']
@@ -227,7 +229,7 @@ module Ki
             # TODO: validate value
             # TODO: handle sorting by id
             hash['__sort'].to_a.each do |e|
-              tmp[e[0].to_sym] = e[1].to_sym
+              tmp[e[0].to_sym] = e[1]
             end
           end
           hash.delete('__sort')

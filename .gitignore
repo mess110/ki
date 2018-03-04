@@ -12,3 +12,4 @@ spec/examples/*/log
 spec/examples/*/Gemfile.lock
 
 /doc/*
+coverage/

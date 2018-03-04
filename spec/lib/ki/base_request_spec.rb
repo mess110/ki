@@ -4,8 +4,8 @@ describe Ki::BaseRequest do
   let(:req) { Ki::BaseRequest }
 
   it 'knows if current path is root' do
-    req.new({ 'PATH_INFO' => '/' }).root?.should be_true
-    req.new({ 'PATH_INFO' => '/foo' }).root?.should be_false
+    req.new({ 'PATH_INFO' => '/' }).root?.should be true
+    req.new({ 'PATH_INFO' => '/foo' }).root?.should be false
   end
 
   it 'coverts path to class' do
@@ -36,14 +36,14 @@ describe Ki::BaseRequest do
 
   context 'json' do
     it 'considers application/json content type as a json request' do
-      req.new({ 'CONTENT_TYPE' => 'application/xml' }).json?.should be_false
-      req.new({}).json?.should be_false
-      req.new({ 'CONTENT_TYPE' => 'application/json' }).json?.should be_true
+      req.new({ 'CONTENT_TYPE' => 'application/xml' }).json?.should be false
+      req.new({}).json?.should be false
+      req.new({ 'CONTENT_TYPE' => 'application/json' }).json?.should be true
     end
 
     it 'considers .json url format as a json request' do
-      req.new({ 'PATH_INFO' => '/foo' }).json?.should be_false
-      req.new({ 'PATH_INFO' => '/foo.json' }).json?.should be_true
+      req.new({ 'PATH_INFO' => '/foo' }).json?.should be false
+      req.new({ 'PATH_INFO' => '/foo.json' }).json?.should be true
     end
 
     # context 'params' do

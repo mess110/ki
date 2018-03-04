@@ -18,14 +18,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = %w(lib examples)
 
-  spec.add_runtime_dependency 'bundler', '~> 1.5'
-  spec.add_runtime_dependency 'rack', '~> 1.5.4'
+  spec.add_runtime_dependency 'bundler'
+  spec.add_runtime_dependency 'rack'
   spec.add_runtime_dependency 'rack-parser'
   spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'haml'
   spec.add_runtime_dependency 'sass'
   spec.add_runtime_dependency 'coffee-script'
-  spec.add_runtime_dependency 'mongo', '1.9.2'
+  spec.add_runtime_dependency 'mongo'
   spec.add_runtime_dependency 'bson_ext'
   spec.add_runtime_dependency 'rack-cors'
   spec.add_runtime_dependency 'faye-websocket'
@@ -33,7 +33,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rspec'
-  # spec.add_development_dependency 'guard-rspec'
-  # spec.add_development_dependency 'guard-rubocop', '~> 1.3.0'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'guard-rspec'
+  spec.add_development_dependency 'guard-rubocop'
   spec.add_development_dependency 'codeclimate-test-reporter'
 end

@@ -7,6 +7,10 @@ module Ki
     class KiGenerator < Thor::Group #:nodoc:
       include Thor::Actions
 
+      def say s
+        puts s
+      end
+
       def self.source_root
         File.join(File.dirname(__FILE__), '..', '..')
       end
