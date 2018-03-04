@@ -41,7 +41,7 @@ module Ki
 
         timer = EventMachine::PeriodicTimer.new(1) do
           msgs = ::Ki::ChannelManager.tick(socket_id: socket['id'])
-          ws_send(ws, { messages: msgs }) if msgs.count > 0
+          ws_send(ws, { messages: msgs }) if msgs.count.positive?
         end
 
         ws.on :close do # |event|

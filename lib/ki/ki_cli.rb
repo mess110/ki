@@ -18,10 +18,11 @@ module Ki
       end
 
       def self.requires_ki_directory
-        unless File.exist? 'config.ru'
+        unless File.exist?('config.ru')
           say 'Working directory should be a ki app.'
           exit 3
         end
+        say 'Found config.ru'
       end
     end
 

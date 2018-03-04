@@ -18,11 +18,8 @@ module Ki
 
     def partial(s)
       path = view_path(s)
-      if File.file?(path)
-        haml(File.read(path))
-      else
-        raise PartialNotFoundError, path
-      end
+      raise PartialNotFoundError, path unless File.file?(path)
+      haml(File.read(path))
     end
   end
 end

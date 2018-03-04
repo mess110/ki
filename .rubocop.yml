@@ -22,3 +22,12 @@ Metrics/AbcSize:
 
 Lint/UnusedMethodArgument:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/MethodMissing:
+  Enabled: false
