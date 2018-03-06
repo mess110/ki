@@ -47,6 +47,7 @@ require 'ki/middleware/admin_interface_generator'
 require 'ki/middleware/realtime'
 
 require 'ki/ki_config'
+require 'ki/ki_logger'
 require 'ki/helpers'
 require 'ki/orm'
 require 'ki/model'

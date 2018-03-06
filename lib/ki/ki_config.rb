@@ -7,6 +7,7 @@ module Ki
     include Singleton
 
     attr_reader :config, :environment
+    attr_accessor :logger
 
     def read(environment)
       @environment = environment

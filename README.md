@@ -388,6 +388,14 @@ end
 By default, logs are written in the `logs` folder and are rotated weekly if and
 only if the `logs` folder exists.
 
+To add something to the log you can:
+
+```
+Ki::KiLogger.instance.logger.info 'for your info'
+Ki::KiLogger.instance.logger.warn 'warning'
+Ki::KiLogger.instance.logger.error 'ops'
+```
+
 ### Magic
 
 #### redirect_to param

@@ -13,7 +13,8 @@ module Ki
 
         if Dir.exist?('logs')
           logfile = ::File.join('logs', 'requests.log')
-          logger  = ::Logger.new(logfile, 'weekly')
+          logger = ::Logger.new(logfile, 'weekly')
+          KiLogger.instance.init(logger)
           use Rack::CommonLogger, logger
         end
 
@@ -25,7 +26,6 @@ module Ki
             allow do
               origins '*'
               resource '*', headers: :any, methods: %i[get search put post delete]
-              # resource '*', headers: :any, methods: :any # TODO: find out why :any doesn't work
             end
           end
         end
