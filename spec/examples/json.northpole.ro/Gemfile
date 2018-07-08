@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem 'ki', :path => '../../..'
-gem 'passenger', '4.0.40'
+gem 'passenger', '5.3.3'
 gem 'thin'
 gem 'capistrano'
 gem 'capistrano-rvm'
