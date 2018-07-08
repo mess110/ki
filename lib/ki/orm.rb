@@ -108,6 +108,9 @@ module Ki
       #
       def find(name, hash = {})
         hash = nourish_hash_id hash
+        a = nourish_regex hash
+        hash = a[0]
+
         a = nourish_hash_limit hash
         hash = a[0]
         limit = a[1]
@@ -219,6 +222,19 @@ module Ki
           # if you change how you access the symbol you will have a bad time
           tmp[:limit] = hash['__limit']
           hash.delete('__limit')
+        end
+        [hash, tmp]
+      end
+
+      def nourish_regex(hash)
+        tmp = {}
+        if hash['__regex']
+          hash['__regex'] = [hash['__regex']] if !hash['__regex'].is_a?(Array)
+          hash['__regex'].each do |target|
+            hash[target] = Regexp.new hash[target]
+          end
+          KiLogger.instance.logger.info hash
+          hash.delete('__regex')
         end
         [hash, tmp]
       end

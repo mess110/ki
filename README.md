@@ -250,6 +250,12 @@ Search in array
 curl -k -X GET -d '{"category": {"$in": ["music"]}}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
 ```
 
+Search by regex
+
+```
+curl -k -X GET -d '{"title": "todo", "__regex": ["title"]}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
 Greater than number
 
 ```
