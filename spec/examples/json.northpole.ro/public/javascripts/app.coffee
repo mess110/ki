@@ -36,7 +36,7 @@ window.syntaxHighlight = (json) ->
     "<span class=\"" + cls + "\">" + match + "</span>"
 
 $(document).ready ->
-  jNorthPole.BASE_URL = 'http://localhost:1337/'
+  # jNorthPole.BASE_URL = 'http://localhost:1337/'
   setActiveMenuClass()
   setInterval(randomlyFlipBear, 1000)
 
