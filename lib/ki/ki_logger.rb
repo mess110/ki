@@ -8,7 +8,7 @@ module Ki
 
     attr_accessor :logger
 
-    def init logger
+    def init(logger)
       @logger = logger
     end
   end
