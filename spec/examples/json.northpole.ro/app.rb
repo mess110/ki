@@ -77,3 +77,7 @@ class Storage < Ki::Model
     params['created_at'] = storage.first['created_at']
   end
 end
+
+class WriteOnlyStorage < Storage
+  forbid :delete, :update
+end
