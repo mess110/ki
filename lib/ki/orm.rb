@@ -233,7 +233,6 @@ module Ki
           hash['__regex'].each do |target|
             hash[target] = Regexp.new hash[target]
           end
-          KiLogger.instance.logger.info hash
           hash.delete('__regex')
         end
         [hash, tmp]
