@@ -112,6 +112,15 @@ describe Ki::Orm do
       r = @db.find('regex_tests', { 'name' => 'world', '__regex' => ['name'] })
       expect(r.size).to eq 1
     end
+
+    it 'queries by regex insensitive' do
+      @db.delete('regex_tests', {})
+      @db.insert('regex_tests', { 'name' => 'hello', 'created_at' => Time.now.to_i })
+      @db.insert('regex_tests', { 'name' => 'hello world', 'created_at' => Time.now.to_i })
+
+      r = @db.find('regex_tests', { 'name' => 'WORLD', '__regexi' => 'name' })
+      expect(r.size).to eq 1
+    end
   end
 
   it 'should update' do

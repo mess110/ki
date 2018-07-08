@@ -228,12 +228,14 @@ module Ki
 
       def nourish_regex(hash)
         tmp = {}
-        if hash['__regex']
-          hash['__regex'] = [hash['__regex']] if !hash['__regex'].is_a?(Array)
-          hash['__regex'].each do |target|
-            hash[target] = Regexp.new hash[target]
+        %w(__regex __regexi).each do |key|
+          if hash[key]
+            hash[key] = [hash[key]] if !hash[key].is_a?(Array)
+            hash[key].each do |target|
+              hash[target] = Regexp.new hash[target], key == '__regexi' ? Regexp::IGNORECASE : nil
+            end
+            hash.delete(key)
           end
-          hash.delete('__regex')
         end
         [hash, tmp]
       end
