@@ -220,7 +220,7 @@ module Ki
         if hash['__limit']
           # really need to work on hash_with_indifferent access
           # if you change how you access the symbol you will have a bad time
-          tmp[:limit] = hash['__limit']
+          tmp[:limit] = hash['__limit'].try(:to_i)
           hash.delete('__limit')
         end
         [hash, tmp]

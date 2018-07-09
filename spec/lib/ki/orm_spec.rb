@@ -96,6 +96,9 @@ describe Ki::Orm do
 
       r = @db.find('limit_tests', { '__limit' => 2 })
       expect(r.size).to eq 2
+
+      r = @db.find('limit_tests', { '__limit' => '2' })
+      expect(r.size).to eq 2
     end
 
     it 'queries by regex' do
