@@ -215,14 +215,22 @@ module Ki
       end
 
       # TODO: write tests
+      # http://api.mongodb.com/ruby/current/Mongo/Collection.html#find-instance_method
+      #
+      # really need to work on hash_with_indifferent access
+      # if you change how you access the symbol you will have a bad time
       def nourish_hash_limit(hash)
         tmp = {}
         if hash['__limit']
-          # really need to work on hash_with_indifferent access
-          # if you change how you access the symbol you will have a bad time
           tmp[:limit] = hash['__limit'].try(:to_i)
           hash.delete('__limit')
         end
+
+        if hash['__skip']
+          tmp[:skip] = hash['__skip'].try(:to_i)
+          hash.delete('__skip')
+        end
+
         [hash, tmp]
       end
 

@@ -90,6 +90,8 @@ describe Ki::Orm do
     end
 
     it 'applies limiting according to __limit key' do
+      @db.delete('limit_tests', {})
+
       3.times do
         @db.insert('limit_tests', { 'created_at' => Time.now.to_i })
       end
@@ -99,6 +101,17 @@ describe Ki::Orm do
 
       r = @db.find('limit_tests', { '__limit' => '2' })
       expect(r.size).to eq 2
+    end
+
+    it 'applies skipping according to __skip key' do
+      @db.delete('skip_tests', {})
+
+      3.times do |e|
+        @db.insert('skip_tests', { 'created_at' => Time.now.to_i, 'i' => e })
+      end
+
+      r = @db.find('skip_tests', { '__skip' => 2 })
+      expect(r.size).to eq 1
     end
 
     it 'queries by regex' do

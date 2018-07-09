@@ -281,6 +281,12 @@ For example, the request below will limit itself to 10 results.
 curl -k -X GET -d '{"__limit": 10}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
 ```
 
+To skip results results, you can use the param called *__skip*.
+
+```
+curl -k -X GET -d '{"__skip": 10}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
 To sort the results, use a param called *__sort* and the key value desired. Example
 
 curl -k -X GET -d '{"__sort": { "name": "desc" }}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
