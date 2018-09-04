@@ -259,6 +259,9 @@ module Ki
             # TODO: validate value
             # TODO: handle sorting by id
             hash['__sort'].to_a.each do |e|
+              # asc/desc for some reason don't work on all versions
+              e[1] = -1 if e[1] == '-1'
+              e[1] = 1 if e[1] == '1'
               tmp[e[0].to_sym] = e[1]
             end
           end

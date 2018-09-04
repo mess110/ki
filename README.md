@@ -289,7 +289,11 @@ curl -k -X GET -d '{"__skip": 10}' "https://json.northpole.ro/storage.json?api_k
 
 To sort the results, use a param called *__sort* and the key value desired. Example
 
+```
 curl -k -X GET -d '{"__sort": { "name": "desc" }}' "https://json.northpole.ro/storage.json?api_key=guest&secret=guest"
+```
+
+NOTE: replace 'desc' with -1 and 'asc' with 1 if needed.
 
 #### Update
 
